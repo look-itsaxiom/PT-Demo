@@ -1,0 +1,5 @@
+# Godot 4+ specific ignores
+.godot/
+.vscode/
+KayKit_Adventurers_1.0_FREE/
+KayKit_Prototype_Bits_1.0_FREE/
