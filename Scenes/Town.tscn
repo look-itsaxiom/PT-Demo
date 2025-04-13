@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://4lwofyokdot0"]
+[gd_scene load_steps=21 format=3 uid="uid://4lwofyokdot0"]
 
 [ext_resource type="PackedScene" uid="uid://d3d0pktqej0ug" path="res://Scenes/player.tscn" id="1_544ct"]
 [ext_resource type="Script" path="res://Scripts/TownManager.cs" id="1_hxuch"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/FadeManager.cs" id="6_ju5og"]
 [ext_resource type="PackedScene" uid="uid://dh3j64xrvtn1h" path="res://Scenes/Buildings/BuildSite.tscn" id="8_aciwr"]
 [ext_resource type="ArrayMesh" uid="uid://dsrvn7hcwuhgj" path="res://KayKit_Prototype_Bits_1.0_FREE/KayKit_Prototype_Bits_1.0_FREE/Assets/obj/target_stand_A.obj" id="8_nfr5w"]
+[ext_resource type="PackedScene" uid="uid://ce5unwihvwmk0" path="res://Scenes/UI/BuildMenu.tscn" id="10_6kerd"]
 
 [sub_resource type="Animation" id="Animation_rr226"]
 resource_name = "fade_in"
@@ -169,5 +170,7 @@ shape = SubResource("ConvexPolygonShape3D_psmhy")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="QuestBoard/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.67164, 0)
 shape = SubResource("SphereShape3D_ccitk")
+
+[node name="BuildMenu" parent="." instance=ExtResource("10_6kerd")]
 
 [connection signal="animation_finished" from="FadeManager/AnimationPlayer" to="FadeManager" method="_on_animation_player_animation_finished"]
