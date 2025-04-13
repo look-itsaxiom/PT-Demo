@@ -5,7 +5,7 @@ public partial class Bed : Interactable, IInteractable
 {
 	[Export] public Chronos chronos;
 
-	public new void Interact(Player interactor)
+	public override void Interact(Player interactor)
 	{
 		if (playerInRange)
 		{
