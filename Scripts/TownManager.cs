@@ -1,7 +1,6 @@
 using Godot;
-using System;
 
-public partial class TownManager : Node
+public partial class TownManager : Node3D
 {
 	public int TownLevel { get; set; } = 1;
 	public int TownLevelMax { get; set; } = 2;
