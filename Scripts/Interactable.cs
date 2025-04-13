@@ -13,7 +13,7 @@ public abstract partial class Interactable : Area3D, IInteractable
 		BodyExited += OnBodyExited;
 	}
 
-	private void OnBodyExited(Node3D body)
+	public virtual void OnBodyExited(Node3D body)
 	{
 		if (body.IsInGroup("Player"))
 		{
@@ -22,8 +22,7 @@ public abstract partial class Interactable : Area3D, IInteractable
 		}
 	}
 
-
-	private void OnBodyEntered(Node3D body)
+	public virtual void OnBodyEntered(Node3D body)
 	{
 		if (body.IsInGroup("Player"))
 		{
@@ -35,7 +34,7 @@ public abstract partial class Interactable : Area3D, IInteractable
 
 	public bool CanInteract() => playerInRange;
 
-	public void Interact(Player player)
+	public virtual void Interact(Player player)
 	{
 		GD.Print("Interacting with the interactable: " + this.ObjectName);
 	}
