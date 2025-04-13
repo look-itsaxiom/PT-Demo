@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dh3j64xrvtn1h"]
+
+[ext_resource type="ArrayMesh" uid="uid://fg7t72h3mjvs" path="res://KayKit_Prototype_Bits_1.0_FREE/KayKit_Prototype_Bits_1.0_FREE/Assets/obj/Floor_Dirt.obj" id="1_r1nyd"]
+[ext_resource type="Script" path="res://Scripts/BuildSite.cs" id="2_aip1g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h05ff"]
+size = Vector3(4, 1, 4)
+
+[node name="BuildSite" type="Area3D"]
+script = ExtResource("2_aip1g")
+
+[node name="FloorDirt" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_r1nyd")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_h05ff")

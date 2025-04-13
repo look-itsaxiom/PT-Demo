@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://4lwofyokdot0"]
+[gd_scene load_steps=20 format=3 uid="uid://4lwofyokdot0"]
 
 [ext_resource type="PackedScene" uid="uid://d3d0pktqej0ug" path="res://Scenes/player.tscn" id="1_544ct"]
 [ext_resource type="Script" path="res://Scripts/TownManager.cs" id="1_hxuch"]
@@ -7,9 +7,8 @@
 [ext_resource type="ArrayMesh" uid="uid://dlh2egyh4l6ma" path="res://KayKit_Prototype_Bits_1.0_FREE/KayKit_Prototype_Bits_1.0_FREE/Assets/obj/table_medium_long.obj" id="4_tb5sy"]
 [ext_resource type="Script" path="res://Scripts/Bed.cs" id="5_btatj"]
 [ext_resource type="Script" path="res://Scripts/FadeManager.cs" id="6_ju5og"]
-[ext_resource type="ArrayMesh" uid="uid://fg7t72h3mjvs" path="res://KayKit_Prototype_Bits_1.0_FREE/KayKit_Prototype_Bits_1.0_FREE/Assets/obj/Floor_Dirt.obj" id="7_racad"]
+[ext_resource type="PackedScene" uid="uid://dh3j64xrvtn1h" path="res://Scenes/Buildings/BuildSite.tscn" id="8_aciwr"]
 [ext_resource type="ArrayMesh" uid="uid://dsrvn7hcwuhgj" path="res://KayKit_Prototype_Bits_1.0_FREE/KayKit_Prototype_Bits_1.0_FREE/Assets/obj/target_stand_A.obj" id="8_nfr5w"]
-[ext_resource type="Script" path="res://Scripts/BuildSite.cs" id="8_rtwdj"]
 
 [sub_resource type="Animation" id="Animation_rr226"]
 resource_name = "fade_in"
@@ -64,16 +63,14 @@ size = Vector3(4.07626, 1.38135, 2.50555)
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xxrn"]
 size = Vector3(3.07489, 1.59973, 1.95532)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_68kqt"]
-size = Vector3(14.6179, 4.02795, 15.8001)
-
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_psmhy"]
 points = PackedVector3Array(-0.325282, 1.92043, -0.227121, 0.404675, 0.0795702, 0.407936, -0.420539, 0.0795702, 0.407936, 0.396487, 0.00548367, -1.1, 0.5, 1.86469, 0.0932052, -0.420539, 0.0795702, -1.11572, -0.491555, 1.87783, 0.1, 0.341205, 1.92043, -0.227121, 0.531718, 0.270059, -0.00489557, -0.515795, 0.270059, -0.0366634, 0.404675, 0.0795702, -1.11572, 0.41663, 1.96848, 0.1, 0.39863, 0, 0.396327, -0.4, 0.0331986, -1.07921, -0.4, 0.0331986, 0.37142, -0.400707, 1.96848, 0.1, -0.420539, 1.82519, -0.227121, 0.436462, 1.8568, -0.195353, -0.466844, 1.8344, -0.0663125, -0.3929, 1.94997, -0.0571254, -0.491555, 0.303842, 0.1, 0.480482, 1.83039, -0.0390361, 0.404675, 1.8568, -0.227121, 0.46123, 1.87715, -0.0616188, 0.402767, 1.93562, -0.0616084)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ccitk"]
 radius = 3.44624
 
-[node name="Node3D" type="Node3D"]
+[node name="Town" type="Node3D"]
+script = ExtResource("1_hxuch")
 
 [node name="FadeManager" type="Control" parent="."]
 layout_mode = 3
@@ -99,9 +96,6 @@ color = Color(0.187176, 0.187176, 0.187176, 1)
 libraries = {
 "": SubResource("AnimationLibrary_owpxv")
 }
-
-[node name="TownManager" type="Node" parent="."]
-script = ExtResource("1_hxuch")
 
 [node name="Player" parent="." instance=ExtResource("1_544ct")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.28991, 0)
@@ -154,35 +148,8 @@ shape = SubResource("BoxShape3D_x5usn")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0361023, 0.299866, 0.171509)
 shape = SubResource("BoxShape3D_0xxrn")
 
-[node name="BuildSite" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.793, 0.105727, -5.47102)
-
-[node name="FloorDirt" type="MeshInstance3D" parent="BuildSite"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -1.5, 0, -2)
-mesh = ExtResource("7_racad")
-skeleton = NodePath("../..")
-
-[node name="FloorDirt2" type="MeshInstance3D" parent="BuildSite"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 4, 0, -2)
-mesh = ExtResource("7_racad")
-skeleton = NodePath("../..")
-
-[node name="FloorDirt3" type="MeshInstance3D" parent="BuildSite"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -1.5, 0, 5)
-mesh = ExtResource("7_racad")
-skeleton = NodePath("../..")
-
-[node name="FloorDirt4" type="MeshInstance3D" parent="BuildSite"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 4, 0, 5)
-mesh = ExtResource("7_racad")
-skeleton = NodePath("../..")
-
-[node name="Area3D" type="Area3D" parent="BuildSite"]
-script = ExtResource("8_rtwdj")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildSite/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.510288, 2.23801, 1.43131)
-shape = SubResource("BoxShape3D_68kqt")
+[node name="BuildSite" parent="." instance=ExtResource("8_aciwr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5553, 1.10705, -4.11027)
 
 [node name="QuestBoard" type="Node3D" parent="."]
 transform = Transform3D(-0.213542, 0, -0.976934, 0, 1, 0, 0.976934, 0, -0.213542, 9.609, 1, 6.356)
