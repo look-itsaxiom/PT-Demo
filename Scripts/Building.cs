@@ -1,17 +1,10 @@
 using Godot;
 using System;
 
-public class Building
+public partial class Building : Node3D
 {
-    public string Name { get; set; }
-    public Vector2 Size { get; set; }
-
-    public PackedScene BuildingScene { get; set; }
-
-    public Building(string name, int sizeX, int sizeY, string scenePath)
-    {
-        Name = name;
-        Size = new Vector2(sizeX, sizeY);
-        BuildingScene = GD.Load<PackedScene>(scenePath);
-    }
+	[Export] public Vector2I GridSize;
+	[Export] public string BuildingName;
+	[Export] public string Description;
+	[Export] public string ScenePath;
 }
