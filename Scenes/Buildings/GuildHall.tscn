@@ -1,15 +1,263 @@
-[gd_scene load_steps=3 format=3 uid="uid://mtert8arreje"]
+[gd_scene load_steps=5 format=3 uid="uid://mtert8arreje"]
 
 [ext_resource type="Script" path="res://Scripts/Building.cs" id="1_dig5o"]
-[ext_resource type="MeshLibrary" uid="uid://dbfobj1dhfo6i" path="res://Resources/primitive_mesh_library.tres" id="1_obovh"]
+[ext_resource type="ArrayMesh" uid="uid://c7d8v0oqmf05x" path="res://KayKit_Prototype_Bits_1.0_FREE/KayKit_Prototype_Bits_1.0_FREE/Assets/obj/Primitive_Cube.obj" id="2_mqjs6"]
+[ext_resource type="ArrayMesh" uid="uid://ub20t02wyv3q" path="res://KayKit_Prototype_Bits_1.0_FREE/KayKit_Prototype_Bits_1.0_FREE/Assets/obj/Door_A.obj" id="3_gkl4d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hud7m"]
+size = Vector3(24, 8, 16)
 
 [node name="GuildHall" type="Node3D"]
 script = ExtResource("1_dig5o")
 
-[node name="GridMap" type="GridMap" parent="."]
-mesh_library = ExtResource("1_obovh")
-cell_size = Vector3(2, 1, 2)
-data = {
-"cells": PackedInt32Array(1, 1, 1441795, 3, 1, 1441795, 5, 1, 1441795, 7, 1, 1441795, 7, 3, 1441795, 7, 5, 1441795, 7, 7, 1441795, 9, 1, 1441795, 9, 3, 1441795, 9, 4, 1441795, 9, 5, 1441795, 9, 6, 1441795, 8, 7, 1441795, 9, 7, 1441795, 6, 7, 1441795, 5, 7, 1441795, 4, 7, 1441795, 3, 7, 1441795, 2, 7, 1441795, 1, 7, 1441795, 1, 3, 1441795, 1, 4, 1441795, 1, 5, 1441795, 2, 5, 1441795, 3, 5, 1441795, 4, 5, 1441795, 5, 5, 1441795, 4, 3, 1441795, 4, 2, 1441795, 5, 2, 1441795, 3, 2, 1441795, 2, 2, 1441795, 3, 3, 1441795, 65540, 0, 655362, 65537, 0, 655379, 65546, 3, 1048595, 65546, 6, 1441806, 65545, 0, 655374, 65546, 1, 1048590, 65543, 0, 19, 65542, 0, 15, 65541, 0, 15, 65539, 0, 15, 65538, 0, 15, 65546, 5, 1441806, 65546, 4, 1441807, 65546, 7, 1441806, 65545, 8, 655374, 65536, 7, 1441806, 65536, 1, 1441806, 65537, 8, 14, 65536, 3, 1048595, 65536, 5, 1048595, 65539, 8, 19, 65543, 8, 19, 65541, 8, 14, 327689, 5, 7, 327681, 5, 655367, 327681, 7, 1441801, 327689, 7, 9, 327689, 4, 7, 327681, 4, 655367, 327681, 2, 655367, 327681, 1, 655369, 327689, 1, 1048585, 327689, 2, 7, 327687, 1, 1048583, 327685, 1, 1048583, 327683, 1, 1048583, 327683, 7, 1441799, 327685, 7, 1441799, 327687, 7, 1441799, 327687, 5, 1441792, 327686, 5, 1441792, 327685, 5, 1441792, 327684, 5, 1441792, 327683, 5, 1441792, 327682, 5, 1441792, 327682, 3, 1441792, 327683, 3, 1441792, 327684, 3, 1441792, 327685, 3, 1441792, 327686, 3, 1441792, 327687, 3, 1441792, 393222, 4, 1441792, 393221, 4, 1441792, 393220, 4, 1441792, 393219, 4, 1441792, 393223, 4, 1441792, 393223, 5, 1441792, 393221, 5, 1441792, 393220, 5, 1441792, 393219, 5, 1441792, 393219, 3, 1441792, 393220, 3, 1441792, 393221, 3, 1441792, 393222, 3, 1441792, 393223, 3, 1441792, 655367, 4, 1441793, 5, 4, 1441795, -65530, 0, 17, -65529, 0, 17, -65528, 0, 17, -65527, 0, 17, -65526, 1, 1441809, -65526, 2, 1441809, -65526, 3, 1441809, -65526, 4, 1441809, -65526, 5, 1441809, -65526, 6, 1441809, -65526, 7, 1441809, -65527, 8, 655377, -65528, 8, 655377, -65529, 8, 655377, -65530, 8, 655377, -65532, 8, 655377, -65533, 8, 655377, -65534, 8, 655377, -65535, 8, 655377, -65536, 7, 1048593, -65536, 6, 1048593, -65536, 5, 1048593, -65536, 3, 1048593, -65536, 2, 1048593, -65536, 1, 1048593, -65534, 0, 17, -65535, 0, 17, -65536, 0, 655365, -65536, 8, 655365, -65526, 8, 655365, -65526, 0, 655365, 65546, 0, 655365, 65546, 8, 655365, 65536, 8, 655365, 65536, 0, 655365, -196604, 65535, 1048588)
-}
-metadata/_editor_floor_ = Vector3(0, -3, 0)
+[node name="Meshes" type="Node3D" parent="."]
+
+[node name="PrimitiveCube" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube2" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube3" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 2)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube4" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 2)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube5" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 2)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube6" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 2)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube7" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube8" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube9" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 6)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube10" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 6)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube11" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 6)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube12" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 6)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube13" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube14" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 10)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube15" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 10)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube16" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 10)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube17" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 10)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube18" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 10)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube19" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 14)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube20" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 14)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube21" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 14)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube22" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 14)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube23" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 14)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube24" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 14)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube25" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, 2)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube26" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, 2)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube27" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4, 2)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube28" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 4, 2)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube29" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, 2)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube30" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 4, 2)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube31" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, 6)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube32" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, 6)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube33" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4, 6)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube34" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 4, 6)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube35" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, 6)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube36" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 4, 6)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube37" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, 10)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube38" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, 10)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube39" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4, 10)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube40" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 4, 10)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube41" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, 10)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube42" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 4, 10)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube43" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, 14)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube44" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, 14)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube45" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4, 14)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube46" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 4, 14)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube47" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, 14)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="PrimitiveCube48" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 4, 14)
+mesh = ExtResource("2_mqjs6")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 4, 8)
+shape = SubResource("BoxShape3D_hud7m")
+
+[node name="DoorA" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0)
+mesh = ExtResource("3_gkl4d")
