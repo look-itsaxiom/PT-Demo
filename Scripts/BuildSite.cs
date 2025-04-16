@@ -13,7 +13,7 @@ public partial class BuildSite : Interactable, IInteractable
 
 	public DataRegistry dataRegistry;
 
-	public List<Vector2I> ownedTiles = new();
+	public List<Vector3I> ownedTiles = new();
 
 	public override void _Ready()
 	{
@@ -45,13 +45,25 @@ public partial class BuildSite : Interactable, IInteractable
 
 	private void OnBuildingChosen(string buildingKey)
 	{
+		// Get building data
 		var building = dataRegistry.buildingTemplates[buildingKey];
 		GD.Print("Building Scene: " + building.Name);
 		var buildingInstance = (Node3D)GD.Load<PackedScene>(building.ScenePath).Instantiate();
-		buildingInstance.Transform = this.GlobalTransform;
+
+		Vector3I originTile = GetTopLeftTile();
+
+		//Vector3 worldPos = buildGrid.GridToWorld(originTile);
+		Vector3 worldPos = buildGrid.GridToWorld(originTile);
+		if (!buildGrid.CanPlaceBuilding(originTile, building.GridSize))
+		{
+			GD.Print("Cannot place building: not enough space");
+			return;
+		}
 		GetParent().AddChild(buildingInstance);
-		GD.Print(building.Name + " built!");
-		QueueFree();
+		buildingInstance.GlobalPosition = worldPos;
+		buildGrid.PlaceBuilding(buildingKey, buildingInstance, originTile, building.GridSize);
+		GD.Print($"{building.BuildingName} built at tile: {originTile}.");
+		GD.Print($"{building.BuildingName} placed at world position: {worldPos}.");
 	}
 
 	private void FindOwnedTiles()
@@ -66,6 +78,22 @@ public partial class BuildSite : Interactable, IInteractable
 				ownedTiles.Add(tile);
 			}
 		}
+	}
+
+	private Vector3I GetTopLeftTile()
+	{
+		int minX = int.MaxValue;
+		int minY = int.MaxValue;
+		int minZ = int.MaxValue;
+
+		foreach (var tile in ownedTiles)
+		{
+			if (tile.X < minX) minX = tile.X;
+			if (tile.Y < minY) minY = tile.Y;
+			if (tile.Z < minZ) minZ = tile.Z;
+		}
+
+		return new Vector3I(minX, minY, minZ);
 	}
 
 	private Aabb GetVisualBounds()
@@ -88,5 +116,4 @@ public partial class BuildSite : Interactable, IInteractable
 		// Fallback default
 		return new Aabb(GlobalTransform.Origin - new Vector3(1, 0.1f, 1), new Vector3(2, 0.2f, 2));
 	}
-
 }
