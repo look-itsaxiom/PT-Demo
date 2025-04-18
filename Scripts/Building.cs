@@ -1,7 +1,8 @@
 using Godot;
 using System;
 
-public partial class Building : Node3D
+[GlobalClass]
+public partial class Building : Resource
 {
 	[Export] public Vector2I GridSize;
 	[Export] public string BuildingName;

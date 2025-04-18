@@ -47,7 +47,7 @@ public partial class BuildSite : Interactable, IInteractable
 	{
 		// Get building data
 		var building = dataRegistry.buildingTemplates[buildingKey];
-		GD.Print("Building Scene: " + building.Name);
+		GD.Print("Building Scene: " + building.BuildingName);
 		var buildingInstance = (Node3D)GD.Load<PackedScene>(building.ScenePath).Instantiate();
 
 		Vector3I originTile = GetTopLeftTile();

@@ -14,6 +14,8 @@ public partial class BuildGrid : Node3D
 {
 	[Export] public GridMap buildGridMap;
 
+	[Export] public float buildingVerticalOffset = 0.05f;
+
 	public Dictionary<Vector3I, TileData> tileStates = new();
 
 	public override void _Ready()
@@ -48,8 +50,19 @@ public partial class BuildGrid : Node3D
 			for (int z = 0; z < size.Y; z++)
 			{
 				var tile = new Vector3I(origin.X + x, origin.Y, origin.Z + z);
-				if (tileStates.TryGetValue(tile, out TileData tileData) && tileData.IsOccupied)
+				if (tileStates.TryGetValue(tile, out TileData tileData))
+				{
+					if (tileData.IsOccupied)
+					{
+						GD.Print($"Tile {tile} is already occupied.");
+						return false;
+					}
+				}
+				else
+				{
+					GD.Print($"Tile {tile} is out of bounds.");
 					return false;
+				}
 			}
 		return true;
 	}
@@ -77,13 +90,13 @@ public partial class BuildGrid : Node3D
 	public Vector3 GridToWorld(Vector3I tile)
 	{
 		var cellSize = buildGridMap.CellSize;
-		var normieValue = new Vector3(
-			tile.X * cellSize.X + cellSize.X / 2.0f,
-			tile.Y + Transform.Origin.Y,
-			tile.Z * cellSize.Z + cellSize.Z / 2.0f
-		);
 
-		return normieValue;
+		return new Vector3(
+			tile.X * cellSize.X,
+			tile.Y + Transform.Origin.Y + buildingVerticalOffset,
+			tile.Z * cellSize.Z
+		);
 	}
+
 
 }
