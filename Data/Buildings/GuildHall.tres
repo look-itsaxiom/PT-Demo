@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Building" load_steps=2 format=3 uid="uid://evoe1otwtgk6"]
+
+[ext_resource type="Script" path="res://Scripts/Building.cs" id="1_hydy8"]
+
+[resource]
+script = ExtResource("1_hydy8")
+GridSize = Vector2i(24, 16)
+BuildingName = "GuildHall"
+Description = "A place for adventurers to gather and form parties."
+ScenePath = "res://Scenes/Buildings/GuildHall.tscn"
