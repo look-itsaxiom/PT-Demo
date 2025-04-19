@@ -1,31 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dh3j64xrvtn1h"]
+[gd_scene load_steps=3 format=3 uid="uid://dh3j64xrvtn1h"]
 
 [ext_resource type="Script" path="res://Scripts/BuildSite.cs" id="2_aip1g"]
-[ext_resource type="Script" path="res://Scripts/BuildGrid.cs" id="2_nt0uj"]
-[ext_resource type="PlaneMesh" uid="uid://lknf1a82wc81" path="res://Resources/BuildTilePlane.tres" id="3_g017q"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_14uuh"]
-size = Vector3(14, 5.63577, 6)
-
-[sub_resource type="MeshLibrary" id="MeshLibrary_phrf6"]
-item/0/name = "GoodToBuild"
-item/0/mesh = ExtResource("3_g017q")
-item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/0/shapes = []
-item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/0/navigation_layers = 1
+[sub_resource type="BoxShape3D" id="BoxShape3D_y1o5e"]
+size = Vector3(17, 5.63577, 26.0444)
 
 [node name="BuildSite" type="Area3D"]
 script = ExtResource("2_aip1g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.976948, 0, 1.5)
-shape = SubResource("BoxShape3D_14uuh")
+shape = SubResource("BoxShape3D_y1o5e")
 
-[node name="BuildGrid" type="Node3D" parent="."]
-script = ExtResource("2_nt0uj")
-
-[node name="BuildGridMap" type="GridMap" parent="BuildGrid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
-mesh_library = SubResource("MeshLibrary_phrf6")
-metadata/_editor_floor_ = Vector3(0, 0, 0)
+[node name="Camera3D" type="Camera3D" parent="."]

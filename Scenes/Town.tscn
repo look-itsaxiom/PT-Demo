@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://4lwofyokdot0"]
+[gd_scene load_steps=26 format=3 uid="uid://4lwofyokdot0"]
 
 [ext_resource type="PackedScene" uid="uid://d3d0pktqej0ug" path="res://Scenes/player.tscn" id="1_544ct"]
 [ext_resource type="Script" path="res://Scripts/TownManager.cs" id="1_hxuch"]
@@ -68,9 +68,6 @@ item/0/shapes = []
 item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/0/navigation_layers = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_14uuh"]
-size = Vector3(19, 5.63577, 33)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_x5usn"]
 size = Vector3(4.07626, 1.38135, 2.50555)
 
@@ -82,6 +79,12 @@ points = PackedVector3Array(-0.325282, 1.92043, -0.227121, 0.404675, 0.0795702, 
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ccitk"]
 radius = 3.44624
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y1o5e"]
+size = Vector3(17, 5.63577, 26.0444)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hk4hq"]
+size = Vector3(20, 1, 36)
 
 [node name="Town" type="Node3D"]
 script = ExtResource("1_hxuch")
@@ -143,22 +146,6 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="BuildSite" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 29)
-script = ExtResource("8_yfhj2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildSite"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86442, 2.12553, -1.31553)
-shape = SubResource("BoxShape3D_14uuh")
-
-[node name="BuildSite2" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53, 0, 29)
-script = ExtResource("8_yfhj2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildSite2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.36442, 2.12553, 7.18447)
-shape = SubResource("BoxShape3D_14uuh")
-
 [node name="Chronos" type="Node3D" parent="."]
 script = ExtResource("3_bm2da")
 
@@ -217,5 +204,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.67164, 0)
 shape = SubResource("SphereShape3D_ccitk")
 
 [node name="BuildMenu" parent="." instance=ExtResource("10_6kerd")]
+
+[node name="BuildSite" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.16257, 1, 28.7205)
+script = ExtResource("8_yfhj2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildSite"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.97695, 0, -0.915089)
+shape = SubResource("BoxShape3D_y1o5e")
+
+[node name="Camera3D" type="Camera3D" parent="BuildSite"]
+transform = Transform3D(-1, 0, 8.74228e-08, 6.18172e-08, 0.707107, 0.707107, -6.18172e-08, 0.707107, -0.707107, 0, 15, -13)
+
+[node name="BuildSite2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51, 1, 39)
+script = ExtResource("8_yfhj2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BuildSite2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0230522, 0, -2.52222)
+shape = SubResource("BoxShape3D_hk4hq")
+
+[node name="Camera3D" type="Camera3D" parent="BuildSite2"]
+transform = Transform3D(-4.37114e-08, -0.633381, 0.77384, 0, 0.773841, 0.633381, -1, 2.7686e-08, -3.38256e-08, 14.58, 15.23, -1.475)
 
 [connection signal="animation_finished" from="FadeManager/AnimationPlayer" to="FadeManager" method="_on_animation_player_animation_finished"]
