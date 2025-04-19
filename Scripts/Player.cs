@@ -4,10 +4,13 @@ public partial class Player : CharacterBody3D
 {
 	public const float MoveSpeed = 15.0f;
 	public const float BackMoveSpeed = 7.0f;
-
 	public const float RotationSpeed = 4.5f;
-
 	public IInteractable interactTarget;
+	public bool CanMove = true;
+
+	public Camera3D PlayerCamera;
+
+	[Signal] public delegate void PlayerCanMoveChangedEventHandler(bool canMove);
 
 	private AnimationPlayer _animationPlayer;
 
@@ -24,11 +27,15 @@ public partial class Player : CharacterBody3D
 	{
 		// Get the AnimationPlayer node.
 		_animationPlayer = GetNode<AnimationPlayer>("Visual/Knight/AnimationPlayer");
+		PlayerCamera = GetNode<Camera3D>("Camera3D");
 		_animationPlayer.Play(Idle);
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (!CanMove)
+			return;
+
 		Vector3 velocity = Velocity;
 
 		// Add the gravity.

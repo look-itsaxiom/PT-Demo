@@ -7,19 +7,24 @@ public partial class BuildSite : Interactable, IInteractable
 {
 	[Export] public Vector2 BuildSiteSize;
 
-	[Export] public BuildMenu buildMenu;
+	[Export] public BuildMenu BuildMenu;
 
-	[Export] public BuildGrid buildGrid;
+	[Export] public BuildGrid BuildGrid;
+
+	[Export] public Camera3D BuildSiteCamera;
 
 	public DataRegistry dataRegistry;
 
 	public List<Vector3I> ownedTiles = new();
 
+	public Player player;
+
 	public override void _Ready()
 	{
-		buildMenu = GetNode<BuildMenu>("../BuildMenu");
+		BuildMenu = GetNode<BuildMenu>("../BuildMenu");
 		dataRegistry = GetNode<DataRegistry>("/root/DataRegistry");
-		buildGrid = GetNode<BuildGrid>("../BuildGrid");
+		BuildGrid = GetNode<BuildGrid>("../BuildGrid");
+		BuildSiteCamera = GetNode<Camera3D>("Camera3D");
 		base._Ready();
 		FindOwnedTiles();
 		GD.Print("BuildSite owns " + ownedTiles.Count + " tiles.");
@@ -28,18 +33,20 @@ public partial class BuildSite : Interactable, IInteractable
 	public override void Interact(Player interactor)
 	{
 		if (!playerInRange) return;
-
+		player = interactor;
 		GD.Print("Interacting with the Build Site");
-		buildMenu.OnBuildSelected = OnBuildingChosen;
-		buildMenu.Open();
+		BuildMenu.OnBuildSelected = OnBuildingChosen;
+		player.CanMove = false;
+		BuildMenu.Open();
 	}
 
 	public override void OnBodyExited(Node3D body)
 	{
 		base.OnBodyExited(body);
-		if (!playerInRange && buildMenu.Visible)
+		if (!playerInRange && BuildMenu.Visible)
 		{
-			buildMenu.Close();
+			player = null;
+			BuildMenu.Close();
 		}
 	}
 
@@ -47,32 +54,41 @@ public partial class BuildSite : Interactable, IInteractable
 	{
 		// Get building data
 		var building = dataRegistry.buildingTemplates[buildingKey];
-		GD.Print("Building Scene: " + building.BuildingName);
-		var buildingInstance = (Node3D)GD.Load<PackedScene>(building.ScenePath).Instantiate();
+		player.PlayerCamera.Current = false;
+		BuildSiteCamera.Current = true;
 
-		Vector3I originTile = GetTopLeftTile();
-
-		//Vector3 worldPos = buildGrid.GridToWorld(originTile);
-		Vector3 worldPos = buildGrid.GridToWorld(originTile);
-		if (!buildGrid.CanPlaceBuilding(originTile, building.GridSize))
+		var ghostWrapper = new GhostBuilding();
+		ghostWrapper.OnPlacementConfirmed = (Vector3I buildOriginTile) =>
 		{
-			GD.Print("Cannot place building: not enough space");
-			return;
-		}
-		GetParent().AddChild(buildingInstance);
-		buildingInstance.GlobalPosition = worldPos;
-		buildGrid.PlaceBuilding(buildingKey, buildingInstance, originTile, building.GridSize);
-		GD.Print($"{building.BuildingName} built at tile: {originTile}.");
-		GD.Print($"{building.BuildingName} placed at world position: {worldPos}.");
+			Vector3 worldPos = BuildGrid.GridToWorld(buildOriginTile);
+			var buildingInstance = (Node3D)GD.Load<PackedScene>(building.ScenePath).Instantiate();
+			this.AddChild(buildingInstance);
+			buildingInstance.GlobalPosition = worldPos;
+			BuildGrid.PlaceBuilding(buildingKey, buildingInstance, buildOriginTile, building.GridSize);
+			GD.Print($"{building.BuildingName} built at tile: {buildOriginTile}.");
+			GD.Print($"{building.BuildingName} placed at world position: {worldPos}.");
+			player.PlayerCamera.Current = true;
+			BuildSiteCamera.Current = false;
+			player.CanMove = true;
+
+		};
+		ghostWrapper.OnPlacementCancelled = () =>
+		{
+			player.PlayerCamera.Current = true;
+			BuildSiteCamera.Current = false;
+			player.CanMove = true;
+		};
+		GetParent().AddChild(ghostWrapper);
+		ghostWrapper.Initialize(building, ownedTiles, BuildGrid);
 	}
 
 	private void FindOwnedTiles()
 	{
 		var myBounds = GetVisualBounds();
 
-		foreach (var tile in buildGrid.tileStates.Keys)
+		foreach (var tile in BuildGrid.tileStates.Keys)
 		{
-			Vector3 worldPos = buildGrid.GridToWorld(tile);
+			Vector3 worldPos = BuildGrid.GridToWorld(tile);
 			if (myBounds.HasPoint(worldPos))
 			{
 				ownedTiles.Add(tile);
@@ -83,17 +99,15 @@ public partial class BuildSite : Interactable, IInteractable
 	private Vector3I GetTopLeftTile()
 	{
 		int minX = int.MaxValue;
-		int minY = int.MaxValue;
 		int minZ = int.MaxValue;
 
 		foreach (var tile in ownedTiles)
 		{
 			if (tile.X < minX) minX = tile.X;
-			if (tile.Y < minY) minY = tile.Y;
 			if (tile.Z < minZ) minZ = tile.Z;
 		}
 
-		return new Vector3I(minX, minY, minZ);
+		return new Vector3I(minX, ownedTiles[0].Y, minZ);
 	}
 
 	private Aabb GetVisualBounds()
