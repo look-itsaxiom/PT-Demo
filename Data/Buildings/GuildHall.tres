@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_hydy8")
-GridSize = Vector2i(24, 16)
+GridSize = Vector2i(12, 8)
 BuildingName = "GuildHall"
 Description = "A place for adventurers to gather and form parties."
 ScenePath = "res://Scenes/Buildings/GuildHall.tscn"

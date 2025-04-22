@@ -89,6 +89,11 @@ public partial class BuildGrid : Node3D
 
 	public Vector3 GridToWorld(Vector3I tile)
 	{
+		var worldPos = ToGlobal(buildGridMap.MapToLocal(tile));
+		worldPos.Y += buildingVerticalOffset;
+
+		return worldPos;
+
 		var cellSize = buildGridMap.CellSize;
 
 		return new Vector3(
