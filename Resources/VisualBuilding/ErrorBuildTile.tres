@@ -1,0 +1,7 @@
+[gd_resource type="PlaneMesh" load_steps=2 format=3 uid="uid://cemjnay8abn4l"]
+
+[ext_resource type="Material" uid="uid://d0wuflb535m5y" path="res://Resources/VisualBuilding/ErrorBuildShader.tres" id="1_p7sfl"]
+
+[resource]
+material = ExtResource("1_p7sfl")
+size = Vector2(1, 1)

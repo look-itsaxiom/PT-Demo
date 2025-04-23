@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bwl3mxxkyc8s8"]
+
+[ext_resource type="Shader" path="res://Resources/VisualBuilding/BuildTileShader.gdshader" id="1_th0ja"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_th0ja")
+shader_parameter/base_color = Color(0, 1, 0, 0.4)
+shader_parameter/border_color = Color(0, 0.5, 0, 1)
+shader_parameter/border_thickness = 0.03
