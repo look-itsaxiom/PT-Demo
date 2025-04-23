@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bwl3mxxkyc8s8"]
 
-[ext_resource type="Shader" path="res://Resources/BuildTileShader.gdshader" id="1_th0ja"]
+[ext_resource type="Shader" path="res://Resources/VisualBuilding/BuildTileShader.gdshader" id="1_th0ja"]
 
 [resource]
 render_priority = 0

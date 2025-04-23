@@ -58,14 +58,16 @@ public partial class BuildSite : Interactable, IInteractable
 		BuildSiteCamera.Current = true;
 
 		var ghostWrapper = new GhostBuilding();
-		ghostWrapper.OnPlacementConfirmed = (Vector3I buildOriginTile) =>
+		ghostWrapper.OnPlacementConfirmed = (Transform3D buildingTransform, List<Vector3I> requestedTiles) =>
 		{
-			Vector3 worldPos = BuildGrid.GridToWorld(buildOriginTile);
+			Vector3 worldPos = buildingTransform.Origin;
+			var worldRotation = buildingTransform.Basis.GetEuler();
 			var buildingInstance = (Node3D)GD.Load<PackedScene>(building.ScenePath).Instantiate();
 			this.AddChild(buildingInstance);
 			buildingInstance.GlobalPosition = worldPos;
-			BuildGrid.PlaceBuilding(buildingKey, buildingInstance, buildOriginTile, building.GridSize);
-			GD.Print($"{building.BuildingName} built at tile: {buildOriginTile}.");
+			buildingInstance.GlobalRotation = worldRotation;
+			BuildGrid.PlaceBuilding(buildingKey, buildingInstance, requestedTiles);
+			FindOwnedTiles();
 			GD.Print($"{building.BuildingName} placed at world position: {worldPos}.");
 			player.PlayerCamera.Current = true;
 			BuildSiteCamera.Current = false;
@@ -84,14 +86,15 @@ public partial class BuildSite : Interactable, IInteractable
 
 	private void FindOwnedTiles()
 	{
+		ownedTiles.Clear();
 		var myBounds = GetVisualBounds();
 
-		foreach (var tile in BuildGrid.tileStates.Keys)
+		foreach (var tile in BuildGrid.tileStates.Values)
 		{
-			Vector3 worldPos = BuildGrid.GridToWorld(tile);
-			if (myBounds.HasPoint(worldPos))
+			Vector3 worldPos = BuildGrid.GridToWorld(tile.Position);
+			if (myBounds.HasPoint(worldPos) && !tile.IsOccupied)
 			{
-				ownedTiles.Add(tile);
+				ownedTiles.Add(tile.Position);
 			}
 		}
 	}

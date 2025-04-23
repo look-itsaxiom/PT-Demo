@@ -1,16 +1,18 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class GhostBuilding : Node3D
 {
     public Vector2I GridSize;
     public List<Vector3I> AllowedTiles;
     public BuildGrid BuildGrid;
-    public Action<Vector3I> OnPlacementConfirmed;
+    public Action<Transform3D, List<Vector3I>> OnPlacementConfirmed;
     public Action OnPlacementCancelled;
 
-    private Vector3I _currentTile;
+    private Vector3I _pivotTile;
+    private List<Vector3I> _tileFootprint;
     private int _rotation = 0;
 
     public void Initialize(Building building, List<Vector3I> allowedTiles, BuildGrid buildGrid)
@@ -34,12 +36,22 @@ public partial class GhostBuilding : Node3D
             }
         }
 
-        GridSize = building.GridSize;
+        // handles the center position nature of the grid for visual appeal
+        GridSize = building.GridSize + new Vector2I(1, 1);
         AllowedTiles = allowedTiles;
         BuildGrid = buildGrid;
 
-        _currentTile = allowedTiles[0];
-        GlobalPosition = BuildGrid.GridToWorld(_currentTile);
+        _pivotTile = GetOriginTile();
+        _rotation = 0;
+        GlobalPosition = BuildGrid.GridToWorld(_pivotTile);
+        _tileFootprint = GetRequestedFootprint();
+        BuildGrid.PaintBuildingFootprint(_tileFootprint, AllowedTiles);
+    }
+
+    private Vector3I GetOriginTile()
+    {
+
+        return AllowedTiles[0] - new Vector3I(GridSize.X, 0, 0);
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -57,23 +69,22 @@ public partial class GhostBuilding : Node3D
 
         if (move != Vector3I.Zero)
         {
-            var newTile = _currentTile + move;
-            _currentTile = newTile;
-            GlobalPosition = BuildGrid.GridToWorld(_currentTile);
-            GD.Print($"Current tile: {_currentTile}");
+            _pivotTile += move;
+            ApplyMovement();
         }
 
-        // if (@event.IsActionPressed("rotate"))
-        // {
-        //     _rotation = (_rotation + 270) % 360;
-        //     RotationDegrees = new Vector3(0, _rotation, 0);
-        // }
+        if (@event.IsActionPressed("rotate"))
+        {
+            _rotation = (_rotation + 90) % 360;
+            RotationDegrees = new Vector3(0, _rotation, 0);
+            ApplyMovement();
+        }
 
         if (@event.IsActionPressed("ui_accept"))
         {
-            if (BuildGrid.CanPlaceBuilding(_currentTile, GridSize))
+            if (BuildGrid.CanPlaceBuilding(_tileFootprint))
             {
-                OnPlacementConfirmed?.Invoke(_currentTile);
+                OnPlacementConfirmed?.Invoke(this.Transform, _tileFootprint);
                 QueueFree();
             }
             else
@@ -88,5 +99,62 @@ public partial class GhostBuilding : Node3D
             OnPlacementCancelled?.Invoke();
             QueueFree();
         }
+    }
+
+    private void ApplyMovement()
+    {
+        GlobalPosition = BuildGrid.GridToWorld(_pivotTile);
+        _tileFootprint = GetRequestedFootprint();
+        BuildGrid.PaintBuildingFootprint(_tileFootprint, AllowedTiles);
+    }
+
+    private List<Vector3I> GetRequestedFootprint()
+    {
+        int w = GridSize.X;
+        int h = GridSize.Y;
+
+        List<Vector3I> requestedTiles = new List<Vector3I>();
+
+        switch (_rotation % 360)
+        {
+            case 0:
+                for (int x = 0; x < w; x++)
+                {
+                    for (int z = 0; z < h; z++)
+                    {
+                        requestedTiles.Add(_pivotTile + new Vector3I(x, 0, z));
+                    }
+                }
+                break;
+            case 90:
+                for (int x = 0; x < h; x++)
+                {
+                    for (int z = 0; z < w; z++)
+                    {
+                        requestedTiles.Add(_pivotTile + new Vector3I(x, 0, -z));
+                    }
+                }
+                break;
+            case 180:
+                for (int x = 0; x < w; x++)
+                {
+                    for (int z = 0; z < h; z++)
+                    {
+                        requestedTiles.Add(_pivotTile + new Vector3I(-x, 0, -z));
+                    }
+                }
+                break;
+            case 270:
+                for (int x = 0; x < h; x++)
+                {
+                    for (int z = 0; z < w; z++)
+                    {
+                        requestedTiles.Add(_pivotTile + new Vector3I(-x, 0, z));
+                    }
+                }
+                break;
+        }
+
+        return requestedTiles;
     }
 }
