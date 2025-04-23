@@ -44,47 +44,43 @@ public partial class BuildGrid : Node3D
 		GD.Print("Total buildable tiles found: ", tileStates.Count);
 	}
 
-	public bool CanPlaceBuilding(Vector3I origin, Vector2I size)
+	public bool CanPlaceBuilding(List<Vector3I> requestedTiles)
 	{
-		for (int x = 0; x < size.X; x++)
-			for (int z = 0; z < size.Y; z++)
+		foreach (var tile in requestedTiles)
+		{
+			if (tileStates.TryGetValue(tile, out TileData tileData))
 			{
-				var tile = new Vector3I(origin.X + x, origin.Y, origin.Z + z);
-				if (tileStates.TryGetValue(tile, out TileData tileData))
+				if (tileData.IsOccupied)
 				{
-					if (tileData.IsOccupied)
-					{
-						GD.Print($"Tile {tile} is already occupied.");
-						return false;
-					}
-				}
-				else
-				{
-					GD.Print($"Tile {tile} is out of bounds.");
+					GD.Print($"Tile {tile} is already occupied.");
 					return false;
 				}
 			}
+			else
+			{
+				GD.Print($"Tile {tile} is out of bounds.");
+				return false;
+			}
+		}
 		return true;
 	}
 
-	public void PlaceBuilding(string buildingKey, Node3D buildingInstance, Vector3I origin, Vector2I size)
+	public void PlaceBuilding(string buildingKey, Node3D buildingInstance, List<Vector3I> requestedTiles)
 	{
-		for (int x = 0; x < size.X; x++)
-			for (int z = 0; z < size.Y; z++)
+		foreach (var tile in requestedTiles)
+		{
+			if (!tileStates.TryGetValue(tile, out var tileData))
 			{
-				var tile = new Vector3I(origin.X + x, origin.Y, origin.Z + z);
-				if (!tileStates.TryGetValue(tile, out var tileData))
-				{
-					GD.PrintErr($"Tried to place building on invalid tile: {tile}");
-					continue; // Skip invalid tiles
-				}
-
-				tileData.IsOccupied = true;
-				tileData.BuildingKey = buildingKey;
-				tileData.BuildingInstance = buildingInstance;
-				tileStates[tile] = tileData;
-				buildGridMap.SetCellItem(tile, -1);
+				GD.PrintErr($"Tried to place building on invalid tile: {tile}");
+				continue; // Skip invalid tiles
 			}
+
+			tileData.IsOccupied = true;
+			tileData.BuildingKey = buildingKey;
+			tileData.BuildingInstance = buildingInstance;
+			tileStates[tile] = tileData;
+			buildGridMap.SetCellItem(tile, -1);
+		}
 	}
 
 	public Vector3 GridToWorld(Vector3I tile)
@@ -93,15 +89,24 @@ public partial class BuildGrid : Node3D
 		worldPos.Y += buildingVerticalOffset;
 
 		return worldPos;
-
-		var cellSize = buildGridMap.CellSize;
-
-		return new Vector3(
-			tile.X * cellSize.X,
-			tile.Y + Transform.Origin.Y + buildingVerticalOffset,
-			tile.Z * cellSize.Z
-		);
 	}
 
-
+	public void PaintBuildingFootprint(List<Vector3I> requestedTiles, List<Vector3I> availableTiles)
+	{
+		for (int i = 0; i < availableTiles.Count; i++)
+		{
+			var tilePos = availableTiles[i];
+			if (tileStates.TryGetValue(tilePos, out TileData tileData))
+			{
+				if (tileData.IsOccupied || requestedTiles.Contains(tilePos))
+				{
+					buildGridMap.SetCellItem(tilePos, 1);
+				}
+				else
+				{
+					buildGridMap.SetCellItem(tilePos, 0);
+				}
+			}
+		}
+	}
 }

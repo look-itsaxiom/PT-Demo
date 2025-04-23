@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bv0a5djfd6nvs"]
 
-[ext_resource type="PlaneMesh" uid="uid://lknf1a82wc81" path="res://Resources/BuildTilePlane.tres" id="2_a360f"]
+[ext_resource type="PlaneMesh" uid="uid://lknf1a82wc81" path="res://Resources/VisualBuilding/BuildTilePlane.tres" id="2_a360f"]
 
 [sub_resource type="MeshLibrary" id="MeshLibrary_k7d08"]
 item/0/name = ""
