@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bv0a5djfd6nvs"]
+
+[ext_resource type="PlaneMesh" uid="uid://lknf1a82wc81" path="res://Resources/VisualBuilding/BuildTilePlane.tres" id="2_a360f"]
+
+[sub_resource type="MeshLibrary" id="MeshLibrary_k7d08"]
+item/0/name = ""
+item/0/mesh = ExtResource("2_a360f")
+item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/shapes = []
+item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/navigation_layers = 1
+
+[node name="GridHelper" type="GridMap"]
+mesh_library = SubResource("MeshLibrary_k7d08")
+cell_size = Vector3(1, 1, 1)
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false

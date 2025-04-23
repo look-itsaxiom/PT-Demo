@@ -6,6 +6,7 @@ public abstract partial class Interactable : Area3D, IInteractable
 	public bool playerInRange;
 	public Player Player { get; set; }
 	public string ObjectName { get; set; }
+	public bool CanInteract { get; set; } = true;
 
 	public override void _Ready()
 	{
@@ -31,8 +32,6 @@ public abstract partial class Interactable : Area3D, IInteractable
 			Player.interactTarget = this;
 		}
 	}
-
-	public bool CanInteract() => playerInRange;
 
 	public virtual void Interact(Player player)
 	{

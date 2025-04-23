@@ -3,14 +3,32 @@ using System.Collections.Generic;
 
 public partial class DataRegistry : Node
 {
-	public Building guildHall = new Building("GuildHall", 2, 3, "res://Scenes/Buildings/GuildHall.tscn");
-	public Dictionary<string, Building> buildingTemplates;
+	[Export] public static DataRegistry Instance;
 
-	public DataRegistry()
+	[Export] public string BuildingFolderPath = "res://Data/Buildings";
+
+	public Dictionary<string, Building> buildingTemplates = new();
+
+	public override void _Ready()
 	{
-		buildingTemplates = new Dictionary<string, Building>
+		Instance = this;
+		RegisterBuildings();
+	}
+
+	private void RegisterBuildings()
+	{
+		foreach (string path in DirAccess.GetFilesAt(BuildingFolderPath))
 		{
-			{ "GuildHall", guildHall }
-		};
+			if (!path.EndsWith(".tres"))
+				continue;
+
+			var fullPath = $"{BuildingFolderPath}/{path}";
+			var resource = ResourceLoader.Load<Building>(fullPath);
+			if (resource != null)
+			{
+				buildingTemplates[resource.BuildingName] = resource;
+				GD.Print($"Loaded building: {resource.BuildingName} from {fullPath}");
+			}
+		}
 	}
 }
