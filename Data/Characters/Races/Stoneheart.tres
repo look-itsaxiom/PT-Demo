@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="RaceData" load_steps=12 format=3]
+
+[sub_resource type="CSharpScript" id="CSharpScript_37x5a"]
+
+[sub_resource type="Resource" id="Resource_adhn7"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_v7nfs"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_klweo"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_td473"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_4wmxa"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_1kmhe"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_evngy"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_sifb6"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_a22l6"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="CSharpScript" id="CSharpScript_gbags"]
+
+[resource]
+script = SubResource("CSharpScript_gbags")
+Name = "Stoneheart"
+Description = "Stalwart and industrious, Stoneheart are natural craftsmen and warriors."
+BaseStats = {
+0: SubResource("Resource_adhn7"),
+1: SubResource("Resource_v7nfs"),
+2: SubResource("Resource_klweo"),
+3: SubResource("Resource_td473"),
+4: SubResource("Resource_4wmxa"),
+5: SubResource("Resource_1kmhe"),
+6: SubResource("Resource_evngy"),
+7: SubResource("Resource_sifb6"),
+8: SubResource("Resource_a22l6")
+}

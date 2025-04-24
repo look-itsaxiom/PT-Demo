@@ -16,6 +16,9 @@ public partial class BuildGrid : Node3D
 
 	[Export] public float buildingVerticalOffset = 0.05f;
 
+	[Signal]
+	public delegate void BuildingPlacedEventHandler(string buildingKey);
+
 	public Dictionary<Vector3I, TileData> tileStates = new();
 
 	public override void _Ready()
@@ -81,6 +84,9 @@ public partial class BuildGrid : Node3D
 			tileStates[tile] = tileData;
 			buildGridMap.SetCellItem(tile, -1);
 		}
+
+		EmitSignal(SignalName.BuildingPlaced, buildingKey);
+
 	}
 
 	public Vector3 GridToWorld(Vector3I tile)

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://k5q2e1l1bolb"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_a2dic"]
+
+[resource]
+script = SubResource("CSharpScript_a2dic")
+Name = "Berserker"
+Description = "High physical damage output."
+tier = 2
+Requirements = PackedStringArray()
+Modifiers = {
+0: 0.35,
+1: 0.1,
+6: 0.25
+}

@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="RaceData" load_steps=12 format=3]
+
+[sub_resource type="CSharpScript" id="CSharpScript_37x5a"]
+
+[sub_resource type="Resource" id="Resource_qtagb"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_e2jcp"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_h7rq2"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_yn21s"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_rh7c7"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_t3jlh"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_hwcil"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_q7jrb"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_rdmno"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="CSharpScript" id="CSharpScript_gbags"]
+
+[resource]
+script = SubResource("CSharpScript_gbags")
+Name = "Reptilekin"
+Description = "Reptilekin balance endurance and defense while maintaining sharp focus in battle."
+BaseStats = {
+0: SubResource("Resource_qtagb"),
+1: SubResource("Resource_e2jcp"),
+2: SubResource("Resource_h7rq2"),
+3: SubResource("Resource_yn21s"),
+4: SubResource("Resource_rh7c7"),
+5: SubResource("Resource_t3jlh"),
+6: SubResource("Resource_hwcil"),
+7: SubResource("Resource_q7jrb"),
+8: SubResource("Resource_rdmno")
+}

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[sub_resource type="CSharpScript" id="CSharpScript_a2dic"]
+
+[resource]
+script = SubResource("CSharpScript_a2dic")
+Name = "Light Mage"
+Description = "Healing magic, buffs, and status condition cures."
+tier = 2
+Requirements = PackedStringArray()
+Modifiers = {
+4: 0.35,
+5: 0.25,
+7: 0.1
+}

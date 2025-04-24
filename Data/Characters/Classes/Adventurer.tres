@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://yuj7c1wbbdm5"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_a2dic"]
+
+[resource]
+script = SubResource("CSharpScript_a2dic")
+Name = "Adventurer"
+Description = "Balanced stats, capable of using simple weapons and armor. All adventurers begin here."
+tier = 0
+Requirements = PackedStringArray()
+Modifiers = {
+0: 0.1,
+1: 0.1,
+2: 0.1,
+3: 0.1,
+4: 0.1,
+5: 0.1,
+6: 0.1,
+7: 0.1,
+8: 0.1
+}
