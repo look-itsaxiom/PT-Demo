@@ -1,0 +1,48 @@
+[gd_resource type="Resource" load_steps=12 format=3 uid="uid://bcwhti37lpmsy"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_37x5a"]
+
+[sub_resource type="Resource" id="Resource_goqjx"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_e64dn"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_wdsxh"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_8lku5"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_hhtyf"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_m4sea"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_4xhky"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_x4eol"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_ejr2g"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="CSharpScript" id="CSharpScript_gbags"]
+
+[resource]
+script = SubResource("CSharpScript_gbags")
+Name = "Demarkin"
+Description = "Inventive and clever devils, Demarkin excel in crafting and magical support."
+BaseStats = {
+0: SubResource("Resource_goqjx"),
+1: SubResource("Resource_e64dn"),
+2: SubResource("Resource_wdsxh"),
+3: SubResource("Resource_8lku5"),
+4: SubResource("Resource_hhtyf"),
+5: SubResource("Resource_m4sea"),
+6: SubResource("Resource_4xhky"),
+7: SubResource("Resource_x4eol"),
+8: SubResource("Resource_ejr2g")
+}

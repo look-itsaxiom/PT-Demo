@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[sub_resource type="CSharpScript" id="CSharpScript_a2dic"]
+
+[resource]
+script = SubResource("CSharpScript_a2dic")
+Name = "Warlord"
+Description = "Highest consistent physical damage output."
+tier = 3
+Requirements = PackedStringArray()
+Modifiers = {
+0: 0.5,
+5: -0.3,
+6: 0.5,
+7: 0.25
+}

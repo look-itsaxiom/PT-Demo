@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="RaceData" load_steps=12 format=3]
+
+[sub_resource type="CSharpScript" id="CSharpScript_37x5a"]
+
+[sub_resource type="Resource" id="Resource_kelw6"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_k0aec"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_5irvb"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_e8nnv"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_f3hp5"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_e25yk"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_q6ffk"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_wr6tj"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="Resource" id="Resource_2tivx"]
+script = SubResource("CSharpScript_37x5a")
+
+[sub_resource type="CSharpScript" id="CSharpScript_gbags"]
+
+[resource]
+script = SubResource("CSharpScript_gbags")
+Name = "Beastkin"
+Description = "Agile and primal, Beastkin possess keen senses and excel in physical prowess."
+BaseStats = {
+0: SubResource("Resource_kelw6"),
+1: SubResource("Resource_k0aec"),
+2: SubResource("Resource_5irvb"),
+3: SubResource("Resource_e8nnv"),
+4: SubResource("Resource_f3hp5"),
+5: SubResource("Resource_e25yk"),
+6: SubResource("Resource_q6ffk"),
+7: SubResource("Resource_wr6tj"),
+8: SubResource("Resource_2tivx")
+}

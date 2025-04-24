@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[sub_resource type="CSharpScript" id="CSharpScript_a2dic"]
+
+[resource]
+script = SubResource("CSharpScript_a2dic")
+Name = "Dread Knight"
+Description = "Mixes defensive and dark magic. Gains abilities to debuff enemies and inflict status conditions."
+tier = 3
+Requirements = PackedStringArray()
+Modifiers = {
+1: 0.5,
+3: 0.25,
+5: 0.5,
+7: -0.3
+}

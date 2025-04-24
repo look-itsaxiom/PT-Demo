@@ -50,8 +50,7 @@ public partial class GhostBuilding : Node3D
 
     private Vector3I GetOriginTile()
     {
-
-        return AllowedTiles[0] - new Vector3I(GridSize.X, 0, 0);
+        return AllowedTiles[0];
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -113,43 +112,51 @@ public partial class GhostBuilding : Node3D
         int w = GridSize.X;
         int h = GridSize.Y;
 
+        // Calculate the offset from center to top-left corner
+        Vector3I centerOffset = new Vector3I(w / 2, 0, h / 2);
+        Vector3I startTile;
+
         List<Vector3I> requestedTiles = new List<Vector3I>();
 
         switch (_rotation % 360)
         {
             case 0:
+                startTile = _pivotTile - centerOffset;
                 for (int x = 0; x < w; x++)
                 {
                     for (int z = 0; z < h; z++)
                     {
-                        requestedTiles.Add(_pivotTile + new Vector3I(x, 0, z));
+                        requestedTiles.Add(startTile + new Vector3I(x, 0, z));
                     }
                 }
                 break;
             case 90:
+                startTile = _pivotTile - new Vector3I(h / 2, 0, -w / 2);
                 for (int x = 0; x < h; x++)
                 {
                     for (int z = 0; z < w; z++)
                     {
-                        requestedTiles.Add(_pivotTile + new Vector3I(x, 0, -z));
+                        requestedTiles.Add(startTile + new Vector3I(x, 0, -z));
                     }
                 }
                 break;
             case 180:
+                startTile = _pivotTile - new Vector3I(-w / 2, 0, -h / 2);
                 for (int x = 0; x < w; x++)
                 {
                     for (int z = 0; z < h; z++)
                     {
-                        requestedTiles.Add(_pivotTile + new Vector3I(-x, 0, -z));
+                        requestedTiles.Add(startTile + new Vector3I(-x, 0, -z));
                     }
                 }
                 break;
             case 270:
+                startTile = _pivotTile - new Vector3I(-h / 2, 0, w / 2);
                 for (int x = 0; x < h; x++)
                 {
                     for (int z = 0; z < w; z++)
                     {
-                        requestedTiles.Add(_pivotTile + new Vector3I(-x, 0, z));
+                        requestedTiles.Add(startTile + new Vector3I(-x, 0, z));
                     }
                 }
                 break;

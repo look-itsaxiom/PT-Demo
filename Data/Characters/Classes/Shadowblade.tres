@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[sub_resource type="CSharpScript" id="CSharpScript_a2dic"]
+
+[resource]
+script = SubResource("CSharpScript_a2dic")
+Name = "Shadowblade"
+Description = "Uses dark magic to inflict debuffs on top of high damaging abilities."
+tier = 3
+Requirements = PackedStringArray()
+Modifiers = {
+2: -0.3,
+3: 0.5,
+6: 0.25,
+8: 0.5
+}

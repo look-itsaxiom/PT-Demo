@@ -68,7 +68,6 @@ public partial class BuildSite : Interactable, IInteractable
 			buildingInstance.GlobalRotation = worldRotation;
 			BuildGrid.PlaceBuilding(buildingKey, buildingInstance, requestedTiles);
 			FindOwnedTiles();
-			GD.Print($"{building.BuildingName} placed at world position: {worldPos}.");
 			player.PlayerCamera.Current = true;
 			BuildSiteCamera.Current = false;
 			player.CanMove = true;
