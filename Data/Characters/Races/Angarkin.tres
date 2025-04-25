@@ -1,48 +1,19 @@
-[gd_resource type="Resource" script_class="RaceData" load_steps=12 format=3]
+[gd_resource type="Resource" script_class="RaceData" load_steps=2 format=3]
 
-[sub_resource type="CSharpScript" id="CSharpScript_37x5a"]
-
-[sub_resource type="Resource" id="Resource_04mc1"]
-script = SubResource("CSharpScript_37x5a")
-
-[sub_resource type="Resource" id="Resource_g228m"]
-script = SubResource("CSharpScript_37x5a")
-
-[sub_resource type="Resource" id="Resource_qgvg1"]
-script = SubResource("CSharpScript_37x5a")
-
-[sub_resource type="Resource" id="Resource_0ypxm"]
-script = SubResource("CSharpScript_37x5a")
-
-[sub_resource type="Resource" id="Resource_swx56"]
-script = SubResource("CSharpScript_37x5a")
-
-[sub_resource type="Resource" id="Resource_qecfa"]
-script = SubResource("CSharpScript_37x5a")
-
-[sub_resource type="Resource" id="Resource_fn43f"]
-script = SubResource("CSharpScript_37x5a")
-
-[sub_resource type="Resource" id="Resource_ckryp"]
-script = SubResource("CSharpScript_37x5a")
-
-[sub_resource type="Resource" id="Resource_2aftj"]
-script = SubResource("CSharpScript_37x5a")
-
-[sub_resource type="CSharpScript" id="CSharpScript_gbags"]
+[ext_resource type="Script" path="res://Scripts/RaceData.cs" id="1_dcjv3"]
 
 [resource]
-script = SubResource("CSharpScript_gbags")
+script = ExtResource("1_dcjv3")
 Name = "Angarkin"
 Description = "Agile and celestial, Angarkin possess keen senses and excel in physical prowess."
 BaseStats = {
-0: SubResource("Resource_04mc1"),
-1: SubResource("Resource_g228m"),
-2: SubResource("Resource_qgvg1"),
-3: SubResource("Resource_0ypxm"),
-4: SubResource("Resource_swx56"),
-5: SubResource("Resource_qecfa"),
-6: SubResource("Resource_fn43f"),
-7: SubResource("Resource_ckryp"),
-8: SubResource("Resource_2aftj")
+0: Vector2i(8, 16),
+1: Vector2i(8, 12),
+2: Vector2i(6, 12),
+3: Vector2i(6, 10),
+4: Vector2i(8, 12),
+5: Vector2i(6, 10),
+6: Vector2i(8, 12),
+7: Vector2i(8, 10),
+8: Vector2i(10, 16)
 }

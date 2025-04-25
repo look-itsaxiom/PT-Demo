@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
 
-[sub_resource type="CSharpScript" id="CSharpScript_a2dic"]
+[ext_resource type="Script" path="res://Scripts/ClassData.cs" id="1_vtdnv"]
 
 [resource]
-script = SubResource("CSharpScript_a2dic")
+script = ExtResource("1_vtdnv")
 Name = "Assassin"
 Description = "Precision-focused abilities, excelling in one-hit critical strikes."
 tier = 3

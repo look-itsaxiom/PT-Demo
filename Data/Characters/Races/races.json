@@ -1,0 +1,122 @@
+{
+  "Gignen": {
+	"name": "Gignen",
+	"description": "Versatile and adaptive, Gignen are generalists suited to any role.",
+	"baseStats": {
+	  "STR": { "min": 8, "max": 12 },
+	  "END": { "min": 8, "max": 12 },
+	  "DEF": { "min": 8, "max": 12 },
+	  "INT": { "min": 8, "max": 12 },
+	  "SPI": { "min": 8, "max": 12 },
+	  "MDF": { "min": 8, "max": 12 },
+	  "SPD": { "min": 8, "max": 12 },
+	  "LCK": { "min": 8, "max": 12 },
+	  "ACC": { "min": 8, "max": 12 }
+	}
+  },
+  "Fae": {
+	"name": "Fae",
+	"description": "Graceful and intelligent, Fae are well rounded for magical positions.",
+	"baseStats": {
+	  "STR": { "min": 6, "max": 10 },
+	  "END": { "min": 6, "max": 10 },
+	  "DEF": { "min": 6, "max": 10 },
+	  "INT": { "min": 10, "max": 16 },
+	  "SPI": { "min": 10, "max": 14 },
+	  "MDF": { "min": 8, "max": 14 },
+	  "SPD": { "min": 8, "max": 12 },
+	  "LCK": { "min": 8, "max": 12 },
+	  "ACC": { "min": 8, "max": 12 }
+	}
+  },
+  "Stoneheart": {
+	"name": "Stoneheart",
+	"description": "Stalwart and industrious, Stoneheart are natural craftsmen and warriors.",
+	"baseStats": {
+	  "STR": { "min": 8, "max": 14 },
+	  "END": { "min": 10, "max": 16 },
+	  "DEF": { "min": 10, "max": 14 },
+	  "INT": { "min": 6, "max": 10 },
+	  "SPI": { "min": 8, "max": 12 },
+	  "MDF": { "min": 6, "max": 10 },
+	  "SPD": { "min": 6, "max": 10 },
+	  "LCK": { "min": 8, "max": 12 },
+	  "ACC": { "min": 8, "max": 12 }
+	}
+  },
+  "Beastkin": {
+	"name": "Beastkin",
+	"description": "Agile and primal, Beastkin possess keen senses and excel in physical prowess.",
+	"baseStats": {
+	  "STR": { "min": 10, "max": 16 },
+	  "END": { "min": 8, "max": 12 },
+	  "DEF": { "min": 6, "max": 10 },
+	  "INT": { "min": 6, "max": 10 },
+	  "SPI": { "min": 6, "max": 12 },
+	  "MDF": { "min": 6, "max": 10 },
+	  "SPD": { "min": 10, "max": 16 },
+	  "LCK": { "min": 6, "max": 10 },
+	  "ACC": { "min": 10, "max": 14 }
+	}
+  },
+  "Kithan": {
+	"name": "Kithan",
+	"description": "Nimble and lucky, Kithan excel in evasion and luck-based roles.",
+	"baseStats": {
+	  "STR": { "min": 6, "max": 14 },
+	  "END": { "min": 6, "max": 10 },
+	  "DEF": { "min": 6, "max": 10 },
+	  "INT": { "min": 8, "max": 12 },
+	  "SPI": { "min": 8, "max": 12 },
+	  "MDF": { "min": 6, "max": 10 },
+	  "SPD": { "min": 10, "max": 16 },
+	  "LCK": { "min": 10, "max": 14 },
+	  "ACC": { "min": 10, "max": 14 }
+	}
+  },
+  "Angarkin": {
+	"name": "Angarkin",
+	"description": "Agile and celestial, Angarkin possess keen senses and excel in physical prowess.",
+	"baseStats": {
+	  "STR": { "min": 8, "max": 16 },
+	  "END": { "min": 8, "max": 12 },
+	  "DEF": { "min": 6, "max": 12 },
+	  "INT": { "min": 6, "max": 10 },
+	  "SPI": { "min": 8, "max": 12 },
+	  "MDF": { "min": 6, "max": 10 },
+	  "SPD": { "min": 8, "max": 12 },
+	  "LCK": { "min": 8, "max": 10 },
+	  "ACC": { "min": 10, "max": 16 }
+	}
+  },
+  "Demarkin": {
+	"name": "Demarkin",
+	"description": "Inventive and clever devils, Demarkin excel in crafting and magical support.",
+	"baseStats": {
+	  "STR": { "min": 4, "max": 10 },
+	  "END": { "min": 6, "max": 10 },
+	  "DEF": { "min": 6, "max": 10 },
+	  "INT": { "min": 12, "max": 16 },
+	  "SPI": { "min": 6, "max": 12 },
+	  "MDF": { "min": 10, "max": 16 },
+	  "SPD": { "min": 8, "max": 12 },
+	  "LCK": { "min": 6, "max": 10 },
+	  "ACC": { "min": 8, "max": 14 }
+	}
+  },
+  "Reptilekin": {
+	"name": "Reptilekin",
+	"description": "Reptilekin balance endurance and defense while maintaining sharp focus in battle.",
+	"baseStats": {
+	  "STR": { "min": 8, "max": 12 },
+	  "END": { "min": 6, "max": 10 },
+	  "DEF": { "min": 10, "max": 14 },
+	  "INT": { "min": 6, "max": 10 },
+	  "SPI": { "min": 8, "max": 16 },
+	  "MDF": { "min": 10, "max": 14 },
+	  "SPD": { "min": 8, "max": 14 },
+	  "LCK": { "min": 6, "max": 10 },
+	  "ACC": { "min": 6, "max": 10 }
+	}
+  }
+}

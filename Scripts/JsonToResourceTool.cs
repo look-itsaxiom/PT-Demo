@@ -1,4 +1,4 @@
-using Characters;
+using CharacterData;
 using Godot;
 using Godot.Collections;
 
@@ -26,14 +26,14 @@ public partial class JsonToResourceTool : Node
             {
                 Name = raceData["name"].ToString(),
                 Description = raceData["description"].ToString(),
-                BaseStats = new Dictionary<Stat.StatKey, StatRange>()
+                BaseStats = new Dictionary<Stat.StatKey, Vector2I>()
             };
 
             var stats = raceData["baseStats"].AsGodotDictionary();
             foreach (var statKey in stats.Keys)
             {
                 var statData = stats[statKey].AsGodotDictionary();
-                resource.BaseStats[Stat.StatKeyNamesReverse[statKey.ToString()]] = new StatRange(
+                resource.BaseStats[Stat.StatKeyNamesReverse[statKey.ToString()]] = new Vector2I(
                 (int)statData["min"], (int)statData["max"]);
             }
 

@@ -3,9 +3,8 @@ using System.Linq.Expressions;
 using Godot;
 using Godot.Collections;
 
-namespace Characters
+namespace CharacterData
 {
-    [GlobalClass]
     public partial class Stat : Resource
     {
         public enum StatKey
@@ -74,7 +73,6 @@ namespace Characters
         }
     }
 
-    [GlobalClass]
     public partial class GrowthRate : Resource
     {
         [Export] public GrowthRateKey Key;
@@ -164,43 +162,24 @@ namespace Characters
     }
 
     [GlobalClass]
-    public partial class CharacterData : Resource
+    public partial class Character : Resource
     {
         [Export] public string CharacterName;
         [Export] public RaceData Race;
         [Export] public ClassData ClassName;
         [Export] public Dictionary<Stat.StatKey, Stat> BaseStats = new();
         [Export] public Dictionary<Stat.StatKey, GrowthRate> GrowthRates = new();
-    }
-
-    [GlobalClass]
-    public partial class RaceData : Resource
-    {
-        [Export] public string Name;
-        [Export] public string Description;
-        [Export] public Dictionary<Stat.StatKey, StatRange> BaseStats = new();
-    }
-
-    [GlobalClass]
-    public partial class ClassData : Resource
-    {
-        [Export] public string Name;
-        [Export] public string Description;
-        [Export] public int tier;
-        [Export] public string[] Requirements;
-        [Export] public Dictionary<Stat.StatKey, float> Modifiers = new();
-    }
-
-    [GlobalClass]
-    public partial class StatRange : Resource
-    {
-        public int Min { get; set; }
-        public int Max { get; set; }
-
-        public StatRange(int min, int max)
+        [Export] public Dictionary<Stat.StatKey, Stat> CurrentStats = new();
+        [Export] public int Level = 1;
+        [Export] public int Experience = 0;
+        [Export] public string[] Abilities = new string[0];
+        [Export] public string[] Affinities = new string[0];
+        public struct Equipment
         {
-            Min = min;
-            Max = max;
+            public string Weapon;
+            public string Armor;
+            public string Accessory;
         }
+        public PackedScene CharacterScene;
     }
 }

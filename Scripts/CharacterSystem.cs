@@ -1,38 +1,28 @@
 using Godot;
 using System.Collections.Generic;
-using Characters;
+using CharacterData;
 using System.Linq;
 
 public partial class CharacterSystem : Node
 {
-    public static Dictionary<string, RaceData> raceDefs;
-    public static Dictionary<string, ClassData> classDefs;
-    public static Dictionary<GrowthRate.GrowthRateKey, GrowthRate> growthRates = new();
-
-    public override void _Ready()
+    public static Character GenerateRandomCharacter()
     {
-        raceDefs = DataRegistry.Instance.Races;
-        classDefs = DataRegistry.Instance.Classes;
-        growthRates = DataRegistry.Instance.GrowthRates;
-    }
-
-    public static CharacterData GenerateRandomCharacter()
-    {
-        var raceKeys = raceDefs.Keys.ToList();
+        var raceKeys = DataRegistry.Instance.Races.Keys.ToList();
         var randomRaceKey = raceKeys[GD.RandRange(0, raceKeys.Count - 1)];
-        var race = raceDefs[randomRaceKey];
+        var race = DataRegistry.Instance.Races[randomRaceKey];
 
-        var character = new CharacterData
+        var character = new Character
         {
             CharacterName = "Jerry",
             Race = race,
-            ClassName = classDefs["Adventurer"]
+            ClassName = DataRegistry.Instance.Classes["Adventurer"],
+
         };
 
         foreach (var stat in character.BaseStats.Keys)
         {
-            var min = race.BaseStats[stat].Min;
-            var max = race.BaseStats[stat].Max;
+            var min = race.BaseStats[stat].X;
+            var max = race.BaseStats[stat].Y;
             character.BaseStats[stat].Value = GD.RandRange(min, max);
         }
 
@@ -40,6 +30,10 @@ public partial class CharacterSystem : Node
         {
             character.GrowthRates[stat] = RollGrowthRate();
         }
+
+        // Apply growth rate modifiers to calc current stats
+
+        character.CharacterScene = GD.Load<PackedScene>("res://Scenes/rogue.tscn");
 
         return character;
     }
@@ -49,7 +43,7 @@ public partial class CharacterSystem : Node
         float roll = (float)GD.Randf();
         float cumulativeProbability = 0f;
 
-        foreach (var growthRate in growthRates.Values)
+        foreach (var growthRate in DataRegistry.Instance.GrowthRates.Values)
         {
             cumulativeProbability += growthRate.GrowthRateChance;
             if (roll < cumulativeProbability)
@@ -59,7 +53,7 @@ public partial class CharacterSystem : Node
         }
 
         // Fallback in case of rounding errors
-        return growthRates[GrowthRate.GrowthRateKey.Minimal];
+        return DataRegistry.Instance.GrowthRates[GrowthRate.GrowthRateKey.Minimal];
     }
 
 }

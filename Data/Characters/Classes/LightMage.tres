@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
 
-[sub_resource type="CSharpScript" id="CSharpScript_a2dic"]
+[ext_resource type="Script" path="res://Scripts/ClassData.cs" id="1_r0wi0"]
 
 [resource]
-script = SubResource("CSharpScript_a2dic")
+script = ExtResource("1_r0wi0")
 Name = "Light Mage"
 Description = "Healing magic, buffs, and status condition cures."
 tier = 2

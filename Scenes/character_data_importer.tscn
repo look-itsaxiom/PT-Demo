@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwgwhxgevmlw"]
+
+[ext_resource type="Script" path="res://Scripts/JsonToResourceTool.cs" id="1_htd4g"]
+
+[node name="CharacterDataImporter" type="Node3D"]
+script = ExtResource("1_htd4g")

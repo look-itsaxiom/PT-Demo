@@ -1,9 +1,9 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://yuj7c1wbbdm5"]
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
 
-[sub_resource type="CSharpScript" id="CSharpScript_a2dic"]
+[ext_resource type="Script" path="res://Scripts/ClassData.cs" id="1_lg0la"]
 
 [resource]
-script = SubResource("CSharpScript_a2dic")
+script = ExtResource("1_lg0la")
 Name = "Adventurer"
 Description = "Balanced stats, capable of using simple weapons and armor. All adventurers begin here."
 tier = 0
