@@ -1,4 +1,4 @@
-using Characters;
+using CharacterData;
 using Godot;
 using System.Collections.Generic;
 

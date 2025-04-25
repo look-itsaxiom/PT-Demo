@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
 
-[sub_resource type="CSharpScript" id="CSharpScript_a2dic"]
+[ext_resource type="Script" path="res://Scripts/ClassData.cs" id="1_c4w16"]
 
 [resource]
-script = SubResource("CSharpScript_a2dic")
+script = ExtResource("1_c4w16")
 Name = "Shadowblade"
 Description = "Uses dark magic to inflict debuffs on top of high damaging abilities."
 tier = 3
