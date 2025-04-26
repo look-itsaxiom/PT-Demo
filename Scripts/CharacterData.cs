@@ -180,6 +180,6 @@ namespace CharacterData
             public string Armor;
             public string Accessory;
         }
-        public PackedScene CharacterScene;
+        public PackedScene CharacterModel;
     }
 }

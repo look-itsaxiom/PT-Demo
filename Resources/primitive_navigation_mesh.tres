@@ -1,0 +1,5 @@
+[gd_resource type="NavigationMesh" format=3 uid="uid://bocbt5ha48bws"]
+
+[resource]
+geometry_parsed_geometry_type = 1
+geometry_source_geometry_mode = 1
