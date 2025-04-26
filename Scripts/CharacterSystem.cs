@@ -33,7 +33,7 @@ public partial class CharacterSystem : Node
 
         // Apply growth rate modifiers to calc current stats
 
-        character.CharacterScene = GD.Load<PackedScene>("res://Scenes/rogue.tscn");
+        character.CharacterModel = GD.Load<PackedScene>("res://Scenes/rogue.tscn");
 
         return character;
     }

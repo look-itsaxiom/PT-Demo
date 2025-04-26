@@ -9,10 +9,12 @@ public partial class TownManager : Node3D
 	public int Stone { get; set; } = 10;
 	public int Food { get; set; } = 10;
 
+	public BuildGrid BuildGrid;
+
 	public override void _Ready()
 	{
-		var buildGrid = GetNode<BuildGrid>("BuildGrid");
-		buildGrid.BuildingPlaced += OnBuildingPlaced;
+		BuildGrid = GetNode<BuildGrid>("BuildGrid");
+		BuildGrid.BuildingPlaced += OnBuildingPlaced;
 	}
 
 	private void OnBuildingPlaced(string buildingKey)
@@ -21,19 +23,16 @@ public partial class TownManager : Node3D
 		{
 			TownLevel++;
 			GD.Print("Adventuring unlocked!");
-			var newAdventurer = CharacterSystem.GenerateRandomCharacter();
-			GD.Print($"New adventurer generated: {newAdventurer.CharacterName}");
-			GD.Print($"{newAdventurer}");
-			var newAdventurerScene = (Node3D)newAdventurer.CharacterScene.Instantiate();
-			AddChild(newAdventurerScene);
+			var newAdventurerData = CharacterSystem.GenerateRandomCharacter();
+			var newAdventurer = GD.Load<PackedScene>("res://Scenes/npc.tscn").Instantiate() as TownNPC;
+			newAdventurer.Initialize(newAdventurerData);
+			AddChild(newAdventurer);
 			var guildHall = GetNode<Node3D>("BuildSite2/GuildHall");
-			var forwardDirection = guildHall.GlobalTransform.Basis.Z.Normalized(); // Extract forward direction as a Vector3 and normalize it
-			var spawnDistance = 8.0f; // Distance in front of the guildhall
-			newAdventurerScene.GlobalPosition = guildHall.GlobalTransform.Origin + forwardDirection * spawnDistance;
-			var animationPlayer = newAdventurerScene.GetNode<AnimationPlayer>("AnimationPlayer");
-			var cheerAnimation = animationPlayer.GetAnimation("Cheer");
-			cheerAnimation.LoopMode = Animation.LoopModeEnum.Linear;
-			animationPlayer.Play("Cheer");
+			var forwardDirection = guildHall.GlobalTransform.Basis.Z.Normalized();
+			var spawnDistance = 8.0f;
+			var spawnPoint = guildHall.GlobalTransform.Origin + forwardDirection * spawnDistance;
+			spawnPoint.Y = 0;
+			newAdventurer.GlobalPosition = spawnPoint;
 		}
 	}
 

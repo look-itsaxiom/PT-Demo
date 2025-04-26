@@ -1,0 +1,123 @@
+using Godot;
+using CharacterData;
+using System;
+
+public partial class TownNPC : CharacterBody3D
+{
+    public Character Character;
+    public NavigationAgent3D NavigationAgent;
+    public float MoveSpeed = 3.5f;
+    public AnimationPlayer AnimationPlayer;
+    public Interactable InteractionArea;
+    public CollisionShape3D InteractionCollisionShape;
+    public bool IsMoving = false;
+    public bool IsInteracting = false;
+    public bool NewToTown = true;
+    private float MovementDelta;
+
+    public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
+    public void Initialize(Character character)
+    {
+        Character = character;
+        var characterModel = character.CharacterModel.Instantiate();
+        AnimationPlayer = characterModel.GetNode<AnimationPlayer>("AnimationPlayer");
+        AddChild(characterModel);
+    }
+
+    public override void _Ready()
+    {
+        NavigationAgent = GetNode<NavigationAgent3D>("NavigationAgent3D");
+        NavigationAgent.VelocityComputed += OnVelocityComputed;
+        NavigationAgent.TargetReached += OnTargetReached;
+        InteractionArea = GetNode<Area3D>("InteractionArea") as Interactable;
+        InteractionCollisionShape = GetNode<CollisionShape3D>("InteractionArea/CollisionShape3D");
+        OnTownArrival();
+        // // Set up the interaction area
+        // InteractionArea.InteractionStarted += OnInteractionStarted;
+        // InteractionArea.InteractionEnded += OnInteractionEnded;
+    }
+
+    private void OnTargetReached()
+    {
+        AnimationPlayer.Play("Idle");
+        Timer timer = new Timer();
+        timer.WaitTime = GD.RandRange(1.0f, 3.0f);
+        timer.OneShot = true;
+        timer.Timeout += () =>
+        {
+            var newPoint = GetParent().GetNode<EnvGridMap>("EnvGridMap").GetRandomTownPoint();
+            NavigationAgent.TargetPosition = newPoint;
+            timer.QueueFree();
+        };
+        AddChild(timer);
+        timer.Start();
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        if (NavigationAgent.IsNavigationFinished() || NewToTown)
+        {
+            Velocity = Vector3.Zero;
+            MoveAndSlide();
+            IsMoving = false;
+            return;
+        }
+
+        var nextPosition = NavigationAgent.GetNextPathPosition();
+
+        var directionToTarget = (nextPosition - GlobalPosition).Normalized();
+        var targetRotation = new Vector3(0, Mathf.Atan2(directionToTarget.X, directionToTarget.Z), 0);
+        Rotation = Rotation.Lerp(targetRotation, (float)delta * 5.0f);
+
+        var direction = (nextPosition - GlobalPosition).Normalized();
+        var velocity = direction * MoveSpeed;
+        velocity.Y = 0;
+
+        Velocity = velocity;
+
+        AnimationPlayer.Play("Walking_A");
+        MoveAndSlide();
+        IsMoving = true;
+    }
+
+
+    private void OnVelocityComputed(Vector3 safeVelocity)
+    {
+        GlobalPosition += safeVelocity;
+    }
+
+    private void OnTownArrival()
+    {
+        if (NewToTown)
+        {
+            Timer timer = new Timer();
+            timer.WaitTime = 5.0f;
+            timer.OneShot = true;
+            timer.Timeout += () =>
+            {
+                var cheerAnimation = AnimationPlayer.GetAnimation("Cheer");
+                cheerAnimation.LoopMode = Animation.LoopModeEnum.None;
+                OnTownArrivalFinished();
+                timer.QueueFree();
+            };
+            AddChild(timer);
+            timer.Start();
+
+            var cheerAnimation = AnimationPlayer.GetAnimation("Cheer");
+            cheerAnimation.LoopMode = Animation.LoopModeEnum.Linear;
+            AnimationPlayer.Play("Cheer");
+        }
+        else
+        {
+            OnTownArrivalFinished();
+        }
+
+    }
+
+    private void OnTownArrivalFinished()
+    {
+        AnimationPlayer.Play("Idle");
+        NewToTown = false;
+        OnTargetReached();
+    }
+}
