@@ -30,9 +30,7 @@ public partial class EnvGridMap : GridMap
     public Vector3 GridToWorld(Vector3I tile)
     {
         var worldPos = ToGlobal(MapToLocal(tile));
-        GD.Print("World Position: ", worldPos);
         worldPos.Y += CellSize.Y;
-        GD.Print("Adjusted World Position: ", worldPos);
 
         return worldPos;
     }

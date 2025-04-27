@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3 uid="uid://cl1y8tfbeok8l"]
 
 [ext_resource type="Script" path="res://Scripts/ClassData.cs" id="1_vtdnv"]
 

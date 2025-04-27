@@ -2,9 +2,16 @@ using Godot;
 using System.Collections.Generic;
 using CharacterData;
 using System.Linq;
+using System;
 
 public partial class CharacterSystem : Node
 {
+    public static Dictionary<int, PackedScene> CharacterModelDictionary = new Dictionary<int, PackedScene> {
+        { 1, GD.Load<PackedScene>("res://Scenes/rogue.tscn") },
+        { 2, GD.Load<PackedScene>("res://Scenes/barbarian.tscn") },
+        { 3, GD.Load<PackedScene>("res://Scenes/wizard.tscn") },
+        { 4, GD.Load<PackedScene>("res://Scenes/knight.tscn") },
+    };
     public static Character GenerateRandomCharacter()
     {
         var raceKeys = DataRegistry.Instance.Races.Keys.ToList();
@@ -15,11 +22,11 @@ public partial class CharacterSystem : Node
         {
             CharacterName = "Jerry",
             Race = race,
-            ClassName = DataRegistry.Instance.Classes["Adventurer"],
+            Class = DataRegistry.Instance.Classes["Adventurer"],
 
         };
 
-        foreach (var stat in character.BaseStats.Keys)
+        foreach (Stat.StatKey stat in Enum.GetValues(typeof(Stat.StatKey)))
         {
             var min = race.BaseStats[stat].X;
             var max = race.BaseStats[stat].Y;
@@ -32,8 +39,11 @@ public partial class CharacterSystem : Node
         }
 
         // Apply growth rate modifiers to calc current stats
+        GD.Print(character.CurrentStats);
+        character.CalculateCurrentStats();
+        GD.Print(character.CurrentStats);
 
-        character.CharacterModel = GD.Load<PackedScene>("res://Scenes/rogue.tscn");
+        character.CharacterModel = CharacterModelDictionary[GD.RandRange(1, CharacterModelDictionary.Count)];
 
         return character;
     }

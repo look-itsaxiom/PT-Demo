@@ -34,12 +34,11 @@ data = PackedVector3Array(2, 0, -0.5, 2, 4, -0.5, 1, 0, -0.5, 1, 0, -0.5, 2, 4, 
 data = PackedVector3Array(2, 1, 2, 2, 1, -2, 2, 0, 2, 2, 0, 2, 2, 1, -2, 2, 0, -2, -2, 0, 2, -2, 1, 2, 2, 0, 2, 2, 0, 2, -2, 1, 2, 2, 1, 2, 2, 0, -2, -2, 0, -2, 2, 0, 2, 2, 0, 2, -2, 0, -2, -2, 0, 2, -2, 1, -2, -2, 1, 2, -2, 0, -2, -2, 0, -2, -2, 1, 2, -2, 0, 2, 2, 1, 2, -2, 1, 2, 2, 1, -2, 2, 1, -2, -2, 1, 2, -2, 1, -2, 2, 1, -2, -2, 1, -2, 2, 0, -2, 2, 0, -2, -2, 1, -2, -2, 0, -2)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_7ld0d"]
-vertices = PackedVector3Array(-1.5, 1.5, -1.5, -1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5)
+vertices = PackedVector3Array(-1.5, 0.5, -1.5, -1.5, 0.5, 1.5, 1.5, 0.5, 1.5, 1.5, 0.5, -1.5)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4vxmu"]
 size = Vector2(4, 4)
-center_offset = Vector3(0, 1, 0)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_okkx6"]
 data = PackedVector3Array(-2, 0, -2, -1, 0, -1, 2, 0, -2, 2, 0, -2, -1, 0, -1, 1, 0, -1, 2, 0, -2, 2, 1, -2, -2, 0, -2, -2, 0, -2, 2, 1, -2, -2, 1, -2, 2, 1, -2, 1, 1, -1, -2, 1, -2, -2, 1, -2, 1, 1, -1, -1, 1, -1, -2, 0, 2, 2, 0, 2, -1, 0, 1, -1, 0, 1, 2, 0, 2, 1, 0, 1, -1, 1, -1, -1, 1, 1, -2, 1, -2, -2, 1, -2, -1, 1, 1, -2, 1, 2, 1, 0, -1, 1, 0, 1, 2, 0, -2, 2, 0, -2, 1, 0, 1, 2, 0, 2, 2, 1, 2, -2, 1, 2, 1, 1, 1, 1, 1, 1, -2, 1, 2, -1, 1, 1, -2, 1, -2, -2, 1, 2, -2, 0, -2, -2, 0, -2, -2, 1, 2, -2, 0, 2, -2, 0, -2, -2, 0, 2, -1, 0, -1, -1, 0, -1, -2, 0, 2, -1, 0, 1, 2, 1, -2, 2, 0, -2, 2, 1, 2, 2, 1, 2, 2, 0, -2, 2, 0, 2, -1, 1, -1, -1, 0, -1, -1, 1, 1, -1, 1, 1, -1, 0, -1, -1, 0, 1, 2, 1, -2, 2, 1, 2, 1, 1, -1, 1, 1, -1, 2, 1, 2, 1, 1, 1, 1, 1, 1, -1, 1, 1, 1, 0, 1, 1, 0, 1, -1, 1, 1, -1, 0, 1, 1, 1, -1, 1, 0, -1, -1, 1, -1, -1, 1, -1, 1, 0, -1, -1, 0, -1, 1, 0, 1, 1, 0, -1, 1, 1, 1, 1, 1, 1, 1, 0, -1, 1, 1, -1, -2, 0, 2, -2, 1, 2, 2, 0, 2, 2, 0, 2, -2, 1, 2, 2, 1, 2)
@@ -129,7 +128,7 @@ visible = false
 shape = SubResource("ConcavePolygonShape3D_qqc7y")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="PrimitiveFloor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000101089, 0, 0.00039959)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_7ld0d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PrimitiveFloor/NavigationRegion3D"]

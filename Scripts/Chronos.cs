@@ -15,12 +15,14 @@ public partial class Chronos : Node3D
 	public FadeManager fadeManager;
 
 	public Label clock;
+	public Label fps;
 
 	public override void _Ready()
 	{
 		sun = GetNode<DirectionalLight3D>("Helios");
 		fadeManager = GetNode<FadeManager>("../FadeManager");
 		clock = GetNode<Label>("Clock");
+		fps = GetNode<Label>("FPS");
 		timer = new Timer();
 		timer.WaitTime = timeInDay;
 		timer.Timeout += EndDay;
@@ -47,6 +49,14 @@ public partial class Chronos : Node3D
 		{
 			float sunRotation = (float)(currentTime / timeInDay) * 180.0f; // Full rotation over a day
 			sun.RotationDegrees = new Vector3(sunRotation - 90.0f, sun.RotationDegrees.Y, sun.RotationDegrees.Z);
+		}
+	}
+
+	public override void _Process(double delta)
+	{
+		if (Engine.GetFramesPerSecond() != 0)
+		{
+			fps.Text = $"FPS: {Engine.GetFramesPerSecond()}";
 		}
 	}
 
