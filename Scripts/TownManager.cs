@@ -10,10 +10,12 @@ public partial class TownManager : Node3D
 	public int Food { get; set; } = 10;
 
 	public BuildGrid BuildGrid;
+	public EnvGridMap EnvGridMap;
 
 	public override void _Ready()
 	{
 		BuildGrid = GetNode<BuildGrid>("BuildGrid");
+		EnvGridMap = GetNode<EnvGridMap>("EnvGridMap");
 		BuildGrid.BuildingPlaced += OnBuildingPlaced;
 	}
 
@@ -27,13 +29,8 @@ public partial class TownManager : Node3D
 			var newAdventurer = GD.Load<PackedScene>("res://Scenes/npc.tscn").Instantiate() as TownNPC;
 			newAdventurer.Initialize(newAdventurerData);
 			AddChild(newAdventurer);
-			var guildHall = GetNode<Node3D>("BuildSite2/GuildHall");
-			var forwardDirection = guildHall.GlobalTransform.Basis.Z.Normalized();
-			var spawnDistance = 8.0f;
-			var spawnPoint = guildHall.GlobalTransform.Origin + forwardDirection * spawnDistance;
-			spawnPoint.Y = 0;
-			newAdventurer.GlobalPosition = spawnPoint;
+			newAdventurer.GlobalPosition = new Vector3(0, 0, 0);
+			GetNode<CharacterInfoMenu>("CharacterInfoMenu").ShowCharacterInfo(newAdventurerData);
 		}
 	}
-
 }

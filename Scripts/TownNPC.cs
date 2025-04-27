@@ -5,6 +5,7 @@ using System;
 public partial class TownNPC : CharacterBody3D
 {
     public Character Character;
+    public CharacterInfoMenu CharacterInfoMenu;
     public NavigationAgent3D NavigationAgent;
     public float MoveSpeed = 3.5f;
     public AnimationPlayer AnimationPlayer;
@@ -15,7 +16,6 @@ public partial class TownNPC : CharacterBody3D
     public bool NewToTown = true;
     private float MovementDelta;
 
-    public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
     public void Initialize(Character character)
     {
         Character = character;
@@ -27,11 +27,11 @@ public partial class TownNPC : CharacterBody3D
     public override void _Ready()
     {
         NavigationAgent = GetNode<NavigationAgent3D>("NavigationAgent3D");
-        NavigationAgent.VelocityComputed += OnVelocityComputed;
         NavigationAgent.TargetReached += OnTargetReached;
         InteractionArea = GetNode<Area3D>("InteractionArea") as Interactable;
         InteractionCollisionShape = GetNode<CollisionShape3D>("InteractionArea/CollisionShape3D");
         OnTownArrival();
+
         // // Set up the interaction area
         // InteractionArea.InteractionStarted += OnInteractionStarted;
         // InteractionArea.InteractionEnded += OnInteractionEnded;
@@ -39,9 +39,9 @@ public partial class TownNPC : CharacterBody3D
 
     private void OnTargetReached()
     {
-        AnimationPlayer.Play("Idle");
+        AnimationPlayer.Play("Interact");
         Timer timer = new Timer();
-        timer.WaitTime = GD.RandRange(1.0f, 3.0f);
+        timer.WaitTime = GD.RandRange(3.0f, 5.0f);
         timer.OneShot = true;
         timer.Timeout += () =>
         {
@@ -55,43 +55,39 @@ public partial class TownNPC : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (NavigationAgent.IsNavigationFinished() || NewToTown)
+        if (NavigationAgent.IsNavigationFinished())
         {
+            AnimationPlayer.Play("Idle");
             Velocity = Vector3.Zero;
             MoveAndSlide();
-            IsMoving = false;
             return;
         }
 
-        var nextPosition = NavigationAgent.GetNextPathPosition();
+        Vector3 nextPathPosition = NavigationAgent.GetNextPathPosition();
+        nextPathPosition.Y = GlobalPosition.Y; // Keep NPC flat
 
-        var directionToTarget = (nextPosition - GlobalPosition).Normalized();
-        var targetRotation = new Vector3(0, Mathf.Atan2(directionToTarget.X, directionToTarget.Z), 0);
-        Rotation = Rotation.Lerp(targetRotation, (float)delta * 5.0f);
+        Vector3 directionToTarget = (nextPathPosition - GlobalPosition).Normalized();
+        Velocity = directionToTarget * MoveSpeed;
 
-        var direction = (nextPosition - GlobalPosition).Normalized();
-        var velocity = direction * MoveSpeed;
-        velocity.Y = 0;
+        NavigationAgent.Velocity = Velocity; // <-- correct way in Godot 4!
 
-        Velocity = velocity;
+        MoveAndSlide();
+
+        if (directionToTarget.LengthSquared() > 0.01f)
+        {
+            var targetRotation = new Vector3(0, Mathf.Atan2(directionToTarget.X, directionToTarget.Z), 0);
+            Rotation = Rotation.Lerp(targetRotation, (float)delta * 5.0f);
+        }
 
         AnimationPlayer.Play("Walking_A");
-        MoveAndSlide();
         IsMoving = true;
     }
-
-
-    private void OnVelocityComputed(Vector3 safeVelocity)
-    {
-        GlobalPosition += safeVelocity;
-    }
-
     private void OnTownArrival()
     {
         if (NewToTown)
         {
             Timer timer = new Timer();
-            timer.WaitTime = 5.0f;
+            timer.WaitTime = 3.0f;
             timer.OneShot = true;
             timer.Timeout += () =>
             {
@@ -119,5 +115,13 @@ public partial class TownNPC : CharacterBody3D
         AnimationPlayer.Play("Idle");
         NewToTown = false;
         OnTargetReached();
+    }
+
+    public void Interact(Player player)
+    {
+        player.CanMove = false;
+        var CharacterInfoMenu = GetNode<CharacterInfoMenu>("/root/CharacterInfoMenu");
+        CharacterInfoMenu.OnClose += () => player.CanMove = true;
+        CharacterInfoMenu.ShowCharacterInfo(Character);
     }
 }

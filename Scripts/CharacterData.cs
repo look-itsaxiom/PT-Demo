@@ -24,6 +24,7 @@ namespace CharacterData
         [Export] public string StatName;
         [Export] public string KeyName;
         [Export] public int Value = 0;
+        [Export] public float Overflow = 0;
         [Export] public string Description;
 
         public static readonly Dictionary<StatKey, string> StatNamesDictionary = new()
@@ -166,10 +167,11 @@ namespace CharacterData
     {
         [Export] public string CharacterName;
         [Export] public RaceData Race;
-        [Export] public ClassData ClassName;
+        [Export] public ClassData Class;
         [Export] public Dictionary<Stat.StatKey, Stat> BaseStats = new();
         [Export] public Dictionary<Stat.StatKey, GrowthRate> GrowthRates = new();
         [Export] public Dictionary<Stat.StatKey, Stat> CurrentStats = new();
+        [Export] public Array<Dictionary<Stat.StatKey, Stat>> StatHistory = new();
         [Export] public int Level = 1;
         [Export] public int Experience = 0;
         [Export] public string[] Abilities = new string[0];
@@ -181,5 +183,36 @@ namespace CharacterData
             public string Accessory;
         }
         public PackedScene CharacterModel;
+
+        public void CalculateCurrentStats()
+        {
+            if (CurrentStats.Count == 0)
+            {
+                foreach (var stat in BaseStats.Keys)
+                {
+                    CurrentStats[stat] = new Stat(stat);
+                }
+            }
+            StatHistory.Add(CurrentStats);
+            foreach (var stat in CurrentStats.Keys)
+            {
+                var baseStat = BaseStats[stat];
+                var currentStat = CurrentStats[stat];
+                var growthRate = GrowthRates[stat];
+                var classMod = Class.Modifiers.TryGetValue(stat, out var classModifier) ? classModifier : 0;
+                float statGrowth = growthRate.CalculateGrowthRate(Level);
+                statGrowth += currentStat.Overflow;
+                statGrowth *= classMod;
+                float newOverflow = statGrowth % 1;
+
+                var newStat = new Stat(stat)
+                {
+                    Value = Mathf.FloorToInt(baseStat.Value + statGrowth),
+                    Overflow = newOverflow
+                };
+
+                CurrentStats[stat] = newStat;
+            }
+        }
     }
 }
