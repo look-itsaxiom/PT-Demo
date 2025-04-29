@@ -19,6 +19,7 @@ public abstract partial class Interactable : Area3D, IInteractable
 		if (body.IsInGroup("Player"))
 		{
 			playerInRange = false;
+			Player.interactTarget = null;
 			Player = null;
 		}
 	}

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ce5unwihvwmk0"]
 
-[ext_resource type="Script" path="res://Scripts/BuildMenu.cs" id="1_ey16a"]
+[ext_resource type="Script" path="res://Scripts/Town/BuildMenu.cs" id="1_ey16a"]
 
 [node name="BuildMenu" type="Control"]
 visible = false
