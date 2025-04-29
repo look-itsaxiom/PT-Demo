@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://vgnl04yevpjv"]
+
+[ext_resource type="Script" path="res://Scripts/Quests/QuestMenu.cs" id="1_tbemw"]
+
+[node name="QuestMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tbemw")
+
+[node name="AvailableQuestsList" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 992.0
+offset_top = 240.0
+offset_right = 1376.0
+offset_bottom = 816.0
+
+[node name="AssignPlayerQuestButton" type="Button" parent="AvailableQuestsList"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 472.0
+offset_right = 184.0
+offset_bottom = 503.0
+text = "Assign Adventurer"
+
+[node name="AssignNPCQuestButton" type="Button" parent="AvailableQuestsList"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 472.0
+offset_right = 360.0
+offset_bottom = 503.0
+text = "Go Yourself
+"
+
+[node name="AvailableQuestList" type="VBoxContainer" parent="AvailableQuestsList"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 56.0
+offset_right = 360.0
+offset_bottom = 464.0
+
+[node name="AvailableQuestsListLabel" type="Label" parent="AvailableQuestsList"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 360.0
+offset_bottom = 47.0
+text = "Available"
+
+[node name="AssignedQuestsList" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 1376.0
+offset_top = 240.0
+offset_right = 1760.0
+offset_bottom = 816.0
+
+[node name="AssignedQuestList" type="VBoxContainer" parent="AssignedQuestsList"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 56.0
+offset_right = 360.0
+offset_bottom = 464.0
+
+[node name="AssignedQuestsListLabel" type="Label" parent="AssignedQuestsList"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 360.0
+offset_bottom = 47.0
+text = "Assigned"

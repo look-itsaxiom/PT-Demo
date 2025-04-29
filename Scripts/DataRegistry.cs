@@ -12,6 +12,8 @@ public partial class DataRegistry : Node
 
 	[Export] public string ClassesFolderPath = "res://Data/Characters/Classes";
 
+	[Export] public string QuestsFolderPath = "res://Data/Quests";
+
 	public Dictionary<string, Building> buildingTemplates = new();
 
 	public Dictionary<string, RaceData> Races = new();
@@ -20,6 +22,8 @@ public partial class DataRegistry : Node
 
 	public Dictionary<GrowthRate.GrowthRateKey, GrowthRate> GrowthRates = new();
 
+	public Dictionary<int, Quest> Quests = new();
+
 	public override void _Ready()
 	{
 		Instance = this;
@@ -27,6 +31,7 @@ public partial class DataRegistry : Node
 		RegisterRaces();
 		RegisterClasses();
 		RegisterGrowthRates();
+		RegisterQuests();
 	}
 
 	private void RegisterBuildings()
@@ -92,6 +97,25 @@ public partial class DataRegistry : Node
 				GrowthRateChance = GrowthRate.GrowthRateChances[growthRateKey],
 				CalculateGrowthRate = GrowthRate.GrowthRateCalculators[growthRateKey]
 			};
+		}
+	}
+
+	private void RegisterQuests()
+	{
+		int id = 0;
+		foreach (string path in DirAccess.GetFilesAt(QuestsFolderPath))
+		{
+			if (!path.EndsWith(".tres"))
+				continue;
+
+			var fullPath = $"{QuestsFolderPath}/{path}";
+			var resource = ResourceLoader.Load<Quest>(fullPath);
+			resource.QuestID = id++;
+			if (resource != null)
+			{
+				Quests[resource.QuestID] = resource;
+				GD.Print($"Registered quest: {resource.QuestName} with ID: {resource.QuestID}");
+			}
 		}
 	}
 }

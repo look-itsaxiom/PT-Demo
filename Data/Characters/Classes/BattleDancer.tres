@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://Scripts/ClassData.cs" id="1_5h58k"]
+[ext_resource type="Script" path="res://Scripts/Characters/ClassData.cs" id="1_5h58k"]
 
 [resource]
 script = ExtResource("1_5h58k")
