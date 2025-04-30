@@ -18,7 +18,7 @@ offset_top = 240.0
 offset_right = 1376.0
 offset_bottom = 816.0
 
-[node name="AssignPlayerQuestButton" type="Button" parent="AvailableQuestsList"]
+[node name="AssignNPCQuestButton" type="Button" parent="AvailableQuestsList"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 472.0
@@ -26,7 +26,7 @@ offset_right = 184.0
 offset_bottom = 503.0
 text = "Assign Adventurer"
 
-[node name="AssignNPCQuestButton" type="Button" parent="AvailableQuestsList"]
+[node name="AssignPlayerQuestButton" type="Button" parent="AvailableQuestsList"]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 472.0
