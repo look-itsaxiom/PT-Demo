@@ -17,7 +17,7 @@ public partial class QuestBoard : Interactable
         GD.Print("Interacting with the Quest Board");
         player.CanMove = false;
         CanInteract = false;
-        QuestMenu.Open();
+        QuestMenu.Open(player);
         QuestMenu.OnClose = () =>
         {
             CanInteract = true;

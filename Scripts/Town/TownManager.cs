@@ -1,9 +1,11 @@
+using System;
 using Godot;
 
 public partial class TownManager : Node3D
 {
 	public int TownLevel { get; set; } = 1;
 	public int TownLevelMax { get; set; } = 2;
+	public int Experience { get; set; } = 0;
 	public int Gold { get; set; } = 100;
 	public int Wood { get; set; } = 50;
 	public int Stone { get; set; } = 10;
@@ -32,4 +34,20 @@ public partial class TownManager : Node3D
 			newAdventurer.GlobalPosition = new Vector3(0, 0, 0);
 		}
 	}
+
+	internal void AddResources(Quest quest)
+	{
+		Gold += quest.GoldReward;
+		Wood += quest.WoodReward;
+		Stone += quest.StoneReward;
+		Food += quest.FoodReward;
+		Experience += quest.ExperienceReward;
+		if (Experience >= TownLevel * 100)
+		{
+			TownLevel++;
+			GD.Print($"Town level increased to {TownLevel}");
+		}
+
+	}
+
 }

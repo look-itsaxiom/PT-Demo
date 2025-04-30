@@ -1,3 +1,4 @@
+using CharacterData;
 using Godot;
 using System;
 
@@ -41,6 +42,24 @@ public partial class QuestPanelData : Button
         {
             QuestAvailabilityLabel.Text = "Player/Adventurer";
         }
+    }
 
+    public void InitializeActiveQuest(Quest quest, Character assignedCharacter)
+    {
+        QuestNameLabel = GetNode<Label>("QuestNameLabel");
+        QuestDescriptionLabel = GetNode<Label>("QuestDescriptionLabel");
+        QuestAvailabilityLabel = GetNode<Label>("QuestAvailabilityLabel");
+        AssignedCharacterLabel = GetNode<Label>("AssignedCharacterLabel");
+        this.Disabled = true;
+        if (quest == null)
+        {
+            GD.PrintErr("Quest is null");
+            return;
+        }
+        GD.Print($"Initializing quest panel with quest: {quest.QuestName}");
+        Quest = quest;
+        QuestNameLabel.Text = Quest.QuestName;
+        QuestDescriptionLabel.Text = quest.Description;
+        AssignedCharacterLabel.Text = assignedCharacter.CharacterName;
     }
 }
