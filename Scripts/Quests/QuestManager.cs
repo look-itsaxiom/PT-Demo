@@ -2,12 +2,14 @@ using CharacterData;
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class QuestManager : Node
 {
     [Export]
     public static QuestManager Instance;
     public DataRegistry DataRegistry;
+    public GameSignalBus GameSignalBus;
 
     public struct ActiveQuest
     {
@@ -31,8 +33,35 @@ public partial class QuestManager : Node
     {
         Instance = this;
         DataRegistry = DataRegistry.Instance;
+        GameSignalBus = GameSignalBus.Instance;
         // Load quests or initialize quest data here
         GetAvailableQuests();
+
+        GameSignalBus.Connect(GameSignalBus.SignalName.EnemyDefeated, Callable.From<string>((enemyKey) =>
+        {
+            OnGameSignalReceived(GameSignalBus.SignalName.EnemyDefeated, new()
+            {
+                { "enemyKey", enemyKey }
+            });
+        }));
+
+        GameSignalBus.Connect(GameSignalBus.SignalName.ItemCollected, Callable.From<string, int>((itemKey, amount) =>
+        {
+            OnGameSignalReceived(GameSignalBus.SignalName.ItemCollected, new()
+            {
+            { "itemKey", itemKey },
+            { "amount", amount }
+            });
+        }));
+
+        GameSignalBus.Connect(GameSignalBus.SignalName.ResourceCollected, Callable.From<string, int>((resourceKey, amount) =>
+        {
+            OnGameSignalReceived(GameSignalBus.SignalName.ResourceCollected, new()
+            {
+                { "resourceKey", resourceKey },
+                { "amount", amount }
+            });
+        }));
     }
 
     public void GetAvailableQuests()
@@ -105,13 +134,27 @@ public partial class QuestManager : Node
             ResourcesCollected = false
         };
 
-        TownManager townManager = GetNode<TownManager>("./Town");
-
-        townManager.AddResources(quest);
+        GameSignalBus.EmitSignal(GameSignalBus.SignalName.QuestCompleted, quest);
 
         CompletedQuests.Add(completedQuest);
 
         var activeQuest = ActiveQuests.Find(x => x.Quest == quest && x.AssignedCharacter == assignedCharacter);
         ActiveQuests.Remove(activeQuest);
+    }
+
+    public void OnGameSignalReceived(string signalName, Dictionary<string, Variant> eventData)
+    {
+        foreach (var activeQuest in ActiveQuests.ToList())
+        {
+            foreach (var goal in activeQuest.Quest.Goals)
+            {
+                goal.OnEvent(signalName, eventData);
+            }
+
+            if (activeQuest.Quest.Goals.All(g => g.IsComplete()))
+            {
+                CompleteQuest(activeQuest.Quest, activeQuest.AssignedCharacter);
+            }
+        }
     }
 }
