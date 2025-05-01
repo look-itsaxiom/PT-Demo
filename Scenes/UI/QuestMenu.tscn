@@ -13,10 +13,10 @@ script = ExtResource("1_tbemw")
 
 [node name="AvailableQuestsList" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 992.0
-offset_top = 240.0
-offset_right = 1376.0
-offset_bottom = 816.0
+offset_left = 504.0
+offset_top = 64.0
+offset_right = 888.0
+offset_bottom = 640.0
 
 [node name="AssignNPCQuestButton" type="Button" parent="AvailableQuestsList"]
 layout_mode = 0
@@ -52,10 +52,10 @@ text = "Available"
 
 [node name="AssignedQuestsList" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 1376.0
-offset_top = 240.0
-offset_right = 1760.0
-offset_bottom = 816.0
+offset_left = 888.0
+offset_top = 64.0
+offset_right = 1272.0
+offset_bottom = 640.0
 
 [node name="AssignedQuestList" type="VBoxContainer" parent="AssignedQuestsList"]
 layout_mode = 0

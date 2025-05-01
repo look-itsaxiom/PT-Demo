@@ -1,6 +1,6 @@
 using CharacterData;
 using Godot;
-using System.Collections.Generic;
+using Godot.Collections;
 
 [GlobalClass]
 public partial class Quest : Resource
@@ -16,16 +16,12 @@ public partial class Quest : Resource
     public int RepeatableCount { get; set; } = 0;
     [Export]
     public QuestAvailability Availability { get; set; } = QuestAvailability.Player;
+
     [Export]
-    public int GoldReward { get; set; } = 0;
+    public Array<QuestGoal> Goals { get; set; } = new();
+
     [Export]
-    public int WoodReward { get; set; } = 0;
-    [Export]
-    public int StoneReward { get; set; } = 0;
-    [Export]
-    public int FoodReward { get; set; } = 0;
-    [Export]
-    public int ExperienceReward { get; set; } = 0;
+    public Array<QuestReward> Rewards { get; set; } = new();
 
     public enum QuestAvailability
     {

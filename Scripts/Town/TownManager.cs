@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 public partial class TownManager : Node3D
@@ -6,19 +7,84 @@ public partial class TownManager : Node3D
 	public int TownLevel { get; set; } = 1;
 	public int TownLevelMax { get; set; } = 2;
 	public int Experience { get; set; } = 0;
-	public int Gold { get; set; } = 100;
-	public int Wood { get; set; } = 50;
-	public int Stone { get; set; } = 10;
-	public int Food { get; set; } = 10;
+	public TownResource Gold { get; set; }
+	public TownResource Wood { get; set; }
+	public TownResource Stone { get; set; }
+	public TownResource Food { get; set; }
 
 	public BuildGrid BuildGrid;
 	public EnvGridMap EnvGridMap;
+	public VBoxContainer TownResourceDisplay;
+
+	public GameSignalBus GameSignalBus;
 
 	public override void _Ready()
 	{
 		BuildGrid = GetNode<BuildGrid>("BuildGrid");
 		EnvGridMap = GetNode<EnvGridMap>("EnvGridMap");
+		TownResourceDisplay = GetNode<VBoxContainer>("TownHUD/TownResourceDisplay");
+		GameSignalBus = GameSignalBus.Instance;
 		BuildGrid.BuildingPlaced += OnBuildingPlaced;
+		InitializeTownResources();
+		GameSignalBus.Connect(GameSignalBus.SignalName.QuestCompleted, Callable.From<Quest>(OnQuestCompleted));
+	}
+
+	private void InitializeTownResources()
+	{
+		Gold = new TownResource { ResourceKey = TownResource.ResourceType.Gold, Amount = 0 };
+		Wood = new TownResource { ResourceKey = TownResource.ResourceType.Wood, Amount = 0 };
+		Stone = new TownResource { ResourceKey = TownResource.ResourceType.Stone, Amount = 0 };
+		Food = new TownResource { ResourceKey = TownResource.ResourceType.Food, Amount = 0 };
+		UpdateTownResourceDisplay();
+	}
+
+	private void UpdateTownResourceDisplay()
+	{
+		var resourceDisplayNames = new Dictionary<TownResource.ResourceType, TownResource>
+		{
+			{ TownResource.ResourceType.Gold, Gold },
+			{ TownResource.ResourceType.Wood, Wood },
+			{ TownResource.ResourceType.Stone, Stone },
+			{ TownResource.ResourceType.Food, Food }
+		};
+
+		foreach (var resourceType in Enum.GetValues<TownResource.ResourceType>())
+		{
+			var label = TownResourceDisplay.GetNode<Label>($"{resourceType}Label");
+			label.Text = $"{resourceType}: {resourceDisplayNames[resourceType].Amount}";
+		}
+	}
+
+	private void OnQuestCompleted(Quest completedQuest)
+	{
+		if (completedQuest != null)
+		{
+			foreach (var reward in completedQuest.Rewards)
+			{
+				switch (reward.Type)
+				{
+					case QuestReward.RewardType.Gold:
+						Gold.Amount += reward.Amount;
+						break;
+					case QuestReward.RewardType.Wood:
+						Wood.Amount += reward.Amount;
+						break;
+					case QuestReward.RewardType.Stone:
+						Stone.Amount += reward.Amount;
+						break;
+					case QuestReward.RewardType.Food:
+						Food.Amount += reward.Amount;
+						break;
+					case QuestReward.RewardType.Item:
+						// Handle item rewards
+						break;
+					case QuestReward.RewardType.Experience:
+						Experience += reward.Amount;
+						break;
+				}
+			}
+			UpdateTownResourceDisplay();
+		}
 	}
 
 	private void OnBuildingPlaced(string buildingKey)
@@ -34,20 +100,4 @@ public partial class TownManager : Node3D
 			newAdventurer.GlobalPosition = new Vector3(0, 0, 0);
 		}
 	}
-
-	internal void AddResources(Quest quest)
-	{
-		Gold += quest.GoldReward;
-		Wood += quest.WoodReward;
-		Stone += quest.StoneReward;
-		Food += quest.FoodReward;
-		Experience += quest.ExperienceReward;
-		if (Experience >= TownLevel * 100)
-		{
-			TownLevel++;
-			GD.Print($"Town level increased to {TownLevel}");
-		}
-
-	}
-
 }

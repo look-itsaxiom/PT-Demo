@@ -13,22 +13,38 @@ config_version=5
 config/name="Project Township Demo"
 run/main_scene="res://Scenes/Town.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
 [autoload]
 
 DataRegistry="*res://Scripts/DataRegistry.cs"
+GameSignalBus="*res://Scripts/GameSignalBus.cs"
 QuestManager="*res://Scripts/Quests/QuestManager.cs"
 CharacterSystem="*res://Scripts/Characters/CharacterSystem.cs"
 
+[debug]
+
+file_logging/enable_file_logging=true
+
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
 
 [dotnet]
 
 project/assembly_name="Project Township Demo"
+project/enable_file_logging=false
+project/size/viewport_height=1080
+project/size/viewport_width=1920
+project/use_filter=true
+project/fullsize=true
+project/show_image=true
+project/size/resizable=true
 
 [input]
 
