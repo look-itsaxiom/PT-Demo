@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://jevlajcphd1h"]
+[gd_scene load_steps=5 format=3 uid="uid://jevlajcphd1h"]
 
 [ext_resource type="Script" path="res://Scripts/Quests/QuestPanelData.cs" id="1_8xy3e"]
 
@@ -6,6 +6,9 @@
 font_size = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_6e50h"]
+font_size = 9
+
+[sub_resource type="LabelSettings" id="LabelSettings_iimtw"]
 font_size = 9
 
 [node name="QuestPanel" type="Button"]
@@ -44,5 +47,7 @@ visible = false
 layout_mode = 0
 offset_left = 24.0
 offset_top = 71.0
-offset_right = 64.0
-offset_bottom = 94.0
+offset_right = 280.0
+offset_bottom = 88.0
+text = "Assigned To: Jerry"
+label_settings = SubResource("LabelSettings_iimtw")

@@ -157,4 +157,10 @@ public partial class QuestManager : Node
             }
         }
     }
+
+    internal bool IsCharacterOnQuest(Character npc)
+    {
+        return ActiveQuests.Any(x => x.AssignedCharacter.CharacterId == npc.CharacterId);
+    }
+
 }

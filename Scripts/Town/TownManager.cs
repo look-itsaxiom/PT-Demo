@@ -24,7 +24,7 @@ public partial class TownManager : Node3D
 		EnvGridMap = GetNode<EnvGridMap>("EnvGridMap");
 		TownResourceDisplay = GetNode<VBoxContainer>("TownHUD/TownResourceDisplay");
 		GameSignalBus = GameSignalBus.Instance;
-		BuildGrid.BuildingPlaced += OnBuildingPlaced;
+		GameSignalBus.Connect(GameSignalBus.SignalName.OnBuildingPlaced, Callable.From<string>(OnBuildingPlaced));
 		InitializeTownResources();
 		GameSignalBus.Connect(GameSignalBus.SignalName.QuestCompleted, Callable.From<Quest>(OnQuestCompleted));
 	}

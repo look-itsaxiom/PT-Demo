@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://bde81c1x3vt8e"]
+
+[ext_resource type="Script" path="res://Scripts/Quests/NPCToAssignQuestData.cs" id="1_gwsg2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lddj3"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_f2kly"]
+font_size = 12
+
+[node name="NPCToAssignQuest" type="Button"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_gwsg2")
+
+[node name="NPCName" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Jerry"
+
+[node name="NPCClass" type="Label" parent="."]
+layout_mode = 0
+offset_top = 24.0
+offset_right = 88.0
+offset_bottom = 41.0
+text = "Adventurer"
+label_settings = SubResource("LabelSettings_lddj3")
+
+[node name="NPCLevel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 24.0
+offset_right = 120.0
+offset_bottom = 41.0
+text = "1"
+label_settings = SubResource("LabelSettings_f2kly")

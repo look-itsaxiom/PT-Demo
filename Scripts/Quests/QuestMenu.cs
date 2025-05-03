@@ -1,3 +1,4 @@
+using CharacterData;
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -6,19 +7,25 @@ public partial class QuestMenu : Control
 {
     public Action OnClose;
     public PackedScene QuestPanelScene = GD.Load<PackedScene>("res://Scenes/UI/QuestPanel.tscn");
+    public PackedScene NPCToAssignQuestPanelScene = GD.Load<PackedScene>("res://Scenes/UI/NPCToAssignQuest.tscn");
     public Quest selectedQuest;
+    public Character selectedCharacter;
     public Player Player;
     private VBoxContainer AvailableQuestsList;
     private VBoxContainer AssignedQuestsList;
+    private Panel NPCListPanel;
+    private VBoxContainer NPCList;
     private Button AssignPlayerQuestButton;
     private Button AssignNPCQuestButton;
 
     public override void _Ready()
     {
-        AssignPlayerQuestButton = GetNode<Button>("AvailableQuestsList/AssignPlayerQuestButton");
-        AssignNPCQuestButton = GetNode<Button>("AvailableQuestsList/AssignNPCQuestButton");
-        AvailableQuestsList = GetNode<VBoxContainer>("AvailableQuestsList/AvailableQuestList");
-        AssignedQuestsList = GetNode<VBoxContainer>("AssignedQuestsList/AssignedQuestList");
+        AssignPlayerQuestButton = GetNode<Button>("QuestMenuRoot/AvailableQuestsList/AssignPlayerQuestButton");
+        AssignNPCQuestButton = GetNode<Button>("QuestMenuRoot/AvailableQuestsList/AssignNPCQuestButton");
+        AvailableQuestsList = GetNode<VBoxContainer>("QuestMenuRoot/AvailableQuestsList/AvailableQuestList");
+        AssignedQuestsList = GetNode<VBoxContainer>("QuestMenuRoot/AssignedQuestsList/AssignedQuestList");
+        NPCListPanel = GetNode<Panel>("QuestMenuRoot/SelectNPCsList");
+        NPCList = GetNode<VBoxContainer>("QuestMenuRoot/SelectNPCsList/SelectNPCList");
 
         AssignPlayerQuestButton.Pressed += OnPlayerQuestSelected;
         AssignNPCQuestButton.Pressed += OnNPCQuestSelected;
@@ -28,24 +35,70 @@ public partial class QuestMenu : Control
 
     private void OnNPCQuestSelected()
     {
-        throw new NotImplementedException();
+        if (selectedQuest == null)
+            return;
+
+        if (selectedQuest.Availability == Quest.QuestAvailability.Player)
+        {
+            GD.Print("Quest is only available for the player");
+            return;
+        }
+
+        var npcs = CharacterSystem.Instance.GetAllNPCs();
+        foreach (var npc in npcs)
+        {
+            if (!QuestManager.Instance.IsCharacterOnQuest(npc))
+            {
+                var npcPanel = NPCToAssignQuestPanelScene.Instantiate();
+                var npcPanelData = npcPanel as NPCToAssignQuestData;
+                npcPanelData.Initialize(npc);
+                npcPanelData.OnCharacterSelected = (Character selectedCharacter) =>
+                {
+                    this.selectedCharacter = selectedCharacter;
+                    QuestManager.Instance.StartQuest(selectedQuest, selectedCharacter);
+                    UpdateQuestsList();
+                    foreach (NPCToAssignQuestData child in NPCList.GetChildren())
+                    {
+                        child._Toggled(child.AssignedCharacter == selectedCharacter);
+                    }
+                    NPCListPanel.Visible = false;
+                };
+                NPCList.AddChild(npcPanel);
+            }
+        }
+        NPCListPanel.Visible = true;
+
     }
 
 
     private void OnPlayerQuestSelected()
     {
+        if (selectedQuest == null)
+            return;
+
+        if (selectedQuest.Availability == Quest.QuestAvailability.NPC)
+        {
+            GD.Print("Quest is only available for the NPC");
+            return;
+        }
         QuestManager.Instance.StartQuest(selectedQuest, Player.PlayerCharacter);
+        UpdateQuestsList();
+    }
+
+    private void UpdateQuestsList()
+    {
         foreach (QuestPanelData child in AvailableQuestsList.GetChildren())
         {
             if (child.Quest == selectedQuest)
             {
                 PopulateAssignedQuests();
                 child.QueueFree();
+                selectedCharacter = null;
+                selectedQuest = null;
                 break;
             }
         }
     }
-
 
     public void Open(Player player)
     {
@@ -53,6 +106,7 @@ public partial class QuestMenu : Control
         SetProcessInput(true);
         Player = player;
         PopulateAvailableQuests();
+        PopulateAssignedQuests();
     }
 
     private void PopulateAvailableQuests()
@@ -94,6 +148,7 @@ public partial class QuestMenu : Control
     public void Close()
     {
         Visible = false;
+        NPCListPanel.Visible = false;
         SetProcessInput(false);
         OnClose?.Invoke();
         foreach (Node child in AvailableQuestsList.GetChildren())
@@ -105,6 +160,7 @@ public partial class QuestMenu : Control
             child.QueueFree();
         }
         selectedQuest = null;
+        selectedCharacter = null;
     }
 
     public override void _Input(InputEvent @event)

@@ -22,4 +22,7 @@ public partial class GameSignalBus : Node
 
     [Signal]
     public delegate void QuestCompletedEventHandler(Quest quest);
+
+    [Signal]
+    public delegate void OnBuildingPlacedEventHandler(string buildingKey);
 }
