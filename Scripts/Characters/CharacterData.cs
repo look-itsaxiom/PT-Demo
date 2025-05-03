@@ -165,6 +165,7 @@ namespace CharacterData
     public partial class Character : Resource
     {
         [Export] public string CharacterName;
+        public Guid CharacterId = Guid.NewGuid();
         [Export] public RaceData Race;
         [Export] public ClassData Class;
         public Dictionary<Stat.StatKey, Stat> BaseStats = new() {

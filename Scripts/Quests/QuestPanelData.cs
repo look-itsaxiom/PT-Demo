@@ -56,10 +56,11 @@ public partial class QuestPanelData : Button
             GD.PrintErr("Quest is null");
             return;
         }
-        GD.Print($"Initializing quest panel with quest: {quest.QuestName}");
         Quest = quest;
         QuestNameLabel.Text = Quest.QuestName;
         QuestDescriptionLabel.Text = quest.Description;
-        AssignedCharacterLabel.Text = assignedCharacter.CharacterName;
+        AssignedCharacterLabel.Text = $"Assigned To: {assignedCharacter.CharacterName}";
+        QuestAvailabilityLabel.Visible = false;
+        AssignedCharacterLabel.Visible = true;
     }
 }

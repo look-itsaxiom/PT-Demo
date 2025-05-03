@@ -9,6 +9,7 @@ public partial class CharacterSystem : Node
     [Export]
     public static CharacterSystem Instance;
     public DataRegistry DataRegistry;
+    public Dictionary<Guid, Character> CharacterLookup = new Dictionary<Guid, Character>();
 
     public override void _Ready()
     {
@@ -54,6 +55,8 @@ public partial class CharacterSystem : Node
 
         character.CharacterModel = CharacterModelDictionary[GD.RandRange(1, CharacterModelDictionary.Count)];
 
+        CharacterLookup.Add(character.CharacterId, character);
+
         return character;
     }
 
@@ -82,6 +85,7 @@ public partial class CharacterSystem : Node
             CharacterName = "Player",
             Race = DataRegistry.Instance.Races["Gignen"],
             Class = DataRegistry.Instance.Classes["Adventurer"],
+            CharacterId = Guid.Empty
         };
 
         foreach (Stat.StatKey stat in pc.Race.BaseStats.Keys)
@@ -92,7 +96,31 @@ public partial class CharacterSystem : Node
 
         pc.CalculateCurrentStats();
 
+        CharacterLookup.Add(pc.CharacterId, pc);
+
         return pc;
+    }
+
+    public Character GetCharacter(Guid characterId)
+    {
+        if (CharacterLookup.TryGetValue(characterId, out var character))
+        {
+            return character;
+        }
+        else
+        {
+            GD.PrintErr($"Character with ID {characterId} not found.");
+            return null;
+        }
+    }
+    public List<Character> GetAllCharacters()
+    {
+        return CharacterLookup.Values.ToList();
+    }
+
+    public List<Character> GetAllNPCs()
+    {
+        return CharacterLookup.Values.Where(c => c.CharacterId != Guid.Empty).ToList();
     }
 }
 
