@@ -99,6 +99,18 @@ public partial class QuestManager : Node
 
     }
 
+    public void AssignQuestToNPC(Quest selectedQuest, Character selectedCharacter)
+    {
+        GameSignalBus.EmitSignal(GameSignalBus.SignalName.NPCStartedQuest, selectedQuest, selectedCharacter);
+        StartQuest(selectedQuest, selectedCharacter);
+    }
+
+    public void AssignQuestToPlayer(Quest selectedQuest, Character playerCharacter)
+    {
+        GameSignalBus.EmitSignal(GameSignalBus.SignalName.PlayerStartedQuest, selectedQuest, playerCharacter);
+        StartQuest(selectedQuest, playerCharacter);
+    }
+
     private bool IsRepeatableQuest(Quest quest)
     {
         bool IsRepeatable = false;
@@ -162,5 +174,4 @@ public partial class QuestManager : Node
     {
         return ActiveQuests.Any(x => x.AssignedCharacter.CharacterId == npc.CharacterId);
     }
-
 }

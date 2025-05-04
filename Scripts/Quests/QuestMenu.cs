@@ -55,7 +55,7 @@ public partial class QuestMenu : Control
                 npcPanelData.OnCharacterSelected = (Character selectedCharacter) =>
                 {
                     this.selectedCharacter = selectedCharacter;
-                    QuestManager.Instance.StartQuest(selectedQuest, selectedCharacter);
+                    QuestManager.Instance.AssignQuestToNPC(selectedQuest, selectedCharacter);
                     UpdateQuestsList();
                     foreach (NPCToAssignQuestData child in NPCList.GetChildren())
                     {
@@ -81,7 +81,7 @@ public partial class QuestMenu : Control
             GD.Print("Quest is only available for the NPC");
             return;
         }
-        QuestManager.Instance.StartQuest(selectedQuest, Player.PlayerCharacter);
+        QuestManager.Instance.AssignQuestToPlayer(selectedQuest, Player.PlayerCharacter);
         UpdateQuestsList();
     }
 

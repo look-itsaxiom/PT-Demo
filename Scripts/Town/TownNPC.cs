@@ -4,21 +4,20 @@ using System;
 
 public partial class TownNPC : CharacterBody3D
 {
-    public Character Character;
-    public CharacterInfoMenu CharacterInfoMenu;
+    public Character MyCharacter;
     public NavigationAgent3D NavigationAgent;
     public float MoveSpeed = 3.5f;
     public AnimationPlayer AnimationPlayer;
-    public Interactable InteractionArea;
-    public CollisionShape3D InteractionCollisionShape;
     public bool IsMoving = false;
     public bool IsInteracting = false;
     public bool NewToTown = true;
+    public bool InTown = true;
+    public Quest MyQuest = null;
     private float MovementDelta;
 
     public void Initialize(Character character)
     {
-        Character = character;
+        MyCharacter = character;
         var characterModel = character.CharacterModel.Instantiate();
         AnimationPlayer = characterModel.GetNode<AnimationPlayer>("AnimationPlayer");
         AddChild(characterModel);
@@ -28,17 +27,26 @@ public partial class TownNPC : CharacterBody3D
     {
         NavigationAgent = GetNode<NavigationAgent3D>("NavigationAgent3D");
         NavigationAgent.TargetReached += OnTargetReached;
-        InteractionArea = GetNode<Area3D>("InteractionArea") as Interactable;
-        InteractionCollisionShape = GetNode<CollisionShape3D>("InteractionArea/CollisionShape3D");
+
+        GameSignalBus.Instance.Connect(GameSignalBus.SignalName.NPCStartedQuest, Callable.From<Quest, Character>(OnQuestStarted));
+
         OnTownArrival();
 
-        // // Set up the interaction area
-        // InteractionArea.InteractionStarted += OnInteractionStarted;
-        // InteractionArea.InteractionEnded += OnInteractionEnded;
     }
 
     private void OnTargetReached()
     {
+        GD.Print($"{MyQuest?.QuestName} NPC {MyCharacter.CharacterName} has reached the exit point");
+
+        if (MyQuest != null)
+        {
+            GD.Print($"{MyQuest?.QuestName} NPC {MyCharacter.CharacterName} has reached the exit point");
+            ExitTown();
+        }
+
+        if (!InTown)
+            return;
+
         AnimationPlayer.Play("Interact");
         Timer timer = new Timer();
         timer.WaitTime = GD.RandRange(3.0f, 5.0f);
@@ -126,5 +134,36 @@ public partial class TownNPC : CharacterBody3D
         AnimationPlayer.Play("Idle");
         NewToTown = false;
         OnTargetReached();
+    }
+
+    private void OnQuestStarted(Quest quest, Character character)
+    {
+        if (character == MyCharacter)
+        {
+            GD.Print($"NPC {MyCharacter.CharacterName} started quest: {quest.QuestName}");
+            MyQuest = quest;
+            NavigationAgent.TargetPosition = GetParent().GetNode<Node3D>("TownExit").Position + new Vector3(0, 0, -1);
+        }
+    }
+
+    private void ExitTown()
+    {
+        GD.Print($"NPC {MyCharacter.CharacterName} has left the town to start their quest.");
+        Visible = false;
+        InTown = false;
+        //NavigationAgent.TargetReached -= ExitTown;
+        Timer timer = new Timer();
+        timer.WaitTime = 10.0f;
+        timer.OneShot = true;
+        timer.Autostart = true;
+        timer.Timeout += () =>
+        {
+            GameSignalBus.Instance.EmitSignal(GameSignalBus.SignalName.ResourceCollected, "Wood", 5);
+            InTown = true;
+            NavigationAgent.TargetPosition = GetParent().GetNode<Node3D>("TownExit").Position + new Vector3(0, 0, 10);
+            Visible = true;
+            timer.QueueFree();
+        };
+        AddChild(timer);
     }
 }
