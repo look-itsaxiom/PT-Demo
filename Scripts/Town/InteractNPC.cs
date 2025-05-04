@@ -13,7 +13,7 @@ public partial class InteractNPC : Interactable
         base._Ready();
         // Initialize any additional properties or nodes here
         TownNPC = GetParent<TownNPC>();
-        Character = TownNPC.Character;
+        Character = TownNPC.MyCharacter;
         ObjectName = Character.CharacterName;
     }
 

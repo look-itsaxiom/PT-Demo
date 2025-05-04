@@ -3,16 +3,17 @@ using System;
 
 public partial class FadeManager : Control
 {
+
 	private ColorRect FadeLayer;
 	private AnimationPlayer animationPlayer;
-
-	[Signal] public delegate void FadeOutFinishedEventHandler();
-	[Signal] public delegate void FadeInFinishedEventHandler();
 
 	public override void _Ready()
 	{
 		FadeLayer = GetNode<ColorRect>("FadeLayer");
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+
+		GameSignalBus.Instance.Connect(GameSignalBus.SignalName.DayStarted, Callable.From(FadeIn));
+		GameSignalBus.Instance.Connect(GameSignalBus.SignalName.DayEnded, Callable.From(FadeOut));
 	}
 
 	public void FadeOut()
@@ -29,11 +30,11 @@ public partial class FadeManager : Control
 	{
 		if (name == "fade_out")
 		{
-			EmitSignal(SignalName.FadeOutFinished);
+			GameSignalBus.Instance.EmitSignal(GameSignalBus.SignalName.FadeOutFinished);
 		}
 		else if (name == "fade_in")
 		{
-			EmitSignal(SignalName.FadeInFinished);
+			GameSignalBus.Instance.EmitSignal(GameSignalBus.SignalName.FadeInFinished);
 		}
 	}
 }

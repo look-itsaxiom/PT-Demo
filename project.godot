@@ -24,6 +24,7 @@ DataRegistry="*res://Scripts/DataRegistry.cs"
 GameSignalBus="*res://Scripts/GameSignalBus.cs"
 QuestManager="*res://Scripts/Quests/QuestManager.cs"
 CharacterSystem="*res://Scripts/Characters/CharacterSystem.cs"
+Chronos="*res://Scripts/Time/Chronos.cs"
 
 [debug]
 
