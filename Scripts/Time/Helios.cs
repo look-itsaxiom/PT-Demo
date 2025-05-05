@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using ChronosSpace;
 
 public partial class Helios : DirectionalLight3D
 {

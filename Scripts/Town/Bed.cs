@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using ChronosSpace;
 
 public partial class Bed : Interactable, IInteractable
 {
