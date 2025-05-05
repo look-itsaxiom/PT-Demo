@@ -1,6 +1,8 @@
 using Godot;
+using Godot.Collections;
 using CharacterData;
 using System;
+using ChronosSpace;
 
 public partial class TownNPC : CharacterBody3D
 {
@@ -165,6 +167,13 @@ public partial class TownNPC : CharacterBody3D
         if (character == MyCharacter)
         {
             MyQuest = null;
+            InTown = true;
+            var townExitPos = GetParent().GetNode<Node3D>("TownExit").Position;
+            NavigationAgent.TargetPosition = new Vector3(townExitPos.X, EnvGridMap.BaseY, townExitPos.Z + 5);
+            Visible = true;
+            NavigationAgent.TargetReached -= ExitTown;
+            NavigationAgent.TargetReached += OnTargetReached;
+            GD.Print($"NPC {MyCharacter.CharacterName} has returned to the town.");
         }
     }
 
@@ -173,22 +182,13 @@ public partial class TownNPC : CharacterBody3D
         GD.Print($"NPC {MyCharacter.CharacterName} has left the town to start their quest.");
         Visible = false;
         InTown = false;
-        Timer timer = new Timer();
-        timer.WaitTime = 10.0f;
-        timer.OneShot = true;
-        timer.Autostart = true;
-        timer.Timeout += () =>
+        var timeHook = new ChronosTimeHook
         {
-            GameSignalBus.Instance.EmitSignal(GameSignalBus.SignalName.ResourceCollected, "Wood", 5);
-            InTown = true;
-            var townExitPos = GetParent().GetNode<Node3D>("TownExit").Position;
-            NavigationAgent.TargetPosition = new Vector3(townExitPos.X, EnvGridMap.BaseY, townExitPos.Z + 5);
-            Visible = true;
-            NavigationAgent.TargetReached -= ExitTown;
-            NavigationAgent.TargetReached += OnTargetReached;
-            GD.Print($"NPC {MyCharacter.CharacterName} has returned to the town.");
-            timer.QueueFree();
+            TriggerDay = Chronos.Instance.CurrentDay,
+            TriggerTime = Chronos.Instance.CurrentTime + 10f,
+            ReturnSignal = GameSignalBus.SignalName.ResourceCollected,
+            ReturnSignalArgs = new Array<Variant> { "Wood", 5 }
         };
-        AddChild(timer);
+        GameSignalBus.Instance.EmitSignal(GameSignalBus.SignalName.RegisterTimeHook, timeHook);
     }
 }

@@ -1,6 +1,6 @@
 using CharacterData;
 using Godot;
-using System;
+using ChronosSpace;
 
 public partial class GameSignalBus : Node
 {
@@ -14,7 +14,7 @@ public partial class GameSignalBus : Node
 
     // Time
     [Signal]
-    public delegate void TimeChangedEventHandler(int day, int hour, int minute);
+    public delegate void RegisterTimeHookEventHandler(ChronosTimeHook timeHook);
 
     [Signal]
     public delegate void DayEndedEventHandler();
