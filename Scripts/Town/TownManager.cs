@@ -13,6 +13,22 @@ public partial class TownManager : Node3D
 	public TownResource Food { get; set; }
 
 	public BuildGrid BuildGrid;
+
+	public TownResource this[TownResource.ResourceType resourceKey]
+	{
+		get
+		{
+			return resourceKey switch
+			{
+				TownResource.ResourceType.Gold => Gold,
+				TownResource.ResourceType.Wood => Wood,
+				TownResource.ResourceType.Stone => Stone,
+				TownResource.ResourceType.Food => Food,
+				_ => throw new ArgumentOutOfRangeException(nameof(resourceKey), "Invalid resource type")
+			};
+		}
+	}
+
 	public EnvGridMap EnvGridMap;
 	public VBoxContainer TownResourceDisplay;
 
@@ -97,7 +113,28 @@ public partial class TownManager : Node3D
 			var newAdventurer = GD.Load<PackedScene>("res://Scenes/npc.tscn").Instantiate() as TownNPC;
 			newAdventurer.Initialize(newAdventurerData);
 			AddChild(newAdventurer);
-			newAdventurer.GlobalPosition = new Vector3(0, 0, 0);
+			newAdventurer.GlobalPosition = new Vector3(0, 1, 0);
 		}
+	}
+
+	public bool HasNecessaryResources(Godot.Collections.Array<TownResource> buildingRequirements)
+	{
+		foreach (TownResource requirement in buildingRequirements)
+		{
+			if (requirement.Amount > this[requirement.ResourceKey].Amount)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public void SpendResources(Godot.Collections.Array<TownResource> buildingRequirements)
+	{
+		foreach (TownResource requirement in buildingRequirements)
+		{
+			this[requirement.ResourceKey].Amount -= requirement.Amount;
+		}
+		UpdateTownResourceDisplay();
 	}
 }

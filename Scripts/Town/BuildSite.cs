@@ -53,9 +53,17 @@ public partial class BuildSite : Interactable, IInteractable
 	{
 		// Get building data
 		var building = dataRegistry.buildingTemplates[buildingKey];
+
+		var townManager = GetParent() as TownManager;
+		if (!townManager.HasNecessaryResources(building.BuildingRequirements))
+		{
+			GD.Print("Not enough resources to build: " + buildingKey);
+			player.CanMove = true;
+			return;
+		}
 		player.PlayerCamera.Current = false;
 		BuildSiteCamera.Current = true;
-
+		townManager.SpendResources(building.BuildingRequirements);
 		var ghostWrapper = new GhostBuilding();
 		ghostWrapper.OnPlacementConfirmed = (Transform3D buildingTransform, List<Vector3I> requestedTiles) =>
 		{
