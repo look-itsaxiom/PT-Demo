@@ -14,6 +14,8 @@ public partial class TownNPC : CharacterBody3D
     public bool InTown = true;
     public Quest MyQuest = null;
     private float MovementDelta;
+    private EnvGridMap EnvGridMap;
+
 
     public void Initialize(Character character)
     {
@@ -29,31 +31,25 @@ public partial class TownNPC : CharacterBody3D
         NavigationAgent.TargetReached += OnTargetReached;
 
         GameSignalBus.Instance.Connect(GameSignalBus.SignalName.NPCStartedQuest, Callable.From<Quest, Character>(OnQuestStarted));
-
+        GameSignalBus.Instance.Connect(GameSignalBus.SignalName.QuestCompleted, Callable.From<Quest, Character>(OnQuestCompleted));
+        EnvGridMap = GetParent().GetNode<EnvGridMap>("EnvGridMap");
         OnTownArrival();
 
     }
 
     private void OnTargetReached()
     {
-        GD.Print($"{MyQuest?.QuestName} NPC {MyCharacter.CharacterName} has reached the exit point");
-
-        if (MyQuest != null)
-        {
-            GD.Print($"{MyQuest?.QuestName} NPC {MyCharacter.CharacterName} has reached the exit point");
-            ExitTown();
-        }
-
         if (!InTown)
             return;
 
         AnimationPlayer.Play("Interact");
+        IsMoving = false;
         Timer timer = new Timer();
         timer.WaitTime = GD.RandRange(3.0f, 5.0f);
         timer.OneShot = true;
         timer.Timeout += () =>
         {
-            var newPoint = GetParent().GetNode<EnvGridMap>("EnvGridMap").GetRandomTownPoint();
+            var newPoint = EnvGridMap.GetRandomTownPoint();
             NavigationAgent.TargetPosition = newPoint;
             timer.QueueFree();
         };
@@ -63,41 +59,57 @@ public partial class TownNPC : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (IsInteracting)
+        if (IsInteracting || !InTown)
         {
-            return;
-        }
-
-        if (NavigationAgent.IsNavigationFinished())
-        {
-            AnimationPlayer.Play("Idle");
-            Velocity = Vector3.Zero;
-            MoveAndSlide();
+            IsMoving = false;
             return;
         }
 
         Vector3 nextPathPosition = NavigationAgent.GetNextPathPosition();
-        nextPathPosition.Y = GlobalPosition.Y;
 
-        Vector3 directionToTarget = (nextPathPosition - GlobalPosition).Normalized();
-        Velocity = directionToTarget * MoveSpeed;
+        if (NavigationAgent.IsNavigationFinished() == true)
+        {
+            IsMoving = false;
+        }
+        else
+        {
+            IsMoving = true;
+            nextPathPosition.Y = GlobalPosition.Y;
 
-        NavigationAgent.Velocity = Velocity;
+            Vector3 directionToTarget = (nextPathPosition - GlobalPosition).Normalized();
+            Velocity = directionToTarget * MoveSpeed;
 
-        MoveAndSlide();
+            NavigationAgent.Velocity = Velocity;
 
-        RotateTo(delta, directionToTarget);
+            RotateTo(directionToTarget);
 
-        AnimationPlayer.Play("Walking_A");
-        IsMoving = true;
+            MoveAndSlide();
+        }
     }
 
-    public void RotateTo(double delta, Vector3 directionToTarget)
+    public override void _Process(double delta)
+    {
+        if (IsInteracting || !InTown)
+        {
+            return;
+        }
+
+        if (IsMoving)
+        {
+            AnimationPlayer.Play("Walking_A");
+        }
+        else
+        {
+            AnimationPlayer.Play("Idle");
+        }
+    }
+
+    public void RotateTo(Vector3 directionToTarget)
     {
         if (directionToTarget.LengthSquared() > 0.01f)
         {
             var targetRotation = new Vector3(0, Mathf.Atan2(directionToTarget.X, directionToTarget.Z), 0);
-            Rotation = Rotation.Lerp(targetRotation, (float)delta * 5.0f);
+            Rotation = Rotation.Lerp(targetRotation, 5f * (float)GetPhysicsProcessDeltaTime());
         }
     }
 
@@ -140,9 +152,19 @@ public partial class TownNPC : CharacterBody3D
     {
         if (character == MyCharacter)
         {
-            GD.Print($"NPC {MyCharacter.CharacterName} started quest: {quest.QuestName}");
             MyQuest = quest;
-            NavigationAgent.TargetPosition = GetParent().GetNode<Node3D>("TownExit").Position + new Vector3(0, 0, -1);
+            var townExitPos = GetParent().GetNode<Node3D>("TownExit").Position;
+            NavigationAgent.TargetPosition = new Vector3(townExitPos.X, EnvGridMap.BaseY, townExitPos.Z);
+            NavigationAgent.TargetReached -= OnTargetReached;
+            NavigationAgent.TargetReached += ExitTown;
+        }
+    }
+
+    private void OnQuestCompleted(Quest quest, Character character)
+    {
+        if (character == MyCharacter)
+        {
+            MyQuest = null;
         }
     }
 
@@ -151,7 +173,6 @@ public partial class TownNPC : CharacterBody3D
         GD.Print($"NPC {MyCharacter.CharacterName} has left the town to start their quest.");
         Visible = false;
         InTown = false;
-        //NavigationAgent.TargetReached -= ExitTown;
         Timer timer = new Timer();
         timer.WaitTime = 10.0f;
         timer.OneShot = true;
@@ -160,8 +181,12 @@ public partial class TownNPC : CharacterBody3D
         {
             GameSignalBus.Instance.EmitSignal(GameSignalBus.SignalName.ResourceCollected, "Wood", 5);
             InTown = true;
-            NavigationAgent.TargetPosition = GetParent().GetNode<Node3D>("TownExit").Position + new Vector3(0, 0, 10);
+            var townExitPos = GetParent().GetNode<Node3D>("TownExit").Position;
+            NavigationAgent.TargetPosition = new Vector3(townExitPos.X, EnvGridMap.BaseY, townExitPos.Z + 5);
             Visible = true;
+            NavigationAgent.TargetReached -= ExitTown;
+            NavigationAgent.TargetReached += OnTargetReached;
+            GD.Print($"NPC {MyCharacter.CharacterName} has returned to the town.");
             timer.QueueFree();
         };
         AddChild(timer);

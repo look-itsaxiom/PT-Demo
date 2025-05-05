@@ -22,10 +22,9 @@ public partial class InteractNPC : Interactable
         // Implement interaction logic here
         if (!playerInRange || !CanInteract) return;
         GD.Print("Interacting with NPC: " + Character.CharacterName);
-        TownNPC.NavigationAgent.TargetPosition = GlobalPosition;
-        TownNPC.RotateTo(0.1, player.GlobalPosition - TownNPC.GlobalPosition);
-        TownNPC.AnimationPlayer.Play("Interact");
         TownNPC.IsInteracting = true;
+        TownNPC.LookAt(player.GlobalPosition, Vector3.Up, true);
+        TownNPC.AnimationPlayer.Play("Interact");
         player.CanMove = false;
         CharacterInfoMenu = GetTree().CurrentScene.GetNode<CharacterInfoMenu>("CharacterInfoMenu");
         CharacterInfoMenu.ShowCharacterInfo(Character);

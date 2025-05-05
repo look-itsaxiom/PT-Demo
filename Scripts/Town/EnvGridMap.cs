@@ -8,6 +8,7 @@ public partial class EnvGridMap : GridMap
     BuildGrid buildGrid;
     public List<Vector3I> usedCells;
     public List<Vector3I> buildCells;
+    public int BaseY = 1;
 
     public override void _Ready()
     {

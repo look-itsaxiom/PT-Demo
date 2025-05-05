@@ -35,6 +35,9 @@ public partial class QuestMenu : Control
 
     private void OnNPCQuestSelected()
     {
+        if (NPCListPanel.Visible)
+            return;
+
         if (selectedQuest == null)
             return;
 
@@ -57,9 +60,11 @@ public partial class QuestMenu : Control
                     this.selectedCharacter = selectedCharacter;
                     QuestManager.Instance.AssignQuestToNPC(selectedQuest, selectedCharacter);
                     UpdateQuestsList();
+                    AvailableQuestsList.GrabFocus();
                     foreach (NPCToAssignQuestData child in NPCList.GetChildren())
                     {
                         child._Toggled(child.AssignedCharacter == selectedCharacter);
+                        child.QueueFree();
                     }
                     NPCListPanel.Visible = false;
                 };
@@ -67,7 +72,7 @@ public partial class QuestMenu : Control
             }
         }
         NPCListPanel.Visible = true;
-
+        NPCListPanel.GrabFocus();
     }
 
 
@@ -156,6 +161,10 @@ public partial class QuestMenu : Control
             child.QueueFree();
         }
         foreach (Node child in AssignedQuestsList.GetChildren())
+        {
+            child.QueueFree();
+        }
+        foreach (Node child in NPCList.GetChildren())
         {
             child.QueueFree();
         }
