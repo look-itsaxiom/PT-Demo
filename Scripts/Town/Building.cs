@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using TownResources;
 
 [GlobalClass]
 public partial class Building : Resource

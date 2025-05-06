@@ -1,6 +1,7 @@
 using CharacterData;
 using Godot;
 using ChronosSpace;
+using System;
 
 public partial class GameSignalBus : Node
 {
@@ -10,6 +11,25 @@ public partial class GameSignalBus : Node
     public override void _Ready()
     {
         Instance = this;
+    }
+
+    public void EmitSignalDynamic(string signalName, Variant[] signalArgs)
+    {
+        switch (signalArgs.Length)
+        {
+            case 0:
+                EmitSignal(signalName);
+                break;
+            case 1:
+                EmitSignal(signalName, signalArgs[0]);
+                break;
+            case 2:
+                EmitSignal(signalName, signalArgs[0], signalArgs[1]);
+                break;
+            default:
+                GD.PrintErr($"Unsupported number of args ({signalArgs.Length}) for signal: {signalName}");
+                break;
+        }
     }
 
     // Time
@@ -30,13 +50,7 @@ public partial class GameSignalBus : Node
 
     // Quest
     [Signal]
-    public delegate void EnemyDefeatedEventHandler(string enemyKey);
-
-    [Signal]
-    public delegate void ItemCollectedEventHandler(string itemKey, int amount);
-
-    [Signal]
-    public delegate void ResourceCollectedEventHandler(string resourceKey, int amount);
+    public delegate void ResourceCollectedEventHandler(ResourceCollectEvent resourceCollectEvent);
 
     [Signal]
     public delegate void PlayerStartedQuestEventHandler(Quest quest, Character character);

@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_b02ut"]
 script = ExtResource("1_kxusv")
-ResourceKey = "Wood"
+ResourceKey = 0
 Amount = 5
 
 [sub_resource type="Resource" id="Resource_n3a8d"]

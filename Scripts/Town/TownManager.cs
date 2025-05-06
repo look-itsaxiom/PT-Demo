@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Godot;
+using TownResources;
 
 public partial class TownManager : Node3D
 {
@@ -14,16 +15,16 @@ public partial class TownManager : Node3D
 
 	public BuildGrid BuildGrid;
 
-	public TownResource this[TownResource.ResourceType resourceKey]
+	public TownResource this[ResourceType resourceKey]
 	{
 		get
 		{
 			return resourceKey switch
 			{
-				TownResource.ResourceType.Gold => Gold,
-				TownResource.ResourceType.Wood => Wood,
-				TownResource.ResourceType.Stone => Stone,
-				TownResource.ResourceType.Food => Food,
+				ResourceType.Gold => Gold,
+				ResourceType.Wood => Wood,
+				ResourceType.Stone => Stone,
+				ResourceType.Food => Food,
 				_ => throw new ArgumentOutOfRangeException(nameof(resourceKey), "Invalid resource type")
 			};
 		}
@@ -47,24 +48,24 @@ public partial class TownManager : Node3D
 
 	private void InitializeTownResources()
 	{
-		Gold = new TownResource { ResourceKey = TownResource.ResourceType.Gold, Amount = 0 };
-		Wood = new TownResource { ResourceKey = TownResource.ResourceType.Wood, Amount = 0 };
-		Stone = new TownResource { ResourceKey = TownResource.ResourceType.Stone, Amount = 0 };
-		Food = new TownResource { ResourceKey = TownResource.ResourceType.Food, Amount = 0 };
+		Gold = new TownResource { ResourceKey = ResourceType.Gold, Amount = 0 };
+		Wood = new TownResource { ResourceKey = ResourceType.Wood, Amount = 5 };
+		Stone = new TownResource { ResourceKey = ResourceType.Stone, Amount = 0 };
+		Food = new TownResource { ResourceKey = ResourceType.Food, Amount = 0 };
 		UpdateTownResourceDisplay();
 	}
 
 	private void UpdateTownResourceDisplay()
 	{
-		var resourceDisplayNames = new Dictionary<TownResource.ResourceType, TownResource>
+		var resourceDisplayNames = new Dictionary<ResourceType, TownResource>
 		{
-			{ TownResource.ResourceType.Gold, Gold },
-			{ TownResource.ResourceType.Wood, Wood },
-			{ TownResource.ResourceType.Stone, Stone },
-			{ TownResource.ResourceType.Food, Food }
+			{ ResourceType.Gold, Gold },
+			{ ResourceType.Wood, Wood },
+			{ ResourceType.Stone, Stone },
+			{ ResourceType.Food, Food }
 		};
 
-		foreach (var resourceType in Enum.GetValues<TownResource.ResourceType>())
+		foreach (var resourceType in Enum.GetValues<ResourceType>())
 		{
 			var label = TownResourceDisplay.GetNode<Label>($"{resourceType}Label");
 			label.Text = $"{resourceType}: {resourceDisplayNames[resourceType].Amount}";
@@ -75,6 +76,7 @@ public partial class TownManager : Node3D
 	{
 		if (completedQuest != null)
 		{
+			GD.Print($"Quest completed: {completedQuest.QuestName}");
 			foreach (var reward in completedQuest.Rewards)
 			{
 				switch (reward.Type)
@@ -99,6 +101,7 @@ public partial class TownManager : Node3D
 						break;
 				}
 			}
+			GD.Print("Quest rewards distributed!");
 			UpdateTownResourceDisplay();
 		}
 	}
