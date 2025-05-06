@@ -3,6 +3,7 @@ using Godot.Collections;
 using CharacterData;
 using System;
 using ChronosSpace;
+using TownResources;
 
 public partial class TownNPC : CharacterBody3D
 {
@@ -187,8 +188,20 @@ public partial class TownNPC : CharacterBody3D
             TriggerDay = Chronos.Instance.CurrentDay,
             TriggerTime = Chronos.Instance.CurrentTime + 10f,
             ReturnSignal = GameSignalBus.SignalName.ResourceCollected,
-            ReturnSignalArgs = new Array<Variant> { "Wood", 5 }
+            ReturnSignalArgs = new Array<Variant>() {
+                new ResourceCollectEvent
+                {
+                    EventName = "QuestCompleted",
+                    AttributedCharacter = MyCharacter,
+                    EventData = new TownResource
+                    {
+                        ResourceKey = ResourceType.Wood,
+                        Amount = 5
+                    }
+                }
+            }
         };
+        GD.Print($"Registering time hook {timeHook.ReturnSignal} for NPC {MyCharacter.CharacterName}.");
         GameSignalBus.Instance.EmitSignal(GameSignalBus.SignalName.RegisterTimeHook, timeHook);
     }
 }

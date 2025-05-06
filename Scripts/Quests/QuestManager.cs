@@ -3,6 +3,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TownResources;
 
 public partial class QuestManager : Node
 {
@@ -37,30 +38,9 @@ public partial class QuestManager : Node
         // Load quests or initialize quest data here
         GetAvailableQuests();
 
-        GameSignalBus.Connect(GameSignalBus.SignalName.EnemyDefeated, Callable.From<string>((enemyKey) =>
+        GameSignalBus.Connect(GameSignalBus.SignalName.ResourceCollected, Callable.From<ResourceCollectEvent>(evt =>
         {
-            OnGameSignalReceived(GameSignalBus.SignalName.EnemyDefeated, new()
-            {
-                { "enemyKey", enemyKey }
-            });
-        }));
-
-        GameSignalBus.Connect(GameSignalBus.SignalName.ItemCollected, Callable.From<string, int>((itemKey, amount) =>
-        {
-            OnGameSignalReceived(GameSignalBus.SignalName.ItemCollected, new()
-            {
-            { "itemKey", itemKey },
-            { "amount", amount }
-            });
-        }));
-
-        GameSignalBus.Connect(GameSignalBus.SignalName.ResourceCollected, Callable.From<string, int>((resourceKey, amount) =>
-        {
-            OnGameSignalReceived(GameSignalBus.SignalName.ResourceCollected, new()
-            {
-                { "resourceKey", resourceKey },
-                { "amount", amount }
-            });
+            OnGameSignalReceived(GameSignalBus.SignalName.ResourceCollected, evt);
         }));
     }
 
@@ -96,7 +76,6 @@ public partial class QuestManager : Node
         {
             AvailableQuests.Remove(quest);
         }
-
     }
 
     public void AssignQuestToNPC(Quest selectedQuest, Character selectedCharacter)
@@ -146,7 +125,8 @@ public partial class QuestManager : Node
             ResourcesCollected = false
         };
 
-        GameSignalBus.EmitSignal(GameSignalBus.SignalName.QuestCompleted, quest);
+        GD.Print($"Quest {quest.QuestName} completed for character {assignedCharacter.CharacterName}");
+        GameSignalBus.EmitSignal(GameSignalBus.SignalName.QuestCompleted, quest, assignedCharacter);
 
         CompletedQuests.Add(completedQuest);
 
@@ -154,17 +134,21 @@ public partial class QuestManager : Node
         ActiveQuests.Remove(activeQuest);
     }
 
-    public void OnGameSignalReceived(string signalName, Dictionary<string, Variant> eventData)
+    public void OnGameSignalReceived<T>(string signalName, QuestEvent<T> questEvent)
     {
-        foreach (var activeQuest in ActiveQuests.ToList())
+        GD.Print($"Received signal: {signalName} for quest: {questEvent.EventName}");
+        var relevantQuests = ActiveQuests.Where(quest => quest.AssignedCharacter == questEvent.AttributedCharacter).ToList();
+        foreach (var activeQuest in relevantQuests)
         {
-            foreach (var goal in activeQuest.Quest.Goals)
+            foreach (var goal in activeQuest.Quest.Goals.OfType<IQuestGoal>())
             {
-                goal.OnEvent(signalName, eventData);
+                goal.OnEventRaw(signalName, questEvent.EventData);
             }
+
 
             if (activeQuest.Quest.Goals.All(g => g.IsComplete()))
             {
+                GD.Print($"Quest {activeQuest.Quest.QuestName} is complete for character {activeQuest.AssignedCharacter.CharacterName}");
                 CompleteQuest(activeQuest.Quest, activeQuest.AssignedCharacter);
             }
         }

@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
@@ -43,6 +44,7 @@ namespace ChronosSpace
 
 		private void RegisterTimeHook(ChronosTimeHook hook)
 		{
+			GD.Print($"Registering time hook: {hook.TriggerName} for day {hook.TriggerDay} at time {hook.TriggerTime}");
 			TimeHooks.Add(hook);
 		}
 
@@ -52,10 +54,10 @@ namespace ChronosSpace
 			CurrentTime = TimeInDay - DayTimer.TimeLeft;
 			foreach (var timeHook in TimeHooks)
 			{
-
 				if ((CurrentDay == timeHook.TriggerDay && CurrentTime >= timeHook.TriggerTime) || CurrentDay > timeHook.TriggerDay)
 				{
-					GameSignalBus.Instance.EmitSignal(timeHook.ReturnSignal, timeHook.ReturnSignalArgs);
+					GD.Print($"Triggering time hook: {timeHook.TriggerName} for day {timeHook.TriggerDay} at time {timeHook.TriggerTime}");
+					GameSignalBus.Instance.EmitSignalDynamic(timeHook.ReturnSignal, timeHook.ReturnSignalArgs.ToArray());
 					TimeHooks.Remove(timeHook);
 				}
 			}

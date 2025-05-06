@@ -1,24 +1,24 @@
 using Godot;
 using System;
-using System.Collections.Generic;
+using TownResources;
 
 [GlobalClass]
-public partial class ResourceCollectGoal : QuestGoal
+public partial class ResourceCollectGoal : QuestGoal<TownResource>, IQuestGoal
 {
     [Export]
-    public string ResourceKey;
+    public ResourceType ResourceKey;
 
     [Export]
     public int Amount = 0;
 
     private int Progress = 0;
 
-    public override void OnEvent(string signalName, Dictionary<string, Variant> data)
+    public override void OnEvent(string signalName, TownResource resourceCollected)
     {
-        if (signalName == "ResourceCollected" && (string)data["resourceKey"] == ResourceKey)
+        if (signalName == "ResourceCollected" && resourceCollected.ResourceKey == ResourceKey)
         {
-            int collectedAmount = (int)data["amount"];
-            Progress += collectedAmount;
+            GD.Print($"Collected {resourceCollected.Amount} {ResourceKey}");
+            Progress += resourceCollected.Amount;
         }
     }
 

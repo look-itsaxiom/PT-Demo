@@ -1,10 +1,8 @@
 using Godot;
 using System;
 
-[GlobalClass]
-public partial class TownResource : Resource
+namespace TownResources
 {
-
     public enum ResourceType
     {
         Wood,
@@ -13,9 +11,14 @@ public partial class TownResource : Resource
         Gold
     }
 
-    [Export]
-    public ResourceType ResourceKey { get; set; }
+    [GlobalClass]
+    public partial class TownResource : Resource
+    {
+        [Export]
+        public ResourceType ResourceKey { get; set; }
 
-    [Export]
-    public int Amount { get; set; } = 0;
+        [Export]
+        public int Amount { get; set; } = 0;
+    }
 }
+
