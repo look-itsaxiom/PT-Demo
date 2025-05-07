@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="RaceData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Characters/RaceData.cs" id="1_0fsep"]
+
+[resource]
+script = ExtResource("1_0fsep")
+Name = "Gignen"
+Description = "Versatile and adaptive, Gignen are generalists suited to any role."
+BaseStats = {
+0: Vector2i(8, 12),
+1: Vector2i(8, 12),
+2: Vector2i(8, 12),
+3: Vector2i(8, 12),
+4: Vector2i(8, 12),
+5: Vector2i(8, 12),
+6: Vector2i(8, 12),
+7: Vector2i(8, 12),
+8: Vector2i(8, 12)
+}

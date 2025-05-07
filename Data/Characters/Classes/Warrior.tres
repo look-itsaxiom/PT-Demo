@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Characters/ClassData.cs" id="1_n1ui2"]
+
+[resource]
+script = ExtResource("1_n1ui2")
+Name = "Warrior"
+Description = "Specializes in physical combat."
+tier = 1
+Requirements = PackedStringArray()
+Modifiers = {
+0: 0.25,
+1: 0.25
+}

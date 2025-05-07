@@ -1,0 +1,366 @@
+{
+  "Adventurer": {
+	"name": "Adventurer",
+	"description": "Balanced stats, capable of using simple weapons and armor. All adventurers begin here.",
+	"tier": 0,
+	"requirements": null,
+	"modifiers": {
+	  "STR": 0.1,
+	  "END": 0.1,
+	  "DEF": 0.1,
+	  "INT": 0.1,
+	  "SPI": 0.1,
+	  "MDF": 0.1,
+	  "SPD": 0.1,
+	  "LCK": 0.1,
+	  "ACC": 0.1
+	}
+  },
+  "Warrior": {
+	"name": "Warrior",
+	"description": "Specializes in physical combat.",
+	"tier": 1,
+	"requirements": {
+	  "level": 5,
+	  "prerequisites": ["Adventurer"]
+	},
+	"modifiers": {
+	  "STR": 0.25,
+	  "END": 0.25
+	}
+  },
+  "Magician": {
+	"name": "Magician",
+	"description": "Focuses on entry-level magic.",
+	"tier": 1,
+	"requirements": {
+	  "level": 5,
+	  "prerequisites": ["Adventurer"]
+	},
+	"modifiers": {
+	  "INT": 0.25,
+	  "SPI": 0.25
+	}
+  },
+  "Scout": {
+	"name": "Scout",
+	"description": "Excels in speed and utility.",
+	"tier": 1,
+	"requirements": {
+	  "level": 5,
+	  "prerequisites": ["Adventurer"]
+	},
+	"modifiers": {
+	  "SPD": 0.25,
+	  "LCK": 0.25
+	}
+  },
+  "Knight": {
+	"name": "Knight",
+	"description": "Tanky defense and endurance.",
+	"tier": 2,
+	"requirements": {
+	  "level": 25,
+	  "prerequisites": ["Warrior"]
+	},
+	"modifiers": {
+	  "DEF": 0.35,
+	  "END": 0.25,
+	  "STR": 0.1
+	}
+  },
+  "Berserker": {
+	"name": "Berserker",
+	"description": "High physical damage output.",
+	"tier": 2,
+	"requirements": {
+	  "level": 25,
+	  "prerequisites": ["Warrior"]
+	},
+	"modifiers": {
+	  "STR": 0.35,
+	  "SPD": 0.25,
+	  "END": 0.1
+	}
+  },
+  "ElementalMage": {
+	"name": "Elemental Mage",
+	"description": "Offensive elemental magic.",
+	"tier": 2,
+	"requirements": {
+	  "level": 25,
+	  "prerequisites": ["Magician"]
+	},
+	"modifiers": {
+	  "INT": 0.35,
+	  "SPD": 0.25,
+	  "MDF": 0.1
+	}
+  },
+  "LightMage": {
+	"name": "Light Mage",
+	"description": "Healing magic, buffs, and status condition cures.",
+	"tier": 2,
+	"requirements": {
+	  "level": 25,
+	  "prerequisites": ["Magician"]
+	},
+	"modifiers": {
+	  "SPI": 0.35,
+	  "MDF": 0.25,
+	  "LCK": 0.1
+	}
+  },
+  "DarkMage": {
+	"name": "Dark Mage",
+	"description": "Offensive dark magic, debuffs, and status conditions.",
+	"tier": 2,
+	"requirements": {
+	  "level": 25,
+	  "prerequisites": ["Magician"]
+	},
+	"modifiers": {
+	  "INT": 0.35,
+	  "ACC": 0.25,
+	  "MDF": 0.1
+	}
+  },
+  "Rogue": {
+	"name": "Rogue",
+	"description": "High damage but low accuracy abilities.",
+	"tier": 2,
+	"requirements": {
+	  "level": 25,
+	  "prerequisites": ["Scout"]
+	},
+	"modifiers": {
+	  "ACC": 0.35,
+	  "LCK": 0.25,
+	  "SPD": 0.1
+	}
+  },
+  "Explorer": {
+	"name": "Explorer",
+	"description": "Excels in exploration and resource gathering.",
+	"tier": 2,
+	"requirements": {
+	  "level": 25,
+	  "prerequisites": ["Scout"]
+	},
+	"modifiers": {
+	  "SPD": 0.35,
+	  "LCK": 0.25,
+	  "END": 0.1
+	}
+  },
+  "Sentinel": {
+	"name": "Sentinel",
+	"description": "Overpowering defensive capabilities.",
+	"tier": 3,
+	"requirements": {
+	  "level": 50,
+	  "prerequisites": ["Knight"]
+	},
+	"modifiers": {
+	  "DEF": 0.5,
+	  "END": 0.5,
+	  "MDF": 0.25,
+	  "SPD": -0.3
+	}
+  },
+  "Paladin": {
+	"name": "Paladin",
+	"description": "Mixes defensive and healing capabilities.",
+	"tier": 3,
+	"requirements": {
+	  "level": 50,
+	  "prerequisites": ["Knight", "Light Mage"]
+	},
+	"modifiers": {
+	  "MDF": 0.5,
+	  "SPI": 0.5,
+	  "DEF": 0.25,
+	  "STR": -0.3
+	}
+  },
+  "DreadKnight": {
+	"name": "Dread Knight",
+	"description": "Mixes defensive and dark magic. Gains abilities to debuff enemies and inflict status conditions.",
+	"tier": 3,
+	"requirements": {
+	  "level": 50,
+	  "prerequisites": ["Knight", "Dark Mage"]
+	},
+	"modifiers": {
+	  "END": 0.5,
+	  "MDF": 0.5,
+	  "INT": 0.25,
+	  "LCK": -0.3
+	}
+  },
+  "Warlord": {
+	"name": "Warlord",
+	"description": "Highest consistent physical damage output.",
+	"tier": 3,
+	"requirements": {
+	  "level": 50,
+	  "prerequisites": ["Berserker"]
+	},
+	"modifiers": {
+	  "STR": 0.5,
+	  "SPD": 0.5,
+	  "LCK": 0.25,
+	  "MDF": -0.3
+	}
+  },
+  "BattleDancer": {
+	"name": "Battle Dancer",
+	"description": "Agile, critical-hit-focused melee fighter.",
+	"tier": 3,
+	"requirements": {
+	  "level": 50,
+	  "prerequisites": ["Berserker", "Rogue"]
+	},
+	"modifiers": {
+	  "SPD": 0.5,
+	  "LCK": 0.5,
+	  "ACC": 0.25,
+	  "DEF": -0.3
+	}
+  },
+  "Spellblade": {
+	"name": "Spellblade",
+	"description": "Combines physical prowess with magical damage.",
+	"tier": 3,
+	"requirements": {
+	  "level": 50,
+	  "prerequisites": ["Elemental Mage", "Berserker"]
+	},
+	"modifiers": {
+	  "STR": 0.5,
+	  "INT": 0.5,
+	  "SPD": 0.25,
+	  "ACC": -0.3
+	}
+  },
+  "Sage": {
+	"name": "Sage",
+	"description": "Capable of both elemental and light schools of magic",
+	"tier": 3,
+	"requirements": {
+	  "level": 50,
+	  "prerequisites": ["Elemental Mage", "Light Mage"]
+	},
+	"modifiers": {
+	  "INT": 0.5,
+	  "SPI": 0.5,
+	  "ACC": 0.25,
+	  "END": -0.3
+	}
+  },
+  "Sorcerer": {
+	"name": "Sorcerer",
+	"description": "Mastery over elemental magic  and multi-target elemental attacks",
+	"tier": 3,
+	"requirements": {
+	  "level": 50,
+	  "prerequisites": ["Elemental Mage"]
+	},
+	"modifiers": {
+	  "INT": 0.5,
+	  "SPD": 0.5,
+	  "ACC": 0.25,
+	  "DEF": -0.3
+	}
+  },
+  "Priest": {
+	"name": "Priest",
+	"description": "Combines healing, buffs, and powerful support magic.",
+	"tier": 3,
+	"requirements": {
+	  "level": 50,
+	  "prerequisites": ["Light Mage"]
+	},
+	"modifiers": {
+	  "SPI": 0.5,
+	  "INT": 0.5,
+	  "LCK": 0.25,
+	  "STR": -0.3
+	}
+  },
+  "Warlock": {
+	"name": "Warlock",
+	"description": "Specializes in dark magic with debuffs.",
+	"tier": 3,
+	"requirements": {
+	  "level": 50,
+	  "prerequisites": ["Dark Mage"]
+	},
+	"modifiers": {
+	  "INT": 0.5,
+	  "ACC": 0.5,
+	  "MDF": 0.25,
+	  "LCK": -0.3
+	}
+  },
+  "Shadowblade": {
+	"name": "Shadowblade",
+	"description": "Uses dark magic to inflict debuffs on top of high damaging abilities.",
+	"tier": 3,
+	"requirements": {
+	  "level": 50,
+	  "prerequisites": ["Dark Mage", "Rogue"]
+	},
+	"modifiers": {
+	  "INT": 0.5,
+	  "ACC": 0.5,
+	  "SPD": 0.25,
+	  "DEF": -0.3
+	}
+  },
+  "Assassin": {
+	"name": "Assassin",
+	"description": "Precision-focused abilities, excelling in one-hit critical strikes.",
+	"tier": 3,
+	"requirements": {
+	  "level": 50,
+	  "prerequisites": ["Rogue"]
+	},
+	"modifiers": {
+	  "ACC": 0.5,
+	  "LCK": 0.5,
+	  "STR": 0.25,
+	  "END": -0.3
+	}
+  },
+  "Ranger": {
+	"name": "Ranger",
+	"description": "Utilizes abilities to support combat and exploration.",
+	"tier": 3,
+	"requirements": {
+	  "level": 50,
+	  "prerequisites": ["Explorer"]
+	},
+	"modifiers": {
+	  "SPD": 0.5,
+	  "END": 0.5,
+	  "ACC": 0.25,
+	  "LCK": -0.3
+	}
+  },
+  "Trailblazer": {
+	"name": "Trailblazer",
+	"description": "Pinnacle of exploration, resource gathering, and wayfinding.",
+	"tier": 3,
+	"requirements": {
+	  "level": 50,
+	  "prerequisites": ["Explorer"]
+	},
+	"modifiers": {
+	  "SPD": 0.5,
+	  "LCK": 0.5,
+	  "SPI": 0.25,
+	  "ACC": -0.3
+	}
+  }
+}

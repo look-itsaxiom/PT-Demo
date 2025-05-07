@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Characters/ClassData.cs" id="1_703ag"]
+
+[resource]
+script = ExtResource("1_703ag")
+Name = "Sorcerer"
+Description = "Mastery over elemental magic  and multi-target elemental attacks"
+tier = 3
+Requirements = PackedStringArray()
+Modifiers = {
+2: -0.3,
+3: 0.5,
+6: 0.5,
+8: 0.25
+}

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Characters/ClassData.cs" id="1_r0wi0"]
+
+[resource]
+script = ExtResource("1_r0wi0")
+Name = "Light Mage"
+Description = "Healing magic, buffs, and status condition cures."
+tier = 2
+Requirements = PackedStringArray()
+Modifiers = {
+4: 0.35,
+5: 0.25,
+7: 0.1
+}

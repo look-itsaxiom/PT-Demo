@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Characters/ClassData.cs" id="1_5hdwa"]
+
+[resource]
+script = ExtResource("1_5hdwa")
+Name = "Knight"
+Description = "Tanky defense and endurance."
+tier = 2
+Requirements = PackedStringArray()
+Modifiers = {
+0: 0.1,
+1: 0.25,
+2: 0.35
+}

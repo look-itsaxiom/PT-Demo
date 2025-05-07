@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvl8ctwk3ww7w"]
+
+[ext_resource type="Script" path="res://Scripts/Town/TownNPC.cs" id="1_nsv0w"]
+[ext_resource type="Script" path="res://Scripts/Town/InteractNPC.cs" id="2_e4j7m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2c4lo"]
+height = 2.50587
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_40sxi"]
+size = Vector3(3, 2, 3)
+
+[node name="NPC" type="CharacterBody3D"]
+script = ExtResource("1_nsv0w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09996, 0)
+shape = SubResource("CapsuleShape3D_2c4lo")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+
+[node name="InteractionArea" type="Area3D" parent="."]
+script = ExtResource("2_e4j7m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0288696, 1.5, 0)
+shape = SubResource("BoxShape3D_40sxi")

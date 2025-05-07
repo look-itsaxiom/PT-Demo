@@ -1,0 +1,105 @@
+[gd_scene load_steps=2 format=3 uid="uid://vgnl04yevpjv"]
+
+[ext_resource type="Script" path="res://Scripts/Quests/QuestMenu.cs" id="1_tbemw"]
+
+[node name="QuestMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tbemw")
+
+[node name="QuestMenuRoot" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -768.0
+offset_top = -288.0
+offset_bottom = 288.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="AvailableQuestsList" type="Panel" parent="QuestMenuRoot"]
+layout_mode = 0
+offset_right = 384.0
+offset_bottom = 576.0
+
+[node name="AssignNPCQuestButton" type="Button" parent="QuestMenuRoot/AvailableQuestsList"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 472.0
+offset_right = 184.0
+offset_bottom = 503.0
+text = "Assign Adventurer"
+
+[node name="AssignPlayerQuestButton" type="Button" parent="QuestMenuRoot/AvailableQuestsList"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 472.0
+offset_right = 360.0
+offset_bottom = 503.0
+text = "Go Yourself
+"
+
+[node name="AvailableQuestList" type="VBoxContainer" parent="QuestMenuRoot/AvailableQuestsList"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 56.0
+offset_right = 360.0
+offset_bottom = 464.0
+
+[node name="AvailableQuestsListLabel" type="Label" parent="QuestMenuRoot/AvailableQuestsList"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 360.0
+offset_bottom = 47.0
+text = "Available"
+
+[node name="AssignedQuestsList" type="Panel" parent="QuestMenuRoot"]
+layout_mode = 0
+offset_left = 384.0
+offset_right = 768.0
+offset_bottom = 576.0
+
+[node name="AssignedQuestList" type="VBoxContainer" parent="QuestMenuRoot/AssignedQuestsList"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 56.0
+offset_right = 360.0
+offset_bottom = 464.0
+
+[node name="AssignedQuestsListLabel" type="Label" parent="QuestMenuRoot/AssignedQuestsList"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 360.0
+offset_bottom = 47.0
+text = "Assigned"
+
+[node name="SelectNPCsList" type="Panel" parent="QuestMenuRoot"]
+visible = false
+layout_mode = 0
+offset_left = -184.0
+offset_top = 88.0
+offset_bottom = 576.0
+
+[node name="SelectNPCLabel" type="Label" parent="QuestMenuRoot/SelectNPCsList"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 168.0
+offset_bottom = 39.0
+text = "Select Adventurer"
+
+[node name="SelectNPCList" type="VBoxContainer" parent="QuestMenuRoot/SelectNPCsList"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 56.0
+offset_right = 168.0
+offset_bottom = 464.0

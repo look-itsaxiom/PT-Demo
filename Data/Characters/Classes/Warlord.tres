@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Characters/ClassData.cs" id="1_cgof3"]
+
+[resource]
+script = ExtResource("1_cgof3")
+Name = "Warlord"
+Description = "Highest consistent physical damage output."
+tier = 3
+Requirements = PackedStringArray()
+Modifiers = {
+0: 0.5,
+5: -0.3,
+6: 0.5,
+7: 0.25
+}

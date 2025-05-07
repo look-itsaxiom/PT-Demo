@@ -1,0 +1,395 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu17dspqrckwo"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/CharacterInfoMenu.cs" id="1_fg0yq"]
+
+[node name="CharacterInfoMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fg0yq")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -224.0
+offset_bottom = 224.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="NamePanel" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 544.0
+offset_bottom = 80.0
+
+[node name="Label" type="Label" parent="Panel/NamePanel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 87.0
+offset_bottom = 39.0
+text = "Name: "
+
+[node name="NameLabel" type="Label" parent="Panel/NamePanel"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 16.0
+offset_right = 480.0
+offset_bottom = 40.0
+
+[node name="RaceClassPanel" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 88.0
+offset_right = 544.0
+offset_bottom = 144.0
+
+[node name="Label" type="Label" parent="Panel/RaceClassPanel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 87.0
+offset_bottom = 39.0
+text = "Class: "
+
+[node name="Label2" type="Label" parent="Panel/RaceClassPanel"]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 16.0
+offset_right = 336.0
+offset_bottom = 39.0
+text = "Race:"
+
+[node name="ClassLabel" type="Label" parent="Panel/RaceClassPanel"]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 16.0
+offset_right = 279.0
+offset_bottom = 39.0
+
+[node name="RaceLabel" type="Label" parent="Panel/RaceClassPanel"]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 16.0
+offset_right = 504.0
+offset_bottom = 39.0
+
+[node name="StatPanel" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 152.0
+offset_right = 544.0
+offset_bottom = 408.0
+
+[node name="Label" type="Label" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 87.0
+offset_bottom = 39.0
+text = "Level:"
+
+[node name="LevelLabel" type="Label" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 16.0
+offset_right = 151.0
+offset_bottom = 39.0
+text = "1"
+
+[node name="STR" type="Panel" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 64.0
+offset_right = 176.0
+offset_bottom = 96.0
+
+[node name="STRGrowthLabel" type="Label" parent="Panel/StatPanel/STR"]
+layout_mode = 2
+offset_right = 16.0
+offset_bottom = 32.0
+text = "+"
+horizontal_alignment = 1
+
+[node name="STRLabel" type="Label" parent="Panel/StatPanel/STR"]
+layout_mode = 2
+offset_left = 16.0
+offset_right = 72.0
+offset_bottom = 32.0
+text = "STR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="STRValue" type="Label" parent="Panel/StatPanel/STR"]
+layout_mode = 2
+offset_left = 72.0
+offset_right = 96.0
+offset_bottom = 32.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="END" type="Panel" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 128.0
+offset_right = 176.0
+offset_bottom = 160.0
+
+[node name="ENDGrowthLabel" type="Label" parent="Panel/StatPanel/END"]
+layout_mode = 2
+offset_right = 16.0
+offset_bottom = 32.0
+text = "+"
+horizontal_alignment = 1
+
+[node name="ENDLabel" type="Label" parent="Panel/StatPanel/END"]
+layout_mode = 2
+offset_left = 16.0
+offset_right = 72.0
+offset_bottom = 32.0
+text = "END"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ENDValue" type="Label" parent="Panel/StatPanel/END"]
+layout_mode = 2
+offset_left = 72.0
+offset_right = 96.0
+offset_bottom = 32.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DEF" type="Panel" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 192.0
+offset_right = 176.0
+offset_bottom = 224.0
+
+[node name="DEFGrowthLabel" type="Label" parent="Panel/StatPanel/DEF"]
+layout_mode = 2
+offset_right = 16.0
+offset_bottom = 32.0
+text = "+"
+horizontal_alignment = 1
+
+[node name="DEFLabel" type="Label" parent="Panel/StatPanel/DEF"]
+layout_mode = 2
+offset_left = 16.0
+offset_right = 72.0
+offset_bottom = 32.0
+text = "DEF"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DEFValue" type="Label" parent="Panel/StatPanel/DEF"]
+layout_mode = 2
+offset_left = 72.0
+offset_right = 96.0
+offset_bottom = 32.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="INT" type="Panel" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 64.0
+offset_right = 304.0
+offset_bottom = 96.0
+
+[node name="INTGrowthLabel" type="Label" parent="Panel/StatPanel/INT"]
+layout_mode = 2
+offset_right = 16.0
+offset_bottom = 32.0
+text = "+"
+horizontal_alignment = 1
+
+[node name="INTLabel" type="Label" parent="Panel/StatPanel/INT"]
+layout_mode = 2
+offset_left = 16.0
+offset_right = 72.0
+offset_bottom = 32.0
+text = "INT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="INTValue" type="Label" parent="Panel/StatPanel/INT"]
+layout_mode = 2
+offset_left = 72.0
+offset_right = 96.0
+offset_bottom = 32.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SPI" type="Panel" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 128.0
+offset_right = 304.0
+offset_bottom = 160.0
+
+[node name="SPIGrowthLabel" type="Label" parent="Panel/StatPanel/SPI"]
+layout_mode = 2
+offset_right = 16.0
+offset_bottom = 32.0
+text = "+"
+horizontal_alignment = 1
+
+[node name="SPILabel" type="Label" parent="Panel/StatPanel/SPI"]
+layout_mode = 2
+offset_left = 16.0
+offset_right = 72.0
+offset_bottom = 32.0
+text = "SPI"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SPIValue" type="Label" parent="Panel/StatPanel/SPI"]
+layout_mode = 2
+offset_left = 72.0
+offset_right = 96.0
+offset_bottom = 32.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MDF" type="Panel" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 192.0
+offset_right = 304.0
+offset_bottom = 224.0
+
+[node name="MDFGrowthLabel" type="Label" parent="Panel/StatPanel/MDF"]
+layout_mode = 2
+offset_right = 16.0
+offset_bottom = 32.0
+text = "+"
+horizontal_alignment = 1
+
+[node name="MDFLabel" type="Label" parent="Panel/StatPanel/MDF"]
+layout_mode = 2
+offset_left = 16.0
+offset_right = 72.0
+offset_bottom = 32.0
+text = "MDF"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MDFValue" type="Label" parent="Panel/StatPanel/MDF"]
+layout_mode = 2
+offset_left = 72.0
+offset_right = 96.0
+offset_bottom = 32.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SPD" type="Panel" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 64.0
+offset_right = 432.0
+offset_bottom = 96.0
+
+[node name="SPDGrowthLabel" type="Label" parent="Panel/StatPanel/SPD"]
+layout_mode = 2
+offset_right = 16.0
+offset_bottom = 32.0
+text = "+"
+horizontal_alignment = 1
+
+[node name="SPDLabel" type="Label" parent="Panel/StatPanel/SPD"]
+layout_mode = 2
+offset_left = 16.0
+offset_right = 72.0
+offset_bottom = 32.0
+text = "SPD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SPDValue" type="Label" parent="Panel/StatPanel/SPD"]
+layout_mode = 2
+offset_left = 72.0
+offset_right = 96.0
+offset_bottom = 32.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LCK" type="Panel" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 128.0
+offset_right = 432.0
+offset_bottom = 160.0
+
+[node name="LCKGrowthLabel" type="Label" parent="Panel/StatPanel/LCK"]
+layout_mode = 2
+offset_right = 16.0
+offset_bottom = 32.0
+text = "+"
+horizontal_alignment = 1
+
+[node name="LCKLabel" type="Label" parent="Panel/StatPanel/LCK"]
+layout_mode = 2
+offset_left = 16.0
+offset_right = 72.0
+offset_bottom = 32.0
+text = "LCK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LCKValue" type="Label" parent="Panel/StatPanel/LCK"]
+layout_mode = 2
+offset_left = 72.0
+offset_right = 96.0
+offset_bottom = 32.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ACC" type="Panel" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 192.0
+offset_right = 432.0
+offset_bottom = 224.0
+
+[node name="ACCGrowthLabel" type="Label" parent="Panel/StatPanel/ACC"]
+layout_mode = 2
+offset_right = 16.0
+offset_bottom = 32.0
+text = "+"
+horizontal_alignment = 1
+
+[node name="ACCLabel" type="Label" parent="Panel/StatPanel/ACC"]
+layout_mode = 2
+offset_left = 16.0
+offset_right = 72.0
+offset_bottom = 32.0
+text = "ACC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ACCValue" type="Label" parent="Panel/StatPanel/ACC"]
+layout_mode = 2
+offset_left = 72.0
+offset_right = 96.0
+offset_bottom = 32.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Characters/ClassData.cs" id="1_5fguj"]
+
+[resource]
+script = ExtResource("1_5fguj")
+Name = "Dread Knight"
+Description = "Mixes defensive and dark magic. Gains abilities to debuff enemies and inflict status conditions."
+tier = 3
+Requirements = PackedStringArray()
+Modifiers = {
+1: 0.5,
+3: 0.25,
+5: 0.5,
+7: -0.3
+}

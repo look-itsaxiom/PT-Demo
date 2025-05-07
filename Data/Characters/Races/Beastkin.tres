@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="RaceData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Characters/RaceData.cs" id="1_4ykqc"]
+
+[resource]
+script = ExtResource("1_4ykqc")
+Name = "Beastkin"
+Description = "Agile and primal, Beastkin possess keen senses and excel in physical prowess."
+BaseStats = {
+0: Vector2i(10, 16),
+1: Vector2i(8, 12),
+2: Vector2i(6, 10),
+3: Vector2i(6, 10),
+4: Vector2i(6, 12),
+5: Vector2i(6, 10),
+6: Vector2i(10, 16),
+7: Vector2i(6, 10),
+8: Vector2i(10, 14)
+}
