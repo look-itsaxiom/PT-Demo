@@ -15,7 +15,7 @@ public partial class TownExit : Interactable
     {
         if (player != null && CanInteract)
         {
-            GameSignalBus.EmitSignal(GameSignalBus.SignalName.ResourceCollected, "Wood", 1);
+            GetTree().ChangeSceneToFile("res://Scenes/WorldMap.tscn");
         }
     }
 }

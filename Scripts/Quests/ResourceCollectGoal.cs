@@ -3,7 +3,7 @@ using System;
 using TownResources;
 
 [GlobalClass]
-public partial class ResourceCollectGoal : QuestGoal<TownResource>, IQuestGoal
+public partial class ResourceCollectGoal : QuestGoal
 {
     [Export]
     public ResourceType ResourceKey;
@@ -13,12 +13,15 @@ public partial class ResourceCollectGoal : QuestGoal<TownResource>, IQuestGoal
 
     private int Progress = 0;
 
-    public override void OnEvent(string signalName, TownResource resourceCollected)
+    public override void OnEvent(string signalName, QuestEvent questEvent)
     {
-        if (signalName == "ResourceCollected" && resourceCollected.ResourceKey == ResourceKey)
+        if (signalName == "ResourceCollected" && questEvent is ResourceCollectEvent resourceCollectEvent)
         {
-            GD.Print($"Collected {resourceCollected.Amount} {ResourceKey}");
-            Progress += resourceCollected.Amount;
+            if (resourceCollectEvent.EventData.ResourceKey == ResourceKey)
+            {
+                Progress += resourceCollectEvent.EventData.Amount;
+                GD.Print($"Collected {resourceCollectEvent.EventData.Amount} of {ResourceKey}. Total: {Progress}/{Amount}");
+            }
         }
     }
 

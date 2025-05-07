@@ -18,7 +18,7 @@ public partial class Quest : Resource
     public QuestAvailability Availability { get; set; } = QuestAvailability.Player;
 
     [Export]
-    public Array<QuestGoal<IQuestGoal>> Goals { get; set; } = new();
+    public Array<QuestGoal> Goals { get; set; } = new();
 
     [Export]
     public Array<QuestReward> Rewards { get; set; } = new();

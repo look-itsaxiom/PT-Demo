@@ -80,6 +80,11 @@ public partial class CharacterSystem : Node
 
     public Character GetPlayerCharacter()
     {
+        if (CharacterLookup.TryGetValue(Guid.Empty, out var playerCharacter))
+        {
+            return playerCharacter;
+        }
+
         var pc = new Character
         {
             CharacterName = "Player",

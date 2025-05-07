@@ -1,7 +1,6 @@
 using CharacterData;
 using Godot;
 using System;
-using System.Collections.Generic;
 
 public partial class QuestMenu : Control
 {
@@ -60,7 +59,7 @@ public partial class QuestMenu : Control
                     this.selectedCharacter = selectedCharacter;
                     QuestManager.Instance.AssignQuestToNPC(selectedQuest, selectedCharacter);
                     UpdateQuestsList();
-                    AvailableQuestsList.GrabFocus();
+                    AvailableQuestsList.FindNextValidFocus().GrabFocus();
                     foreach (NPCToAssignQuestData child in NPCList.GetChildren())
                     {
                         child._Toggled(child.AssignedCharacter == selectedCharacter);
@@ -72,7 +71,7 @@ public partial class QuestMenu : Control
             }
         }
         NPCListPanel.Visible = true;
-        NPCListPanel.GrabFocus();
+        NPCList.FindNextValidFocus().GrabFocus();
     }
 
 

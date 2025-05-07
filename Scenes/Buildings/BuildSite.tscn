@@ -7,7 +7,6 @@ size = Vector3(17, 5.63577, 26.0444)
 
 [node name="BuildSite" type="Area3D"]
 script = ExtResource("2_aip1g")
-BuildSiteSize = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.976948, 0, 1.5)

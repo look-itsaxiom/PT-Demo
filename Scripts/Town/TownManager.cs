@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CharacterData;
 using Godot;
 using TownResources;
 
@@ -43,7 +44,7 @@ public partial class TownManager : Node3D
 		GameSignalBus = GameSignalBus.Instance;
 		GameSignalBus.Connect(GameSignalBus.SignalName.OnBuildingPlaced, Callable.From<string>(OnBuildingPlaced));
 		InitializeTownResources();
-		GameSignalBus.Connect(GameSignalBus.SignalName.QuestCompleted, Callable.From<Quest>(OnQuestCompleted));
+		GameSignalBus.Connect(GameSignalBus.SignalName.QuestCompleted, Callable.From<Quest, Character>(OnQuestCompleted));
 	}
 
 	private void InitializeTownResources()
@@ -72,7 +73,7 @@ public partial class TownManager : Node3D
 		}
 	}
 
-	private void OnQuestCompleted(Quest completedQuest)
+	private void OnQuestCompleted(Quest completedQuest, Character assignedCharacter)
 	{
 		if (completedQuest != null)
 		{
