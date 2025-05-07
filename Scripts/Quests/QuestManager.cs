@@ -38,10 +38,29 @@ public partial class QuestManager : Node
         // Load quests or initialize quest data here
         GetAvailableQuests();
 
-        GameSignalBus.Connect(GameSignalBus.SignalName.ResourceCollected, Callable.From<ResourceCollectEvent>(evt =>
+        GameSignalBus.Connect(GameSignalBus.SignalName.ResourceCollected, Callable.From<QuestEvent>((questEvent) =>
         {
-            OnGameSignalReceived(GameSignalBus.SignalName.ResourceCollected, evt);
+            OnGameSignalReceived(GameSignalBus.SignalName.ResourceCollected, questEvent);
         }));
+    }
+
+    public void OnGameSignalReceived(string signalName, QuestEvent questEvent)
+    {
+        GD.Print($"Received signal: {signalName} for quest: {questEvent.EventName}");
+        var relevantQuests = ActiveQuests.Where(quest => quest.AssignedCharacter == questEvent.AttributedCharacter).ToList();
+        foreach (var activeQuest in relevantQuests)
+        {
+            foreach (var goal in activeQuest.Quest.Goals)
+            {
+                goal.OnEvent(signalName, questEvent);
+            }
+
+            if (activeQuest.Quest.Goals.All(g => g.IsComplete()))
+            {
+                GD.Print($"Quest {activeQuest.Quest.QuestName} is complete for character {activeQuest.AssignedCharacter.CharacterName}");
+                CompleteQuest(activeQuest.Quest, activeQuest.AssignedCharacter);
+            }
+        }
     }
 
     public void GetAvailableQuests()
@@ -132,26 +151,6 @@ public partial class QuestManager : Node
 
         var activeQuest = ActiveQuests.Find(x => x.Quest == quest && x.AssignedCharacter == assignedCharacter);
         ActiveQuests.Remove(activeQuest);
-    }
-
-    public void OnGameSignalReceived<T>(string signalName, QuestEvent<T> questEvent)
-    {
-        GD.Print($"Received signal: {signalName} for quest: {questEvent.EventName}");
-        var relevantQuests = ActiveQuests.Where(quest => quest.AssignedCharacter == questEvent.AttributedCharacter).ToList();
-        foreach (var activeQuest in relevantQuests)
-        {
-            foreach (var goal in activeQuest.Quest.Goals.OfType<IQuestGoal>())
-            {
-                goal.OnEventRaw(signalName, questEvent.EventData);
-            }
-
-
-            if (activeQuest.Quest.Goals.All(g => g.IsComplete()))
-            {
-                GD.Print($"Quest {activeQuest.Quest.QuestName} is complete for character {activeQuest.AssignedCharacter.CharacterName}");
-                CompleteQuest(activeQuest.Quest, activeQuest.AssignedCharacter);
-            }
-        }
     }
 
     internal bool IsCharacterOnQuest(Character npc)
