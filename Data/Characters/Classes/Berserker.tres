@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Characters/ClassData.cs" id="1_8vurm"]
+
+[resource]
+script = ExtResource("1_8vurm")
+Name = "Berserker"
+Description = "High physical damage output."
+tier = 2
+Requirements = PackedStringArray()
+Modifiers = {
+0: 0.35,
+1: 0.1,
+6: 0.25
+}

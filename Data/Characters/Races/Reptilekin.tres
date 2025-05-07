@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="RaceData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Characters/RaceData.cs" id="1_useyn"]
+
+[resource]
+script = ExtResource("1_useyn")
+Name = "Reptilekin"
+Description = "Reptilekin balance endurance and defense while maintaining sharp focus in battle."
+BaseStats = {
+0: Vector2i(8, 12),
+1: Vector2i(6, 10),
+2: Vector2i(10, 14),
+3: Vector2i(6, 10),
+4: Vector2i(8, 16),
+5: Vector2i(10, 14),
+6: Vector2i(8, 14),
+7: Vector2i(6, 10),
+8: Vector2i(6, 10)
+}

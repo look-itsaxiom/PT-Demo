@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Characters/ClassData.cs" id="1_du237"]
+
+[resource]
+script = ExtResource("1_du237")
+Name = "Paladin"
+Description = "Mixes defensive and healing capabilities."
+tier = 3
+Requirements = PackedStringArray()
+Modifiers = {
+0: -0.3,
+2: 0.25,
+4: 0.5,
+5: 0.5
+}

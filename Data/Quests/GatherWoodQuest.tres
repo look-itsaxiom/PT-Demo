@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=6 format=3 uid="uid://lotf4kmrm4l0"]
+
+[ext_resource type="Script" path="res://Scripts/Quests/Quest.cs" id="1_4lqg1"]
+[ext_resource type="Script" path="res://Scripts/Quests/ResourceCollectGoal.cs" id="1_kxusv"]
+[ext_resource type="Script" path="res://Scripts/Quests/QuestReward.cs" id="2_b8snt"]
+
+[sub_resource type="Resource" id="Resource_b02ut"]
+script = ExtResource("1_kxusv")
+ResourceKey = 0
+Amount = 5
+
+[sub_resource type="Resource" id="Resource_n3a8d"]
+script = ExtResource("2_b8snt")
+Type = 1
+Amount = 5
+ItemKey = ""
+
+[resource]
+script = ExtResource("1_4lqg1")
+QuestName = "Gather Wood"
+Description = "Explore the nearby forest and gather Wood there."
+IsRepeatable = true
+RepeatableCount = -1
+Availability = 2
+Goals = [SubResource("Resource_b02ut")]
+Rewards = [SubResource("Resource_n3a8d")]

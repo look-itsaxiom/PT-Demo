@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Characters/ClassData.cs" id="1_j1qw0"]
+
+[resource]
+script = ExtResource("1_j1qw0")
+Name = "Scout"
+Description = "Excels in speed and utility."
+tier = 1
+Requirements = PackedStringArray()
+Modifiers = {
+6: 0.25,
+7: 0.25
+}

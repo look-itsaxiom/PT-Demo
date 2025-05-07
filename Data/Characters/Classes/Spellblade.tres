@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ClassData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Characters/ClassData.cs" id="1_0t7va"]
+
+[resource]
+script = ExtResource("1_0t7va")
+Name = "Spellblade"
+Description = "Combines physical prowess with magical damage."
+tier = 3
+Requirements = PackedStringArray()
+Modifiers = {
+0: 0.5,
+3: 0.5,
+6: 0.25,
+8: -0.3
+}
