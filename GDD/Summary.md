@@ -1,3 +1,5 @@
+> **See also:** [GamePillarDetails.md](GamePillarDetails.md) for detailed breakdowns of stats, classes, jobs, abilities, and formulas.
+
 # Project Township Game Design Document
 
 ## Core Concept

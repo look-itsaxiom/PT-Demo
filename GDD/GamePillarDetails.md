@@ -1,3 +1,5 @@
+> **See also:** [Summary.md](Summary.md) for a high-level overview of the game pillars and core gameplay loop.
+
 # Game Pillars
 
 ## Gameplay Loop
@@ -53,29 +55,24 @@
 
 ### Stat Calculation System
 
-**Formula (Per Level):**
- **Growth = (GrowthRate(Level) + Overflow)  (1 + Class Modifier)**
-
+```
+Growth = (GrowthRate(Level) + Overflow) * (1 + Class Modifier)
 Overflow = Growth % 1
+```
 
 [See the Character Creation tool for examples of stat growth](https://chase-skibeness.github.io/PT-character-generator/)
 
 ### Core Stat Formulas {#core-stat-formulas}
 
-- HP  
-  - 10 * END  
-- MP  
-  - 12 * SPI  
-- Basic Attack Damage  
-  - STR * (1 + Weapon Power / 100) * (User STR/Target DEF) * Crit  
-- Basic Attack To Hit  
-  - Basic Attack Acc 90 + (ACC / 10)  
-- Action Speed (TBA)  
-  - 5.5 - (SPD / 100)  
-- Critical Rate  
-  - 5 * (1 + LCK)%  
-- To Hit:  
-  - Ability Accuracy + (User ACC / 10)%
+```
+HP = 10 * END
+MP = 12 * SPI
+Basic Attack Damage = STR * (1 + Weapon Power / 100) * (User STR/Target DEF) * Crit
+Basic Attack To Hit = Basic Attack Acc 90 + (ACC / 10)
+Action Speed (TBA) = 5.5 - (SPD / 100)
+Critical Rate = 5 * (1 + LCK)%
+To Hit = Ability Accuracy + (User ACC / 10)%
+```
 
 ## Character Customization Framework
 
@@ -93,15 +90,15 @@ Gignen
 
 - **Description:** Versatile and adaptive, Gignen are generalists suited to any role.  
 - **Base Stat Ranges:**  
-  - STR: 8–12  
-  - END: 8–12  
-  - DEF: 8–12  
-  - INT: 8–12  
-  - SPI: 8–12  
-  - MDF: 8–12  
-  - SPD: 8–12  
-  - LCK: 8–12  
-  - ACC: 8–12  
+  - STR: 8-12  
+  - END: 8-12  
+  - DEF: 8-12  
+  - INT: 8-12  
+  - SPI: 8-12  
+  - MDF: 8-12  
+  - SPD: 8-12  
+  - LCK: 8-12  
+  - ACC: 8-12  
 - **Total Stats:** Minimum: 72, Maximum: 108  
 - **Quirk:** Growth rates tend to be higher for Gignen.  
   ---
@@ -110,15 +107,15 @@ Fae
 
 - **Description:** Graceful and intelligent, Fae are well rounded for magical positions.  
 - **Base Stat Ranges:**  
-  - STR: 6–10  
-  - END: 6–10  
-  - DEF: 6–10  
-  - INT: 10–16  
-  - SPI: 10–14  
-  - MDF: 8–14  
-  - SPD: 8–12  
-  - LCK: 8–12  
-  - ACC: 8–12  
+  - STR: 6-10  
+  - END: 6-10  
+  - DEF: 6-10  
+  - INT: 10-16  
+  - SPI: 10-14  
+  - MDF: 8-14  
+  - SPD: 8-12  
+  - LCK: 8-12  
+  - ACC: 8-12  
 - **Total Stats:** Minimum: 70, Maximum: 110  
   ---
 
@@ -126,15 +123,15 @@ Stoneheart
 
 - **Description:** Stalwart and industrious, Stoneheart are natural craftsmen and warriors.  
 - **Base Stat Ranges:**  
-  - STR: 8–14  
-  - END: 10–16  
-  - DEF: 10–14  
-  - INT: 6–10  
-  - SPI: 8–12  
-  - MDF: 6–10  
-  - SPD: 6–10  
-  - LCK: 8–12  
-  - ACC: 8–12  
+  - STR: 8-14  
+  - END: 10-16  
+  - DEF: 10-14  
+  - INT: 6-10  
+  - SPI: 8-12  
+  - MDF: 6-10  
+  - SPD: 6-10  
+  - LCK: 8-12  
+  - ACC: 8-12  
 - **Total Stats:** Minimum: 70, Maximum: 110  
   ---
 
@@ -142,15 +139,15 @@ Beastkin
 
 - **Description:** Agile and primal, Beastkin possess keen senses and excel in physical prowess.  
 - **Base Stat Ranges:**  
-  - STR: 10–16  
-  - END: 8–12  
-  - DEF: 6–10  
-  - INT: 6–10  
-  - SPI: 6–12  
-  - MDF: 6–10  
-  - SPD: 10–16  
-  - LCK: 6–10  
-  - ACC: 10–14  
+  - STR: 10-16  
+  - END: 8-12  
+  - DEF: 6-10  
+  - INT: 6-10  
+  - SPI: 6-12  
+  - MDF: 6-10  
+  - SPD: 10-16  
+  - LCK: 6-10  
+  - ACC: 10-14  
 - **Total Stats:** Minimum: 68, Maximum: 110  
   ---
 
@@ -158,15 +155,15 @@ Kithan
 
 - **Description:** Nimble and lucky, Kithan excel in evasion and luck-based roles.  
 - **Base Stat Ranges:**  
-  - STR: 6–14  
-  - END: 6–10  
-  - DEF: 6–10  
-  - INT: 8–12  
-  - SPI: 8–12  
-  - MDF: 6–10  
-  - SPD: 10–16  
-  - LCK: 10–14  
-  - ACC: 10–14  
+  - STR: 6-14  
+  - END: 6-10  
+  - DEF: 6-10  
+  - INT: 8-12  
+  - SPI: 8-12  
+  - MDF: 6-10  
+  - SPD: 10-16  
+  - LCK: 10-14  
+  - ACC: 10-14  
 - **Total Stats:** Minimum: 70, Maximum: 110  
   ---
 
@@ -174,15 +171,15 @@ Angarkin
 
 - **Description:** Agile and celestial, Angarkin possess keen senses and excel in physical prowess.  
 - **Base Stat Ranges:**  
-  - STR: 8–16  
-  - END: 8–12  
-  - DEF: 6–12  
-  - INT: 6–10  
-  - SPI: 8–12  
-  - MDF: 6–10  
-  - SPD: 8–12  
-  - LCK: 8–10  
-  - ACC: 10–16  
+  - STR: 8-16  
+  - END: 8-12  
+  - DEF: 6-12  
+  - INT: 6-10  
+  - SPI: 8-12  
+  - MDF: 6-10  
+  - SPD: 8-12  
+  - LCK: 8-10  
+  - ACC: 10-16  
 - **Total Stats:** Minimum: 68, Maximum: 110  
   ---
 
@@ -206,12 +203,12 @@ Reptilekin
 
 - **Description:** Calculated and resilient, Reptilekin balance endurance and defense while maintaining sharp focus in battle.  
 - **Base Stat Ranges:**  
-  - STR: 8–12  
+  - STR: 8-12  
   - END: 6-10  
-  - DEF: 10–14  
+  - DEF: 10-14  
   - INT: 6-10  
   - SPI: 8-16  
-  - MDF: 10–14  
+  - MDF: 10-14  
   - SPD: 8-14  
   - LCK: 6-10  
   - ACC: 6-10  
