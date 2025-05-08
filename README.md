@@ -22,6 +22,16 @@ Without these assets, the project will not function correctly.
 3. Import the assets into the root directory of the project.
 4. Open the project in Godot and start exploring!
 
+## How to Build and Run (Godot .NET 4.2.2)
+
+1. Install [Godot 4.2.2 .NET (C#) stable](https://godotengine.org/download/windows/) (not the standard version).
+2. Install .NET SDK 6.0.428 (required for build).
+3. Open the project in Godot (Project Township Demo).
+4. If prompted, let Godot restore C# project files.
+5. Build and run from the Godot editor (F5) or use `dotnet build` in the project root.
+
+**Note:** Required assets must be downloaded and imported as described above.
+
 ## About Me
 
 Game design has always been more than just a hobby for me—it's a passion. I've spent countless hours learning, experimenting, and dreaming about creating my own game. This project is my way of bringing those dreams to life, and I hope you enjoy exploring it as much as I’ve enjoyed creating it.
