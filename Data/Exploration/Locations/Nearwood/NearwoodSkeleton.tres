@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LocationRoomSkeleton" load_steps=2 format=3 uid="uid://b5ndth5aybhqk"]
+
+[ext_resource type="Script" path="res://Scripts/Exploration/LocationRoomSkeleton.cs" id="1_i2t6q"]
+
+[resource]
+script = ExtResource("1_i2t6q")
+Rooms = []
+DifficultyMin = 1
+DifficultyMax = 10
+RoomCountMin = 5
+RoomCountMax = 10
+RoomCount = 5
+RoomSequence = []
