@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using LocationRooms;
+using Locations;
 
 [GlobalClass]
 public partial class LocationRoomSkeleton : Resource

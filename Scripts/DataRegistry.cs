@@ -1,5 +1,6 @@
 using CharacterData;
 using Godot;
+using Locations;
 using System.Collections.Generic;
 
 public partial class DataRegistry : Node
@@ -14,6 +15,8 @@ public partial class DataRegistry : Node
 
 	[Export] public string QuestsFolderPath = "res://Data/Quests";
 
+	[Export] public string LocationsFolderPath = "res://Data/Exploration/Locations";
+
 	public Dictionary<string, Building> buildingTemplates = new();
 
 	public Dictionary<string, RaceData> Races = new();
@@ -24,6 +27,8 @@ public partial class DataRegistry : Node
 
 	public Dictionary<int, Quest> Quests = new();
 
+	public Dictionary<string, Location> Locations = new();
+
 	public override void _Ready()
 	{
 		Instance = this;
@@ -32,6 +37,7 @@ public partial class DataRegistry : Node
 		RegisterClasses();
 		RegisterGrowthRates();
 		RegisterQuests();
+		RegisterLocations();
 	}
 
 	private void RegisterBuildings()
@@ -116,6 +122,15 @@ public partial class DataRegistry : Node
 				Quests[resource.QuestID] = resource;
 				GD.Print($"Registered quest: {resource.QuestName} with ID: {resource.QuestID}");
 			}
+		}
+	}
+
+	private void RegisterLocations()
+	{
+		foreach (string locationName in LocationConstants.LocationNames)
+		{
+			var resource = ResourceLoader.Load<Location>($"{LocationsFolderPath}/{locationName}/{locationName}.tres");
+			Locations[locationName] = resource;
 		}
 	}
 }

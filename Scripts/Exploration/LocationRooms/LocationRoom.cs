@@ -23,6 +23,8 @@ namespace LocationRooms
         Rest,
         Shop,
         Quest,
-        Special
+        Special,
+        RandomPos,
+        RandomNeg,
     }
 }

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MonsterEncounterRoom" load_steps=2 format=3 uid="uid://bw61gvei4jts"]
+
+[ext_resource type="Script" path="res://Scripts/Exploration/LocationRooms/MonsterEncounterRoom.cs" id="1_3tl4h"]
+
+[resource]
+script = ExtResource("1_3tl4h")
+RoomName = ""
+RoomDescription = ""
+RoomImage = ""
+Tier = 1
+ResidentMonsters = []
