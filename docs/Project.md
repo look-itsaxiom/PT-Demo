@@ -15,6 +15,7 @@
 ## Completed Tasks
 - [x] Bootstrap project management and daily standup workflow (pm) (2025-05-08)
 - [x] Break down current features into nucular tasks (pm) (2025-05-08)
+- [x] Location resource registration in DataRegistry (pm, dev, prod) (2025-05-10)
 
 ## [2025-05-08] GDD Markdown Readability Improvements
 - Standardized all stat range dashes to a single hyphen-minus '-' for consistency and human readability in GDD/GamePillarDetails.md.
@@ -25,6 +26,20 @@
 - RoomType classes scaffolded as [GlobalClass]es in Scripts/Exploration/LocationRooms/.
 - AssociatedLocation property removed from all RoomType classes and LocationRoomSkeleton to prevent circular reference errors in Godot.
 - Documentation and codebase are now aligned on this structure. See dev and doc standup for details.
+
+## [2025-05-09] Standup Log
+- Small win focus: Added location resource registration to DataRegistry for Exploration pillar progress. Task assigned to boss for implementation and verification in Godot. (pm)
+- DataRegistry now loads all Location resources from Data/Exploration/Locations/ and exposes them via a Locations dictionary.
+- Next: Boss to verify loading in Godot and report any issues or blockers.
+
+## [2025-05-10] Standup Log
+
+- Small win achieved: Location resource registration in DataRegistry now uses LocationConstants.LocationNames for explicit, reliable loading. Each location folder is expected to contain a main resource file named after the folder. Task completed by boss and verified in codebase. (pm)
+- Next: Continue Exploration pillar implementation or select another quick win as time allows.
+
+- Blocker identified: Further location and Exploration pillar design is blocked by lack of definition for the Resource system, building tiers/town impact, and Town Building pillar progression. (prod, boss)
+- Next actionable task for tomorrow: Define the Resource system, building tiers, and their relationship to locations and town progression. This will enable meaningful location design and ensure the Exploration and Town Building pillars are tightly integrated.
+- No further progress on Exploration pillar until this foundational system is defined.
 
 ## Standup Ritual Expectations
 

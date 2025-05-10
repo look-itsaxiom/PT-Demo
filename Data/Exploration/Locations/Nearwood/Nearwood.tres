@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="Location" load_steps=5 format=3 uid="uid://jt7tpylkfofn"]
+[gd_resource type="Resource" script_class="Location" load_steps=4 format=3 uid="uid://bgcom37v87tqv"]
 
-[ext_resource type="Resource" uid="uid://xylqunaqukhm" path="res://Data/Exploration/Locations/Nearwood/EasyMonsterEncounter.tres" id="1_3ilof"]
 [ext_resource type="Script" path="res://Scripts/Exploration/LocationRoomSkeleton.cs" id="1_rt2xr"]
 [ext_resource type="Script" path="res://Scripts/Exploration/Location.cs" id="2_rfg0d"]
 
-[sub_resource type="Resource" id="Resource_5kkff"]
+[sub_resource type="Resource" id="Resource_75617"]
 script = ExtResource("1_rt2xr")
-Rooms = []
 DifficultyMin = 1
 DifficultyMax = 10
 RoomCountMin = 5
@@ -17,13 +15,13 @@ RoomSequence = []
 [resource]
 script = ExtResource("2_rfg0d")
 LocationName = "Nearwood"
-LocationDescription = "A small forest just outside of town."
-Biome = "Forest"
+LocationDescription = "A forest on the outskirts of town."
+Biome = ""
 Difficulty = 1
-RoomPool = [ExtResource("1_3ilof")]
+RoomPool = []
 Bestiary = []
 TreasurePool = []
 ResourcePool = []
 ExplorationProgress = 0.0
 ConnectedLocations = []
-Skeleton = SubResource("Resource_5kkff")
+Skeleton = SubResource("Resource_75617")
