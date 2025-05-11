@@ -8,6 +8,8 @@ The game is a highly immersive RPG focused on **building, managing, and restorin
 
 As the town develops, players unlock advanced gameplay features such as specialized jobs, rare gear, complex management options, and unique decision-making opportunities. The blend of personal involvement with the town’s growth and the player’s direct control over their avatar creates a rich, layered gameplay experience.
 
+What I want to create is a game that feels like a polymerization of Fire Emblem, Rune Factory, Animal Crossing, Warcraft, and Pokemon. Taking the elements I find the most fun from each and placing them on a track I have seen work a la Final Fantasy Crystal Chonicles: My Life as a King but taken to the level of a full game rather than a WiiWare title.
+
 ## Unique Selling Points
 
 * **In-Depth Character Customization:** A robust system allowing players to influence citizen growth and specialize their skills based on roles, gear, and affinities, fostering unique builds and strategic diversity.  
