@@ -757,14 +757,11 @@ Goal: create a combat system that is both engaging enough for a player to active
 - **Party Defeated:** All adventurers are incapacitated (HP reaches zero).  
 - **Flee:** Choosing to run ends the quest prematurely, returning the party to town empty-handed (or with reduced rewards if partial success is allowed).
 
-## Exploration & Quests
+## Exploration Pillar: Locations & Room Structure
 
 ### Exploration of the World
 
 The World map is arranged as various locations outside of town the players or hired adventurers will travel to in order to conduct their questing, gather resources, unlock new buildings or research opportunities, and generally progress the game forward.
-
-
-## Exploration Pillar: Locations & Room Structure
 
 ### Location Overview
 
@@ -939,6 +936,19 @@ Key building types include housing, production facilities, and specialized struc
 
 ## Building Mechanics:
 
+All building within the town is done by the player utilizing Resources (called Materia) that is gathered via Adventurers excavating it from Materia nodes, or by gathering it from Monsters. 
+
+- Terratite - Earth
+- Aquatite - Water
+- Ventite - Wind
+- Ignitite - Fire
+- Tenebria - Dark
+- Lumia - Light
+
+And the seventh Resource to rule them all: Money, called Aur in this kingdom. The money cost involved is the investment in supplying everything else needed in a building that was created with Materia as well as hiring the necessary staff to run whatever was built there. 
+
+There is an 8th hidden resource here that the player needs to have enough population to run the buildings they've created. Certain buildings like the Mage Tower may have a set NPC come to town to inhabit it and operate it, but others like a Merchant stall or forge may require the player to assign one of their townsfolk to run the business (the other side of the stat system beyond combat)
+
 Here's the player flow I'd like: 
 
 1. Player walks up near a buildable area which then lights up a bit to indicate to the player that it is ready to be interacted with.   
@@ -952,6 +962,8 @@ Here's the player flow I'd like:
 ## Town Development and Progression
 
 The town evolves visually and mechanically as players expand its borders and upgrade its buildings.
+
+As the player and co. explore the various nodes on the map, defeat location bosses, collect unique items, and finish certain quests more buildings will unlock and become buildable furthering the development of their town in both available Adventuring options **and** Renown.
 
 ### Renown and External Influence
 
@@ -967,7 +979,13 @@ The town evolves visually and mechanically as players expand its borders and upg
 - A romance system is under consideration.
 
 # Narrative
+We are leaning heavily on the Attributes as a frame for our world to come alive around. I think the very classic "very advanced civilization is now ancient ruins" setting is an appropriate usage here. The various locations the Player and their team of Adventurers will be going to will occasionally be remnants of this great civilization that was capable of using the Materia in a way that far surpasses what any living race is capable of today and now as the current day civilization builds outwards and explores it is a bit of an arms race to see who can find the most powerful weapon left behind
 
+I guess I'm gonna define the cosmology now:
+The world the living mortal races dwell in stand in the flux of the 4 elemental gods dominions allowing their elemental influence to mix and create the planet as we know it today. This is also why certain areas take on extreme influence from a particular element, because it may be a gathering place for that particular element (like a chunk of flour you find in your poorly made cake)
+Beyond these four horizontal axis, lies the domains of Light and Dark (Selflessness and Selfishness, Commune vs Individual, Positive and Negative), these vertical axis swirl in a perfect duality contrasting the elemental discord. Monsters manifest in this world in multiple ways: perhaps they have slipped through the fabric of the dominions and found themselves on the Mortal dimension, or they may be beings that were born here but mutated by the entropic forces, some may even be manifestations of a given dominion itself
+
+As a Tekton, you are someone who has the capability of utilizing the crystalized essence of these different dominions, what we call Materia, to create buildings and structures at a speed that would otherwise take years. As such, you are sent to this town to become it's new guildmaster and oversee its revitalization. 
 ## **Act Structure Overview**
 
 ### **Act 1: Reclaiming the Outpost**
