@@ -2,6 +2,7 @@ using CharacterData;
 using Godot;
 using ChronosSpace;
 using System;
+using TownResources;
 
 public partial class GameSignalBus : Node
 {
@@ -64,4 +65,8 @@ public partial class GameSignalBus : Node
     // Building
     [Signal]
     public delegate void OnBuildingPlacedEventHandler(string buildingKey);
+
+    // Town
+    [Signal]
+    public delegate void TownResourceUpdatedEventHandler(ResourceType resourceType);
 }

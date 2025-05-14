@@ -5,10 +5,13 @@ namespace TownResources
 {
     public enum ResourceType
     {
-        Wood,
-        Stone,
-        Food,
-        Gold
+        Terratite,
+        Aquatite,
+        Ventite,
+        Ignitite,
+        Lumia,
+        Tenebria,
+        Urum,
     }
 
     [GlobalClass]

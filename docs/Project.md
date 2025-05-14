@@ -41,6 +41,14 @@
 - Next actionable task for tomorrow: Define the Resource system, building tiers, and their relationship to locations and town progression. This will enable meaningful location design and ensure the Exploration and Town Building pillars are tightly integrated.
 - No further progress on Exploration pillar until this foundational system is defined.
 
+## [2025-05-13] Standup Log
+- Major unblocker: Locations, Town Resources, and their interaction design is now complete enough to proceed.
+- Next actionable task: Implement first location resource and ensure DataRegistry loads and exposes it. (dev)
+- Updated by pm on 2025-05-13.
+
+- New session started. Awaiting boss direction for today's focus, priorities, or next actionable task. (pm)
+- All roles are ready for check-in. See docs/StandupLog.md for session entry.
+
 ## Standup Ritual Expectations
 
 The daily standup is a brief, structured check-in to align on project progress, priorities, and blockers. It ensures clarity, momentum, and accountability for each development session.
