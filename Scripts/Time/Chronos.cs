@@ -77,5 +77,20 @@ namespace ChronosSpace
 			DayTimer.Paused = false;
 			DayTimer.Start();
 		}
+
+		public void AdvanceTime(int time)
+		{
+			var newTimeLeft = Mathf.Max(0, DayTimer.TimeLeft - time);
+			DayTimer.Stop();
+			if (newTimeLeft > 0)
+			{
+				DayTimer.WaitTime = newTimeLeft;
+				DayTimer.Start();
+			}
+			else
+			{
+				EndDay();
+			}
+		}
 	}
 }

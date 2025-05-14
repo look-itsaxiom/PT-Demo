@@ -24,9 +24,6 @@ namespace Locations
         public string LocationDescription { get; set; } = string.Empty;
 
         [Export]
-        public string Biome { get; set; } = string.Empty;
-
-        [Export]
         public int Difficulty { get; set; } = 1;
 
         [Export]
@@ -51,5 +48,8 @@ namespace Locations
 
         [Export]
         public LocationRoomSkeleton Skeleton { get; set; } = new();
+
+        [Export]
+        public int DistanceFromTown { get; set; } = 1;
     }
 }

@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_qr20y")
-ResourceKey = "Wood"
-Amount = 5
+ResourceKey = 0
+Amount = 0

@@ -6,15 +6,16 @@ using TownResources;
 
 public partial class TownManager : Node3D
 {
+	public static TownManager Instance { get; private set; }
 	public int TownLevel { get; set; } = 1;
-	public int TownLevelMax { get; set; } = 2;
-	public int Experience { get; set; } = 0;
-	public TownResource Gold { get; set; }
-	public TownResource Wood { get; set; }
-	public TownResource Stone { get; set; }
-	public TownResource Food { get; set; }
-
-	public BuildGrid BuildGrid;
+	public int Renown { get; set; } = 0;
+	public TownResource Urum { get; set; }
+	public TownResource Terratite { get; set; }
+	public TownResource Aquatite { get; set; }
+	public TownResource Ventite { get; set; }
+	public TownResource Ignitite { get; set; }
+	public TownResource Lumia { get; set; }
+	public TownResource Tenebria { get; set; }
 
 	public TownResource this[ResourceType resourceKey]
 	{
@@ -22,25 +23,23 @@ public partial class TownManager : Node3D
 		{
 			return resourceKey switch
 			{
-				ResourceType.Gold => Gold,
-				ResourceType.Wood => Wood,
-				ResourceType.Stone => Stone,
-				ResourceType.Food => Food,
+				ResourceType.Urum => Urum,
+				ResourceType.Terratite => Terratite,
+				ResourceType.Aquatite => Aquatite,
+				ResourceType.Ventite => Ventite,
+				ResourceType.Ignitite => Ignitite,
+				ResourceType.Lumia => Lumia,
+				ResourceType.Tenebria => Tenebria,
 				_ => throw new ArgumentOutOfRangeException(nameof(resourceKey), "Invalid resource type")
 			};
 		}
 	}
 
-	public EnvGridMap EnvGridMap;
-	public VBoxContainer TownResourceDisplay;
-
 	public GameSignalBus GameSignalBus;
 
 	public override void _Ready()
 	{
-		BuildGrid = GetNode<BuildGrid>("BuildGrid");
-		EnvGridMap = GetNode<EnvGridMap>("EnvGridMap");
-		TownResourceDisplay = GetNode<VBoxContainer>("TownHUD/TownResourceDisplay");
+		Instance = this;
 		GameSignalBus = GameSignalBus.Instance;
 		GameSignalBus.Connect(GameSignalBus.SignalName.OnBuildingPlaced, Callable.From<string>(OnBuildingPlaced));
 		InitializeTownResources();
@@ -49,28 +48,13 @@ public partial class TownManager : Node3D
 
 	private void InitializeTownResources()
 	{
-		Gold = new TownResource { ResourceKey = ResourceType.Gold, Amount = 0 };
-		Wood = new TownResource { ResourceKey = ResourceType.Wood, Amount = 5 };
-		Stone = new TownResource { ResourceKey = ResourceType.Stone, Amount = 0 };
-		Food = new TownResource { ResourceKey = ResourceType.Food, Amount = 0 };
-		UpdateTownResourceDisplay();
-	}
-
-	private void UpdateTownResourceDisplay()
-	{
-		var resourceDisplayNames = new Dictionary<ResourceType, TownResource>
-		{
-			{ ResourceType.Gold, Gold },
-			{ ResourceType.Wood, Wood },
-			{ ResourceType.Stone, Stone },
-			{ ResourceType.Food, Food }
-		};
-
-		foreach (var resourceType in Enum.GetValues<ResourceType>())
-		{
-			var label = TownResourceDisplay.GetNode<Label>($"{resourceType}Label");
-			label.Text = $"{resourceType}: {resourceDisplayNames[resourceType].Amount}";
-		}
+		Urum = new TownResource { ResourceKey = ResourceType.Urum, Amount = 0 };
+		Terratite = new TownResource { ResourceKey = ResourceType.Terratite, Amount = 250 };
+		Aquatite = new TownResource { ResourceKey = ResourceType.Aquatite, Amount = 0 };
+		Ventite = new TownResource { ResourceKey = ResourceType.Ventite, Amount = 0 };
+		Ignitite = new TownResource { ResourceKey = ResourceType.Ignitite, Amount = 0 };
+		Lumia = new TownResource { ResourceKey = ResourceType.Lumia, Amount = 0 };
+		Tenebria = new TownResource { ResourceKey = ResourceType.Tenebria, Amount = 0 };
 	}
 
 	private void OnQuestCompleted(Quest completedQuest, Character assignedCharacter)
@@ -82,28 +66,21 @@ public partial class TownManager : Node3D
 			{
 				switch (reward.Type)
 				{
-					case QuestReward.RewardType.Gold:
-						Gold.Amount += reward.Amount;
-						break;
-					case QuestReward.RewardType.Wood:
-						Wood.Amount += reward.Amount;
-						break;
-					case QuestReward.RewardType.Stone:
-						Stone.Amount += reward.Amount;
-						break;
-					case QuestReward.RewardType.Food:
-						Food.Amount += reward.Amount;
+					case QuestReward.RewardType.Resource:
+						if (reward is ResourceQuestReward resourceReward)
+						{
+							this[resourceReward.ResourceKey].Amount += resourceReward.Amount;
+						}
 						break;
 					case QuestReward.RewardType.Item:
 						// Handle item rewards
 						break;
-					case QuestReward.RewardType.Experience:
-						Experience += reward.Amount;
+					case QuestReward.RewardType.Renown:
+						Renown += reward.Amount;
 						break;
 				}
 			}
 			GD.Print("Quest rewards distributed!");
-			UpdateTownResourceDisplay();
 		}
 	}
 
@@ -112,12 +89,6 @@ public partial class TownManager : Node3D
 		if (buildingKey == "GuildHall")
 		{
 			TownLevel++;
-			GD.Print("Adventuring unlocked!");
-			var newAdventurerData = CharacterSystem.Instance.GenerateRandomCharacter();
-			var newAdventurer = GD.Load<PackedScene>("res://Scenes/npc.tscn").Instantiate() as TownNPC;
-			newAdventurer.Initialize(newAdventurerData);
-			AddChild(newAdventurer);
-			newAdventurer.GlobalPosition = new Vector3(0, 1, 0);
 		}
 	}
 
@@ -139,6 +110,5 @@ public partial class TownManager : Node3D
 		{
 			this[requirement.ResourceKey].Amount -= requirement.Amount;
 		}
-		UpdateTownResourceDisplay();
 	}
 }

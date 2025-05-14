@@ -2,6 +2,14 @@
 
 This file contains the daily standup logs for Project Township. For standup ritual expectations and project management, see docs/Project.md.
 
+### 2025-05-13
+- New session started. Project management session initiated by boss. Ready to review current goals, tasks, and priorities.
+- Major unblocker: Offline design work for Locations, Town Resources, and their interaction is now complete enough to proceed.
+- Next: Implement first location resource and ensure DataRegistry loads and exposes it. (dev)
+
+---
+*Log updated by pm on 2025-05-13: Locations/Town Resources design unblocker. Implementation of first location is now actionable. Next step assigned to dev.*
+
 ### 2025-05-08
 - **What we did last session:**
   - Project management bootstrapping initiated.

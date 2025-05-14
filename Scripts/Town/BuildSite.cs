@@ -54,7 +54,7 @@ public partial class BuildSite : Interactable, IInteractable
 		// Get building data
 		var building = dataRegistry.buildingTemplates[buildingKey];
 
-		var townManager = GetParent() as TownManager;
+		var townManager = TownManager.Instance;
 		if (!townManager.HasNecessaryResources(building.BuildingRequirements))
 		{
 			GD.Print("Not enough resources to build: " + buildingKey);

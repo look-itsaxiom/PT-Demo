@@ -27,9 +27,9 @@
 
 **Properties:**
 
-- **Name**: Character’s given name. (Randomly Generated based on Race)
-- **Race**: Chosen from available races (e.g., Gignen, Fae, Stoneheart, etc.).
-- **Base Stats**: Randomly generated within race-specific ranges:
+- **Name**: Character’s given name. (Randomly Generated based on species)
+- **Species**: Chosen from available species (e.g., Gignen, Fae, Stoneheart, etc.).
+- **Base Stats**: Randomly generated within species-specific ranges:
   - STR:
   - END:
   - DEF:
@@ -39,7 +39,7 @@
   - SPD:
   - LCK:
   - ACC:
-- **Base Growth Rates**: Randomly generated percentages (not race-dependent).
+- **Base Growth Rates**: Randomly generated percentages (not species-dependent).
 - **Current Stats**: Base stats adjusted by level, equipment, and other factors.
 - **Class Modifiers**: Reflect adjustments from classes, jobs, and effects.
 - **Abilities**: Special skills or actions the character can use.
@@ -76,13 +76,13 @@ To Hit = Ability Accuracy + (User ACC / 10)%
 
 ## Character Customization Framework
 
-### Races
+### Species
 
-Below are the available races for characters in the game. Each race is defined by thematic traits and specific bonuses. **Base stats** are expressed as ranges to enable randomized character generation. Growth rates are not race-specific and are randomly generated separately.
+Below are the available species for characters in the game. Each species is defined by thematic traits and specific bonuses. **Base stats** are expressed as ranges to enable randomized character generation. Growth rates are not species-specific and are randomly generated separately.
 
 **Base Stat Generation**
 
-- Each race has predefined ranges for base stats, reflecting their thematic strengths and weaknesses.  
+- Each species has predefined ranges for base stats, reflecting their thematic strengths and weaknesses.  
   - For example, Stonehearts excel in **Endurance** and **Defense**, while Demarkin favor **Intelligence** and **Magic Defense**.  
 - Upon character creation, base stats are randomly generated within these ranges.
 
@@ -911,15 +911,7 @@ Example Monster
 
 ### Encounter-Level Determination
 
-Monster levels are determined by the location’s level range and adjusted probabilities based on the party’s average level.
-
-#### **Location-Based Level Ranges:**
-
-- Each zone has a fixed level range (e.g., Beginning Forest: Levels 1-5).
-
-#### **Probability Weights:**
-
-Enemy levels are selected with weights favoring the party’s average level:
+Monster levels are determined by the location’s level range and difficulty class. Every location will have 
 
 # Town Building
 
@@ -928,24 +920,68 @@ Enemy levels are selected with weights favoring the party’s average level:
 Key building types include housing, production facilities, and specialized structures.
 
 - Key building types:  
-  - Housing: Accommodates citizens.  
-  - Production: Farms, workshops, and forges.  
-  - Specialized: Barracks, academies, and guild halls.  
-- Buildings provide both passive bonuses and unlock new gameplay features.  
-- Building certain Buildings near or next to each other has advantages / disadvantages
+  - Unlock Buildings
+  - Population Buildings
+  - Resource Generation Buildings
+  - Item Buildings
+  - Augmentation Buildings
+  - Management Buildings
+  - Renown Buildings
+  - Buff Buildings
 
+*Buildings can have multiple tags
+
+### Unlock Buildings
+Buildings that unlock something or progress the game in some way. These also include buildings that have research options that unlock something
+
+Ex. Barracks, Merchant Stall, Magician's Tower, Tavern, etc. These are all buildings that unlock either a new class for your adventurers to promote into or unlock functionality like the ability to purchase items
+
+### Population Buildings
+Buildings that change the population stat in some way, either by increasing the current number of residents in your town or increasing the maximum number of residents you can have in your town.
+
+Ex. Houses increase the current population of your town whereas Granaries, Waterworks, and other key buildings increase the maximum population cap in your town. 
+
+### Resource Generation Buildings
+Later in the game it may be good to provide the player with buildings that generate Materia and other Resources to supplement having to grind for them. Urum is included in this possible list of generatable resources.
+
+Ex. Market might generate Urum, whereas building a "Forest Shrine" might generate Terratite
+
+### Item Buildings
+Buildings where items can either be purchased or created.
+
+Ex. Merchant Stall, Market, Armorsmith, Weaponsmith, Forge, etc.
+
+### Augmentation Buildings
+These buildings influence other buildings that are around it in some way.
+
+Ex. Building a Library next to housing will result in a passive increase in base INT stats and growth rates for citizens that live in those housing. Building a Pyre Shrine next to housing may increase the chances of a new adventurer having an Affinity for Fire
+
+### Management Buildings
+These buildings directly interact with mechanics that normally may not be interactable or manipulatable. 
+
+Ex. The Quest board and Guild Hall are Management Buildings that interact with quest mechanics. Where as the Ability Obelisk or Fortune Teller can influence or interact with character stats
+
+### Renown Buildings
+Buildings that increase the town's renown level enabling upgrade and expansion.
+
+Ex. The Guildhall, a Granary, honestly every building may contribute to Renown slightly
+
+### Buff Buildings
+Buildings Adventurers (and the player) can visit before leaving for their quest to receive some kind of temporary buff
+
+Ex. Lumia condenser
 ## Building Mechanics:
 
 All building within the town is done by the player utilizing Resources (called Materia) that is gathered via Adventurers excavating it from Materia nodes, or by gathering it from Monsters. 
 
-- Terratite - Earth
-- Aquatite - Water
-- Ventite - Wind
-- Ignitite - Fire
-- Tenebria - Dark
-- Lumia - Light
+- Tr - Terratite - Earth
+- Aq - Aquatite - Water
+- Ve - Ventite - Wind
+- Ig - Ignitite - Fire
+- Tn - Tenebria - Dark
+- Lm - Lumia - Light
 
-And the seventh Resource to rule them all: Money, called Aur in this kingdom. The money cost involved is the investment in supplying everything else needed in a building that was created with Materia as well as hiring the necessary staff to run whatever was built there. 
+And the seventh Resource to rule them all: Money, called Urum in this kingdom. The money cost involved is the investment in supplying everything else needed in a building that was created with Materia as well as hiring the necessary staff to run whatever was built there. 
 
 There is an 8th hidden resource here that the player needs to have enough population to run the buildings they've created. Certain buildings like the Mage Tower may have a set NPC come to town to inhabit it and operate it, but others like a Merchant stall or forge may require the player to assign one of their townsfolk to run the business (the other side of the stat system beyond combat)
 
@@ -979,10 +1015,10 @@ As the player and co. explore the various nodes on the map, defeat location boss
 - A romance system is under consideration.
 
 # Narrative
-We are leaning heavily on the Attributes as a frame for our world to come alive around. I think the very classic "very advanced civilization is now ancient ruins" setting is an appropriate usage here. The various locations the Player and their team of Adventurers will be going to will occasionally be remnants of this great civilization that was capable of using the Materia in a way that far surpasses what any living race is capable of today and now as the current day civilization builds outwards and explores it is a bit of an arms race to see who can find the most powerful weapon left behind
+We are leaning heavily on the Attributes as a frame for our world to come alive around. I think the very classic "very advanced civilization is now ancient ruins" setting is an appropriate usage here. The various locations the Player and their team of Adventurers will be going to will occasionally be remnants of this great civilization that was capable of using the Materia in a way that far surpasses what any living species is capable of today and now as the current day civilization builds outwards and explores it is a bit of an arms race to see who can find the most powerful weapon left behind
 
 I guess I'm gonna define the cosmology now:
-The world the living mortal races dwell in stand in the flux of the 4 elemental gods dominions allowing their elemental influence to mix and create the planet as we know it today. This is also why certain areas take on extreme influence from a particular element, because it may be a gathering place for that particular element (like a chunk of flour you find in your poorly made cake)
+The world the living mortal species dwell in stand in the flux of the 4 elemental gods dominions allowing their elemental influence to mix and create the planet as we know it today. This is also why certain areas take on extreme influence from a particular element, because it may be a gathering place for that particular element (like a chunk of flour you find in your poorly made cake)
 Beyond these four horizontal axis, lies the domains of Light and Dark (Selflessness and Selfishness, Commune vs Individual, Positive and Negative), these vertical axis swirl in a perfect duality contrasting the elemental discord. Monsters manifest in this world in multiple ways: perhaps they have slipped through the fabric of the dominions and found themselves on the Mortal dimension, or they may be beings that were born here but mutated by the entropic forces, some may even be manifestations of a given dominion itself
 
 As a Tekton, you are someone who has the capability of utilizing the crystalized essence of these different dominions, what we call Materia, to create buildings and structures at a speed that would otherwise take years. As such, you are sent to this town to become it's new guildmaster and oversee its revitalization. 

@@ -195,7 +195,7 @@ public partial class TownNPC : CharacterBody3D
                     AttributedCharacter = MyCharacter,
                     EventData = new TownResource
                     {
-                        ResourceKey = ResourceType.Wood,
+                        ResourceKey = ResourceType.Terratite,
                         Amount = 5
                     }
                 }
