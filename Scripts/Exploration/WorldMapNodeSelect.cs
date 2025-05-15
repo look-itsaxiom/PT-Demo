@@ -36,25 +36,30 @@ public partial class WorldMapNodeSelect : Control
         base._Ready();
     }
 
-    private void MoveLocationVisual()
+    private Tween MoveLocationVisual()
     {
         var tween = CreateTween();
         tween.TweenProperty(locationVisual, "position", currentLocationBtn.GlobalPosition + new Vector2(currentLocationBtn.Size.X / 2, -currentLocationBtn.Size.Y), currentLocation?.DistanceFromTown ?? 3f)
-             .SetTrans(Tween.TransitionType.Sine)
+             .SetTrans(Tween.TransitionType.Back)
              .SetEase(Tween.EaseType.InOut);
+        return tween;
     }
 
 
     private void OnHomeNodePressed()
     {
-        // Emit a signal or call a method to handle the home node press
-        GD.Print("Home node pressed");
+        if (currentLocationBtn == HomeNode)
+        {
+            GetTree().ChangeSceneToPacked(townScene);
+            return;
+        }
         Chronos.Instance.AdvanceTime(currentLocation.DistanceFromTown);
         currentLocationBtn = HomeNode;
         currentLocation = null;
-        MoveLocationVisual();
-        GetTree().ChangeSceneToPacked(townScene);
-        //GetTree().ChangeSceneToFile("res://Scenes/Town.tscn");
+        MoveLocationVisual().Finished += () =>
+        {
+            GetTree().ChangeSceneToPacked(townScene);
+        };
     }
 
     private async Task OnMapLocationPressed(Location location)

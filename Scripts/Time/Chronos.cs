@@ -80,17 +80,17 @@ namespace ChronosSpace
 
 		public void AdvanceTime(int time)
 		{
-			var newTimeLeft = Mathf.Max(0, DayTimer.TimeLeft - time);
-			DayTimer.Stop();
-			if (newTimeLeft > 0)
-			{
-				DayTimer.WaitTime = newTimeLeft;
-				DayTimer.Start();
-			}
-			else
-			{
-				EndDay();
-			}
+			var prevTimeLeft = DayTimer.TimeLeft;
+			GD.Print($"Advancing time by {time} seconds. Previous time left: {prevTimeLeft}");
+			DayTimer.QueueFree();
+			DayTimer = new Timer();
+			DayTimer.WaitTime = prevTimeLeft - time < 0.01 ? 0.01 : prevTimeLeft - time;
+			DayTimer.Timeout += EndDay;
+			DayTimer.OneShot = false;
+			DayTimer.Autostart = false; // Set to false, we'll start manually
+			AddChild(DayTimer);
+			DayTimer.Start(); // Start the timer so TimeLeft is set
+			GD.Print($"New time left: {DayTimer.TimeLeft}");
 		}
 	}
 }
