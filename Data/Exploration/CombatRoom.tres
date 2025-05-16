@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RoomTemplate" load_steps=2 format=3 uid="uid://bfo8vixg5kxme"]
+
+[ext_resource type="Script" path="res://Scripts/Exploration/RoomTemplate.cs" id="1_pam0d"]
+
+[resource]
+script = ExtResource("1_pam0d")
+TemplateName = "Combat Room"
+RoomType = 0
+Description = "generic monster encounter?"
+IsUnique = false

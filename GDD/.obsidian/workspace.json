@@ -35,7 +35,8 @@
               "title": "GamePillarDetails"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -184,8 +185,9 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "f86ffb7bdccda480",
+  "active": "70e63605113f6464",
   "lastOpenFiles": [
+    "MVPImplementation.md",
     "GamePillarDetails.md",
     "X axis Cosmos.png",
     "logseq/bak/Excalidraw/Drawing 2025-05-10 17.42.06.excalidraw/2025-05-11T06_22_11.918Z.Desktop.md",
@@ -193,7 +195,6 @@
     "logseq/bak/Excalidraw",
     "logseq/bak",
     "Excalidraw/Drawing 2025-05-10 17.42.06.excalidraw.md",
-    "Excalidraw",
-    "MVPImplementation.md"
+    "Excalidraw"
   ]
 }
