@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RoomTemplate" load_steps=2 format=3 uid="uid://dxhmw7jx70v6c"]
+
+[ext_resource type="Script" path="res://Scripts/Exploration/RoomTemplate.cs" id="1_ap2ft"]
+
+[resource]
+script = ExtResource("1_ap2ft")
+TemplateName = "Resource Node Room"
+RoomType = 1
+Description = ""
+IsUnique = false
