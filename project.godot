@@ -22,9 +22,10 @@ config/icon="res://icon.svg"
 
 DataRegistry="*res://Scripts/DataRegistry.cs"
 GameSignalBus="*res://Scripts/GameSignalBus.cs"
-QuestManager="*res://Scripts/Quests/QuestManager.cs"
 CharacterSystem="*res://Scripts/Characters/CharacterSystem.cs"
+QuestManager="*res://Scripts/Quests/QuestManager.cs"
 TownManager="*res://Scripts/Town/TownManager.cs"
+ExplorationManager="*res://Scripts/Exploration/ExplorationManager.cs"
 Chronos="*res://Scripts/Time/Chronos.cs"
 
 [debug]
