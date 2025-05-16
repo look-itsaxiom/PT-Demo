@@ -15,7 +15,8 @@ public partial class TownExit : Interactable
     {
         if (player != null && CanInteract)
         {
-            GetTree().ChangeSceneToFile("res://Scenes/WorldMap.tscn");
+            GD.Print("Exiting Town");
+            //GetTree().ChangeSceneToFile("res://Scenes/WorldMap.tscn");
         }
     }
 }
