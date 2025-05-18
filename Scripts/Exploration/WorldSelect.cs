@@ -5,13 +5,25 @@ public partial class WorldSelect : Control
 {
     public override void _Ready()
     {
-        GetNode<Button>("StartNearwoodButton").Pressed += OnStart;
-    }
+        foreach (Button btn in GetNode("MapImage/NodeLayer").GetChildren())
+        {
+            if (btn is LocationButton locBtn && locBtn.LinkedLocation != null)
+            {
+                if (ExplorationManager.Instance.CurrentLocation == locBtn.LinkedLocation)
+                    btn.GrabFocus();
 
-    private void OnStart()
-    {
-        var location = GD.Load<Location>("res://Data/Exploration/Nearwood.tres");
-        ExplorationManager.Instance.StartRun(location);
-        GetTree().ChangeSceneToFile("res://Scenes/ExplorationRunner.tscn");
+                btn.Pressed += () =>
+                {
+                    ExplorationManager.Instance.StartRun(locBtn.LinkedLocation);
+                    GetTree().ChangeSceneToFile("res://Scenes/ExplorationRunner.tscn");
+                };
+            }
+        }
+
+        GetNode<Button>("MapImage/TownButton").Pressed += () =>
+            GetTree().ChangeSceneToFile("res://Scenes/Town.tscn");
+
+        if (ExplorationManager.Instance.CurrentLocation == null)
+            GetNode<Button>("MapImage/TownButton").GrabFocus();
     }
 }

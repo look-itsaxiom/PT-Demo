@@ -1,7 +1,9 @@
 using Godot;
+using Godot.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TownResources;
 
 public class RoomGenerationContext
 {
@@ -170,10 +172,12 @@ public partial class ExplorationManager : Node
                 }
                 break;
 
-            case RoomType.Resource:
+            case RoomType.ResourceNode:
                 if (ctx.Location.ResourcePool.Count > 0)
                 {
-                    room.Resource = ctx.Location.ResourcePool[ctx.Rng.RandiRange(0, ctx.Location.ResourcePool.Count - 1)];
+                    room.ResourceNode = GenerateResourceNode(ctx.Location.ResourcePool, ctx.Rng);
+
+
                 }
                 break;
 
@@ -186,6 +190,18 @@ public partial class ExplorationManager : Node
         }
 
         return room;
+    }
+
+    private ResourceNodeDefinition GenerateResourceNode(Array<WeightedResource> pool, RandomNumberGenerator rng)
+    {
+        var node = new ResourceNodeDefinition
+        {
+            NodeName = "Generic Resource Node",
+            InteractionsAllowed = rng.RandiRange(2, 6),
+            Contents = new Array<WeightedResource>(pool)
+        };
+
+        return node;
     }
 
 
