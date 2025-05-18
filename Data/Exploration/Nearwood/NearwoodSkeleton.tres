@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="LocationLayoutDefinition" load_steps=2 format=3 uid="uid://b4sxgu0hlbc10"]
 
-[ext_resource type="Script" path="res://Scripts/Exploration/LocationLayoutDefinition.cs" id="1_r78g0"]
+[ext_resource type="Script" path="res://Scripts/Exploration/LocationLayoutDefinition.cs" id="1_vsm73"]
 
 [resource]
-script = ExtResource("1_r78g0")
+script = ExtResource("1_vsm73")
 RoomCountMin = 5
 RoomCountMax = 8
 RoomSequence = [1, 0, 7, 7, 7, 6]

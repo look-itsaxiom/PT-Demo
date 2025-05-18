@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://l228i77jilpr"]
+[gd_scene load_steps=5 format=3 uid="uid://l228i77jilpr"]
 
 [ext_resource type="Script" path="res://Scripts/Exploration/WorldSelect.cs" id="1_srk5g"]
+[ext_resource type="Script" path="res://Scripts/Exploration/LocationButton.cs" id="2_ryf8s"]
+[ext_resource type="Resource" uid="uid://cq738x8yqkx0x" path="res://Data/Exploration/Nearwood/Nearwood.tres" id="3_6fowc"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_6574g"]
 
 [node name="WorldSelect" type="Control"]
 layout_mode = 3
@@ -11,8 +15,43 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_srk5g")
 
-[node name="StartNearwoodButton" type="Button" parent="."]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="MapImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ImageTexture_6574g")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NodeLayer" type="Control" parent="MapImage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartNearwoodButton" type="Button" parent="MapImage/NodeLayer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.417188
+anchor_top = 0.186111
+anchor_right = 0.535156
+anchor_bottom = 0.229167
 text = "Explore Nearwood"
+script = ExtResource("2_ryf8s")
+LinkedLocation = ExtResource("3_6fowc")
+metadata/_edit_use_anchors_ = true
+
+[node name="TownButton" type="Button" parent="MapImage"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.284375
+anchor_top = 0.122222
+anchor_right = 0.384375
+anchor_bottom = 0.165278
+text = "Return to Town"
+metadata/_edit_use_anchors_ = true

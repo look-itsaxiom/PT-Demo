@@ -18,7 +18,7 @@ public partial class Location : Resource
     public Array<PackedScene> MonsterPool { get; set; } = new();
 
     [Export]
-    public Array<ResourceType> ResourcePool { get; set; } = new();
+    public Array<WeightedResource> ResourcePool { get; set; } = new();
 
     [Export]
     public Array<PackedScene> ItemPool { get; set; } = new();

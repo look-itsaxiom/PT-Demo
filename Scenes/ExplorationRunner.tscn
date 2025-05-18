@@ -31,3 +31,8 @@ layout_mode = 2
 [node name="AdvanceButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Continue"
+
+[node name="EnterRoomButton" type="Button" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Enter"

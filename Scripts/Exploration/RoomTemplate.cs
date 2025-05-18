@@ -22,7 +22,7 @@ public partial class RoomTemplate : Resource
 public enum RoomType
 {
     Combat,
-    Resource,
+    ResourceNode,
     Event,
     Treasure,
     Shop,

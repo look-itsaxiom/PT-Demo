@@ -12,7 +12,7 @@ public class GeneratedRoom
     public PackedScene SceneToLoad;
 
     public List<PackedScene> Monsters = new();
-    public ResourceType? Resource;
+    public ResourceNodeDefinition ResourceNode;
     public PackedScene Item;
 
     public bool IsUnique;

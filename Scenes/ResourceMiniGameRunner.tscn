@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq14aiy7fobx6"]
+
+[ext_resource type="Script" path="res://Scripts/Exploration/ResourceMiniGameRunner.cs" id="1_6p6ek"]
+
+[node name="ResourceMiniGameRunner" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6p6ek")
+
+[node name="ResourceTitleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 23.0
+offset_right = 155.0
+offset_bottom = 46.0
+text = "Resource Title"
+
+[node name="RemainingLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 62.0
+offset_right = 243.0
+offset_bottom = 85.0
+text = "Remaining Label"
+
+[node name="ClickArea" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 109.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LootDisplay" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 46.0
+offset_right = 600.0
+offset_bottom = 86.0
