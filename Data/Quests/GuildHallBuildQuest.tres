@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=6 format=3 uid="uid://lotf4kmrm4l0"]
+
+[ext_resource type="Script" path="res://Scripts/Quests/ResourceCollectGoal.cs" id="1_dwq6p"]
+[ext_resource type="Script" path="res://Scripts/Quests/ResourceQuestReward.cs" id="2_vydal"]
+[ext_resource type="Script" path="res://Scripts/Quests/Quest.cs" id="3_ho38l"]
+
+[sub_resource type="Resource" id="Resource_b02ut"]
+script = ExtResource("1_dwq6p")
+ResourceKey = 0
+Amount = 250
+
+[sub_resource type="Resource" id="Resource_n3o8q"]
+script = ExtResource("2_vydal")
+Type = 2
+Amount = 250
+ResourceKey = 6
+
+[resource]
+script = ExtResource("3_ho38l")
+QuestName = "Build: Guild Hall"
+Description = "This town needs a guild hall for you to being managing it effectively. We'll have to gather the necessary Materia to build one."
+IsRepeatable = true
+RepeatableCount = -1
+Availability = 2
+Goals = [SubResource("Resource_b02ut")]
+Rewards = [SubResource("Resource_n3o8q")]

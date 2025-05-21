@@ -51,7 +51,9 @@ public partial class TownManager : Node
 	{
 		if (@event != null)
 		{
+			GD.Print($"Resource collected: {@event.EventData.ResourceKey} - {@event.EventData.Amount}");
 			this[@event.EventData.ResourceKey].Amount += @event.EventData.Amount;
+			GD.Print($"New amount: {this[@event.EventData.ResourceKey].Amount}");
 		}
 	}
 

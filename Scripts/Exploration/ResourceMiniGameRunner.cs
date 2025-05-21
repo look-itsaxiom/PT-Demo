@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class ResourceMiniGameRunner : Control
 {
@@ -35,13 +36,22 @@ public partial class ResourceMiniGameRunner : Control
         {
             GD.Print("Node depleted!");
             ExplorationManager.Instance.AdvanceRoom();
+
             GetTree().ChangeSceneToFile("res://Scenes/ExplorationRunner.tscn");
             return;
         }
 
         var resource = PickWeightedResource(_node.Contents);
         var amount = 25; // You can tune this per node
-
+        GameSignalBus.Instance.EmitSignal(GameSignalBus.SignalName.ResourceCollected, new ResourceCollectEvent
+        {
+            EventData = new TownResources.TownResource
+            {
+                ResourceKey = _node.Contents[0].ResourceType,
+                Amount = amount,
+            },
+            AttributedCharacter = CharacterSystem.Instance.GetPlayerCharacter(),
+        });
         var lootLabel = new Label
         {
             Text = $"+{amount} {resource}"

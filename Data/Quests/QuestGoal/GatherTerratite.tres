@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ResourceCollectGoal" load_steps=2 format=3 uid="uid://drqht5v8tcyoc"]
 
-[ext_resource type="Script" path="res://Scripts/Quests/ResourceCollectGoal.cs" id="1_qr20y"]
+[ext_resource type="Script" path="res://Scripts/Quests/ResourceCollectGoal.cs" id="1_tyvx6"]
 
 [resource]
-script = ExtResource("1_qr20y")
+script = ExtResource("1_tyvx6")
 ResourceKey = 0
-Amount = 0
+Amount = 250

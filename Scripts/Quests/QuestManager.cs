@@ -46,7 +46,7 @@ public partial class QuestManager : Node
 
     public void OnGameSignalReceived(string signalName, QuestEvent questEvent)
     {
-        GD.Print($"Received signal: {signalName} for quest: {questEvent.EventName}");
+        GD.Print($"Received signal: {signalName}");
         var relevantQuests = ActiveQuests.Where(quest => quest.AssignedCharacter == questEvent.AttributedCharacter).ToList();
         foreach (var activeQuest in relevantQuests)
         {
