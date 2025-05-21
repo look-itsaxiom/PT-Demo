@@ -26,6 +26,14 @@ public partial class ExplorationRunner : Control
             return;
         }
 
+        if (Manager.IsRunComplete())
+        {
+            GD.Print("Run complete from ResourceMiniGame return.");
+            GetTree().ChangeSceneToFile("res://Scenes/Town.tscn");
+            return;
+        }
+
+
         AdvanceBtn.GrabFocus();
 
         GetNode<Label>("MarginContainer/VBoxContainer/RoomTitle").Text = room.DisplayName;

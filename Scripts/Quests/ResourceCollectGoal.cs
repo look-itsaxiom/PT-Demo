@@ -17,6 +17,7 @@ public partial class ResourceCollectGoal : QuestGoal
     {
         if (signalName == "ResourceCollected" && questEvent is ResourceCollectEvent resourceCollectEvent)
         {
+            GD.Print($"ResourceCollectGoal: Received resource collection event for {resourceCollectEvent.EventData.ResourceKey}");
             if (resourceCollectEvent.EventData.ResourceKey == ResourceKey)
             {
                 Progress += resourceCollectEvent.EventData.Amount;

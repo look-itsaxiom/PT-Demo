@@ -49,7 +49,12 @@ public partial class ExplorationManager : Node
             CurrentRoomIndex++;
             return true;
         }
-
+        else if (CurrentRoomIndex == CurrentRun.Count - 1)
+        {
+            // Move past the last room to mark run as complete
+            CurrentRoomIndex++;
+            return false;
+        }
         return false;
     }
 
@@ -81,6 +86,10 @@ public partial class ExplorationManager : Node
         for (int i = 0; i < roomCount; i++)
         {
             RoomType type = useSequence ? structure[i % structure.Count] : GetRandomRoomType(rng);
+            if (type == RoomType.Random)
+            {
+                type = GetRandomRoomType(rng);
+            }
             var template = PickTemplateForType(type, location);
             var ctx = new RoomGenerationContext
             {
