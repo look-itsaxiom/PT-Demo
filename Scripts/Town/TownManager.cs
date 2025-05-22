@@ -4,7 +4,7 @@ using CharacterData;
 using Godot;
 using TownResources;
 
-public partial class TownManager : Node3D
+public partial class TownManager : Node
 {
 	public static TownManager Instance { get; private set; }
 	public int TownLevel { get; set; } = 1;
@@ -42,14 +42,25 @@ public partial class TownManager : Node3D
 		Instance = this;
 		GameSignalBus = GameSignalBus.Instance;
 		GameSignalBus.Connect(GameSignalBus.SignalName.OnBuildingPlaced, Callable.From<string>(OnBuildingPlaced));
+		GameSignalBus.Connect(GameSignalBus.SignalName.ResourceCollected, Callable.From<ResourceCollectEvent>(OnResourceCollected));
 		InitializeTownResources();
 		GameSignalBus.Connect(GameSignalBus.SignalName.QuestCompleted, Callable.From<Quest, Character>(OnQuestCompleted));
+	}
+
+	private void OnResourceCollected(ResourceCollectEvent @event)
+	{
+		if (@event != null)
+		{
+			GD.Print($"Resource collected: {@event.EventData.ResourceKey} - {@event.EventData.Amount}");
+			this[@event.EventData.ResourceKey].Amount += @event.EventData.Amount;
+			GD.Print($"New amount: {this[@event.EventData.ResourceKey].Amount}");
+		}
 	}
 
 	private void InitializeTownResources()
 	{
 		Urum = new TownResource { ResourceKey = ResourceType.Urum, Amount = 0 };
-		Terratite = new TownResource { ResourceKey = ResourceType.Terratite, Amount = 250 };
+		Terratite = new TownResource { ResourceKey = ResourceType.Terratite, Amount = 0 };
 		Aquatite = new TownResource { ResourceKey = ResourceType.Aquatite, Amount = 0 };
 		Ventite = new TownResource { ResourceKey = ResourceType.Ventite, Amount = 0 };
 		Ignitite = new TownResource { ResourceKey = ResourceType.Ignitite, Amount = 0 };
@@ -67,10 +78,6 @@ public partial class TownManager : Node3D
 				switch (reward.Type)
 				{
 					case QuestReward.RewardType.Resource:
-						if (reward is ResourceQuestReward resourceReward)
-						{
-							this[resourceReward.ResourceKey].Amount += resourceReward.Amount;
-						}
 						break;
 					case QuestReward.RewardType.Item:
 						// Handle item rewards
