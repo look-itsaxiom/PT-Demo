@@ -43,6 +43,7 @@ public partial class ResourceMiniGameRunner : Control
 
         var resource = PickWeightedResource(_node.Contents);
         var amount = 25; // You can tune this per node
+
         GameSignalBus.Instance.EmitSignal(GameSignalBus.SignalName.ResourceCollected, new ResourceCollectEvent
         {
             EventData = new TownResources.TownResource
@@ -52,6 +53,7 @@ public partial class ResourceMiniGameRunner : Control
             },
             AttributedCharacter = CharacterSystem.Instance.GetPlayerCharacter(),
         });
+
         var lootLabel = new Label
         {
             Text = $"+{amount} {resource}"

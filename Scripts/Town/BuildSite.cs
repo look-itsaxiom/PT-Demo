@@ -52,7 +52,7 @@ public partial class BuildSite : Interactable, IInteractable
 	private void OnBuildingChosen(string buildingKey)
 	{
 		// Get building data
-		var building = dataRegistry.buildingTemplates[buildingKey];
+		var building = dataRegistry.BuildingTemplates[buildingKey];
 
 		var townManager = TownManager.Instance;
 		if (!townManager.HasNecessaryResources(building.BuildingRequirements))

@@ -14,7 +14,7 @@ public partial class DataRegistry : Node
 
 	[Export] public string QuestsFolderPath = "res://Data/Quests";
 
-	public Dictionary<string, Building> buildingTemplates = new();
+	public Dictionary<string, Building> BuildingTemplates = new();
 
 	public Dictionary<string, RaceData> Races = new();
 
@@ -45,7 +45,7 @@ public partial class DataRegistry : Node
 			var resource = ResourceLoader.Load<Building>(fullPath);
 			if (resource != null)
 			{
-				buildingTemplates[resource.BuildingName] = resource;
+				BuildingTemplates[resource.BuildingName] = resource;
 			}
 		}
 	}
