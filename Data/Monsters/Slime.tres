@@ -1,0 +1,119 @@
+[gd_resource type="Resource" script_class="MonsterTemplate" load_steps=12 format=3 uid="uid://cagk16t2onemd"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/MonsterTemplate.cs" id="1_ecvm8"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_njmky"]
+
+[sub_resource type="Resource" id="Resource_8s3cl"]
+script = SubResource("CSharpScript_njmky")
+Key = 0
+StatName = "Strength"
+KeyName = "STR"
+Value = 6
+Overflow = 0.0
+Description = ""
+
+[sub_resource type="Resource" id="Resource_3kp3d"]
+script = SubResource("CSharpScript_njmky")
+Key = 1
+StatName = "Endurance"
+KeyName = "END"
+Value = 12
+Overflow = 0.0
+Description = ""
+
+[sub_resource type="Resource" id="Resource_pksv1"]
+script = SubResource("CSharpScript_njmky")
+Key = 2
+StatName = "Defense"
+KeyName = "DEF"
+Value = 10
+Overflow = 0.0
+Description = ""
+
+[sub_resource type="Resource" id="Resource_86m4r"]
+script = SubResource("CSharpScript_njmky")
+Key = 3
+StatName = "Intelligence"
+KeyName = "INT"
+Value = 2
+Overflow = 0.0
+Description = ""
+
+[sub_resource type="Resource" id="Resource_4ci18"]
+script = SubResource("CSharpScript_njmky")
+Key = 4
+StatName = "Spirit"
+KeyName = "SPI"
+Value = 8
+Overflow = 0.0
+Description = ""
+
+[sub_resource type="Resource" id="Resource_bpvpj"]
+script = SubResource("CSharpScript_njmky")
+Key = 5
+StatName = "Magic Defense"
+KeyName = "MDF"
+Value = 12
+Overflow = 0.0
+Description = ""
+
+[sub_resource type="Resource" id="Resource_81il7"]
+script = SubResource("CSharpScript_njmky")
+Key = 6
+StatName = "Speed"
+KeyName = "SPD"
+Value = 4
+Overflow = 0.0
+Description = ""
+
+[sub_resource type="Resource" id="Resource_awyp6"]
+script = SubResource("CSharpScript_njmky")
+Key = 7
+StatName = "Luck"
+KeyName = "LCK"
+Value = 4
+Overflow = 0.0
+Description = ""
+
+[sub_resource type="Resource" id="Resource_auqal"]
+script = SubResource("CSharpScript_njmky")
+Key = 8
+StatName = "Accuracy"
+KeyName = "ACC"
+Value = 10
+Overflow = 0.0
+Description = ""
+
+[resource]
+script = ExtResource("1_ecvm8")
+MonsterName = "Slime"
+Description = ""
+Level = 1
+BaseStats = {
+0: SubResource("Resource_8s3cl"),
+1: SubResource("Resource_3kp3d"),
+2: SubResource("Resource_pksv1"),
+3: SubResource("Resource_86m4r"),
+4: SubResource("Resource_4ci18"),
+5: SubResource("Resource_bpvpj"),
+6: SubResource("Resource_81il7"),
+7: SubResource("Resource_awyp6"),
+8: SubResource("Resource_auqal")
+}
+ScalingMultipliers = {
+0: 1.0,
+1: 2.0,
+2: 1.5,
+3: 0.5,
+4: 1.0,
+5: 1.5,
+6: 0.5,
+7: 0.3,
+8: 1.0
+}
+StatRandomizationRange = Vector2(0.5, 1.5)
+Abilities = PackedStringArray()
+Attributes = Array[int]([2])
+CombatBehavior = "Aggressive"
+ItemDrops = PackedStringArray()

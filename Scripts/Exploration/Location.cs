@@ -15,7 +15,7 @@ public partial class Location : Resource
     public LocationLayoutDefinition LayoutDefinition { get; set; }
 
     [Export]
-    public Array<PackedScene> MonsterPool { get; set; } = new();
+    public Array<MonsterTemplate> MonsterPool { get; set; } = new();
 
     [Export]
     public Array<WeightedResource> ResourcePool { get; set; } = new();

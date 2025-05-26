@@ -11,7 +11,7 @@ public class GeneratedRoom
     public RoomTemplate TemplateUsed;
     public PackedScene SceneToLoad;
 
-    public List<PackedScene> Monsters = new();
+    public List<MonsterTemplate> Monsters = new();
     public ResourceNodeDefinition ResourceNode;
     public PackedScene Item;
 

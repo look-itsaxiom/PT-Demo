@@ -1,10 +1,94 @@
 [gd_scene load_steps=4 format=3 uid="uid://kr543u1coh4x"]
 
+[ext_resource type="Script" path="res://Scripts/Combat/CombatRunner.cs" id="1_1idx4"]
 [ext_resource type="MeshLibrary" uid="uid://dbfobj1dhfo6i" path="res://Resources/primitive_mesh_library.tres" id="1_ntmyy"]
-[ext_resource type="PackedScene" uid="uid://c2cfxsyfmbfa3" path="res://Scenes/barbarian.tscn" id="2_efk4q"]
-[ext_resource type="PackedScene" uid="uid://baaxxkjvell3p" path="res://Scenes/knight.tscn" id="3_63emq"]
 
-[node name="CombatRunner" type="Node3D"]
+[sub_resource type="LabelSettings" id="LabelSettings_8v4k0"]
+font_size = 30
+
+[node name="CombatRunner" type="Node3D" node_paths=PackedStringArray("PartyZones", "EnemyZones")]
+script = ExtResource("1_1idx4")
+PartyZones = []
+EnemyZones = []
+
+[node name="CombatMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CombatMenu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 23.0
+offset_top = -204.0
+offset_right = 1258.0
+offset_bottom = -30.0
+grow_vertical = 0
+split_offset = -198
+
+[node name="Panel" type="Panel" parent="CombatMenu/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CombatMenu/HSplitContainer/Panel"]
+layout_mode = 1
+offset_left = 70.0
+offset_top = 25.0
+offset_right = 163.0
+offset_bottom = 67.0
+text = "Attack"
+label_settings = SubResource("LabelSettings_8v4k0")
+
+[node name="Label2" type="Label" parent="CombatMenu/HSplitContainer/Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -163.0
+offset_top = 25.0
+offset_right = -70.0
+offset_bottom = 67.0
+grow_horizontal = 0
+text = "Ability"
+label_settings = SubResource("LabelSettings_8v4k0")
+
+[node name="Label3" type="Label" parent="CombatMenu/HSplitContainer/Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -163.0
+offset_top = -67.0
+offset_right = -63.0
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Escape"
+label_settings = SubResource("LabelSettings_8v4k0")
+
+[node name="Label4" type="Label" parent="CombatMenu/HSplitContainer/Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 70.0
+offset_top = -67.0
+offset_right = 163.0
+offset_bottom = -25.0
+grow_vertical = 0
+text = "Item"
+label_settings = SubResource("LabelSettings_8v4k0")
+
+[node name="Panel2" type="Panel" parent="CombatMenu/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-3.09086e-08, -0.707107, 0.707107, -3.09086e-08, 0.707107, 0.707107, -1, 0, -4.37114e-08, 4, 5, 0)
@@ -28,53 +112,29 @@ data = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -11)
 
 [node name="PartyMember1" type="Node3D" parent="PartyZones"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="knight" parent="PartyZones/PartyMember1" instance=ExtResource("3_63emq")]
-transform = Transform3D(-0.75, 0, -6.55671e-08, 0, 0.75, 0, 6.55671e-08, 0, -0.75, 0, 0, 0)
 
 [node name="PartyMember2" type="Node3D" parent="PartyZones"]
 transform = Transform3D(0.991445, 0, -0.130526, 0, 1, 0, 0.130526, 0, 0.991445, -2.5, 0, 0)
 
-[node name="knight" parent="PartyZones/PartyMember2" instance=ExtResource("3_63emq")]
-transform = Transform3D(-0.75, 0, -8.19564e-08, 0, 0.75, 0, 8.19564e-08, 0, -0.75, 0, 0, 0)
-
 [node name="PartyMember3" type="Node3D" parent="PartyZones"]
 transform = Transform3D(0.987688, 0, 0.156434, 0, 1, 0, -0.156434, 0, 0.987688, 2.5, 0, -0.5)
 
-[node name="knight" parent="PartyZones/PartyMember3" instance=ExtResource("3_63emq")]
-transform = Transform3D(-0.75, 0, -6.55671e-08, 0, 0.75, 0, 6.55671e-08, 0, -0.75, 0, 0, 0)
-
 [node name="PartyMember4" type="Node3D" parent="PartyZones"]
 transform = Transform3D(0.819152, 0, -0.573576, 0, 1, 0, 0.573576, 0, 0.819152, -5, 0, -1)
-
-[node name="knight" parent="PartyZones/PartyMember4" instance=ExtResource("3_63emq")]
-transform = Transform3D(-0.75, 0, -5.21541e-08, 0, 0.75, 0, 5.21541e-08, 0, -0.75, 0, 0, 0)
 
 [node name="EnemyZones" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -18)
 
 [node name="Enemy1" type="Node3D" parent="EnemyZones"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="barbarian" parent="EnemyZones/Enemy1" instance=ExtResource("2_efk4q")]
 
 [node name="Enemy2" type="Node3D" parent="EnemyZones"]
 transform = Transform3D(0.991445, 0, -0.130526, 0, 1, 0, 0.130526, 0, 0.991445, 2.5, 0, -1.5)
 
-[node name="barbarian" parent="EnemyZones/Enemy2" instance=ExtResource("2_efk4q")]
-
 [node name="Enemy3" type="Node3D" parent="EnemyZones"]
 transform = Transform3D(0.991445, 0, 0.130526, 0, 1, 0, -0.130526, 0, 0.991445, -2.5, 0, -1.5)
-
-[node name="barbarian" parent="EnemyZones/Enemy3" instance=ExtResource("2_efk4q")]
 
 [node name="Enemy4" type="Node3D" parent="EnemyZones"]
 transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 5, 0, -0.5)
 
-[node name="barbarian" parent="EnemyZones/Enemy4" instance=ExtResource("2_efk4q")]
-
 [node name="Enemy5" type="Node3D" parent="EnemyZones"]
 transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -5, 0, -0.5)
-
-[node name="barbarian" parent="EnemyZones/Enemy5" instance=ExtResource("2_efk4q")]
