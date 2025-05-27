@@ -90,7 +90,8 @@ public partial class CharacterSystem : Node
             CharacterName = "Player",
             Race = DataRegistry.Instance.Races["Gignen"],
             Class = DataRegistry.Instance.Classes["Adventurer"],
-            CharacterId = Guid.Empty
+            CharacterId = Guid.Empty,
+            CharacterModel = CharacterModelDictionary[4]
         };
 
         foreach (Stat.StatKey stat in pc.Race.BaseStats.Keys)

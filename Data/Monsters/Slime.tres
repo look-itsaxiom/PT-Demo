@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="MonsterTemplate" load_steps=12 format=3 uid="uid://cagk16t2onemd"]
+[gd_resource type="Resource" script_class="MonsterTemplate" load_steps=13 format=3 uid="uid://cagk16t2onemd"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/MonsterTemplate.cs" id="1_ecvm8"]
+[ext_resource type="PackedScene" uid="uid://d3p6m8dr61c3t" path="res://Scenes/Monsters/Slime.tscn" id="1_voxbl"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_njmky"]
 
@@ -117,3 +118,4 @@ Abilities = PackedStringArray()
 Attributes = Array[int]([2])
 CombatBehavior = "Aggressive"
 ItemDrops = PackedStringArray()
+MonsterModel = ExtResource("1_voxbl")

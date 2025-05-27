@@ -48,7 +48,22 @@ public partial class ExplorationRunner : Control
             EnterRoomBtn.Pressed += GoToResourceScene;
             return;
         }
+
+        if (room.Type == RoomType.Combat)
+        {
+            AdvanceBtn.Visible = false;
+            EnterRoomBtn.Visible = true;
+            EnterRoomBtn.GrabFocus();
+            EnterRoomBtn.Pressed += GoToCombatScene;
+            return;
+        }
     }
+
+    private void GoToCombatScene()
+    {
+        GetTree().ChangeSceneToFile("res://Scenes/CombatRunner.tscn");
+    }
+
 
     private void GoToResourceScene()
     {

@@ -1,3 +1,4 @@
+using CharacterData;
 using Godot;
 using Godot.Collections;
 using System;
@@ -21,6 +22,8 @@ public partial class ExplorationManager : Node
     public Location CurrentLocation { get; private set; }
     public List<GeneratedRoom> CurrentRun { get; private set; } = new();
     public int CurrentRoomIndex { get; private set; } = 0;
+
+    public Array<Character> PartyMembers { get; set; }
 
     public override void _Ready()
     {

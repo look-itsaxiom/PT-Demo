@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Godot.Collections;
 
 public partial class TownExit : Interactable
 {
@@ -16,6 +17,7 @@ public partial class TownExit : Interactable
         if (player != null && CanInteract)
         {
             GD.Print("Exiting Town");
+            ExplorationManager.Instance.PartyMembers = new Array<CharacterData.Character> { player.PlayerCharacter };
             GetTree().ChangeSceneToFile("res://Scenes/WorldSelect.tscn");
         }
     }

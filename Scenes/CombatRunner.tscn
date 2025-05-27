@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://kr543u1coh4x"]
+[gd_scene load_steps=6 format=3 uid="uid://kr543u1coh4x"]
 
 [ext_resource type="Script" path="res://Scripts/Combat/CombatRunner.cs" id="1_1idx4"]
 [ext_resource type="MeshLibrary" uid="uid://dbfobj1dhfo6i" path="res://Resources/primitive_mesh_library.tres" id="1_ntmyy"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_8v4k0"]
-font_size = 30
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xb470"]
+
+[sub_resource type="Sky" id="Sky_wpy3h"]
+sky_material = SubResource("ProceduralSkyMaterial_xb470")
+
+[sub_resource type="Environment" id="Environment_klxbg"]
+background_mode = 2
+sky = SubResource("Sky_wpy3h")
 
 [node name="CombatRunner" type="Node3D" node_paths=PackedStringArray("PartyZones", "EnemyZones")]
 script = ExtResource("1_1idx4")
@@ -19,74 +25,70 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HSplitContainer" type="HSplitContainer" parent="CombatMenu"]
+[node name="HSC" type="HSplitContainer" parent="CombatMenu"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 23.0
-offset_top = -204.0
-offset_right = 1258.0
-offset_bottom = -30.0
+offset_left = 25.0
+offset_top = -220.0
+offset_right = 1260.0
+offset_bottom = -20.0
 grow_vertical = 0
-split_offset = -198
+split_offset = -211
 
-[node name="Panel" type="Panel" parent="CombatMenu/HSplitContainer"]
+[node name="ActionMenu" type="Panel" parent="CombatMenu/HSC"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="CombatMenu/HSplitContainer/Panel"]
+[node name="AttackButton" type="Button" parent="CombatMenu/HSC/ActionMenu"]
 layout_mode = 1
-offset_left = 70.0
-offset_top = 25.0
-offset_right = 163.0
-offset_bottom = 67.0
+offset_left = 60.0
+offset_top = 30.0
+offset_right = 185.0
+offset_bottom = 90.0
 text = "Attack"
-label_settings = SubResource("LabelSettings_8v4k0")
 
-[node name="Label2" type="Label" parent="CombatMenu/HSplitContainer/Panel"]
+[node name="AbilityButton" type="Button" parent="CombatMenu/HSC/ActionMenu"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -163.0
-offset_top = 25.0
-offset_right = -70.0
-offset_bottom = 67.0
+offset_left = -190.0
+offset_top = 30.0
+offset_right = -65.0
+offset_bottom = 90.0
 grow_horizontal = 0
 text = "Ability"
-label_settings = SubResource("LabelSettings_8v4k0")
 
-[node name="Label3" type="Label" parent="CombatMenu/HSplitContainer/Panel"]
+[node name="EscapeButton" type="Button" parent="CombatMenu/HSC/ActionMenu"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -163.0
-offset_top = -67.0
-offset_right = -63.0
-offset_bottom = -25.0
+offset_left = -190.0
+offset_top = -90.0
+offset_right = -65.0
+offset_bottom = -30.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Escape"
-label_settings = SubResource("LabelSettings_8v4k0")
 
-[node name="Label4" type="Label" parent="CombatMenu/HSplitContainer/Panel"]
+[node name="ItemButton" type="Button" parent="CombatMenu/HSC/ActionMenu"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 70.0
-offset_top = -67.0
-offset_right = 163.0
-offset_bottom = -25.0
+offset_left = 60.0
+offset_top = -90.0
+offset_right = 185.0
+offset_bottom = -30.0
 grow_vertical = 0
 text = "Item"
-label_settings = SubResource("LabelSettings_8v4k0")
 
-[node name="Panel2" type="Panel" parent="CombatMenu/HSplitContainer"]
+[node name="StatusDisplay" type="Panel" parent="CombatMenu/HSC"]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -95,6 +97,7 @@ transform = Transform3D(-3.09086e-08, -0.707107, 0.707107, -3.09086e-08, 0.70710
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.965926, -0.12941, 0.224144, 0, 0.866025, 0.5, -0.258819, -0.482963, 0.836516, 4, 6, -7)
+environment = SubResource("Environment_klxbg")
 current = true
 
 [node name="EnvTerrain" type="Node3D" parent="."]
@@ -109,7 +112,7 @@ data = {
 }
 
 [node name="PartyZones" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -11)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3, 1, -11)
 
 [node name="PartyMember1" type="Node3D" parent="PartyZones"]
 
