@@ -2,7 +2,7 @@
 
 
 1. Introduction
-This document serves as the license agreement for the 3D Model Pack (hereinafter referred to as "the Pack") sold on itch.io by Games by McSteeg. By purchasing and downloading the Pack, the purchaser (hereinafter referred to as "the Licensee") agrees to be bound by the terms of this License Agreement.
+This document serves as the license agreement for the 3D Model Pack (hereinafter referred to as "the Pack") sold on itch.io by Games by McSteeg. By purchasing and downloading the Pack, the purAxiomr (hereinafter referred to as "the Licensee") agrees to be bound by the terms of this License Agreement.
 
 2. Grant of License
 Games by McSteeg hereby grants the Licensee a non-exclusive, worldwide, perpetual license to use the Pack in any game, movie, or creative project, whether personal or commercial, subject to the terms and conditions set forth in this License Agreement.

@@ -60,7 +60,7 @@ Growth = (GrowthRate(Level) + Overflow) * (1 + Class Modifier)
 Overflow = Growth % 1
 ```
 
-[See the Character Creation tool for examples of stat growth](https://chase-skibeness.github.io/PT-character-generator/)
+[See the Character Creation tool for examples of stat growth](https://Axiom-Axiom.github.io/PT-character-generator/)
 
 ### Core Stat Formulas {#core-stat-formulas}
 
@@ -679,7 +679,7 @@ Note on Abiliti
 
 ### Equipment and Gear
 
-Equipment and gear is purchased or created in town, or found while Exploring. 
+Equipment and gear is purAxiomd or created in town, or found while Exploring. 
 
 Equipment such as weapons, offhands and shields modify core stats and effect damage calculations or can augment other important values
 
@@ -934,7 +934,7 @@ Key building types include housing, production facilities, and specialized struc
 ### Unlock Buildings
 Buildings that unlock something or progress the game in some way. These also include buildings that have research options that unlock something
 
-Ex. Barracks, Merchant Stall, Magician's Tower, Tavern, etc. These are all buildings that unlock either a new class for your adventurers to promote into or unlock functionality like the ability to purchase items
+Ex. Barracks, Merchant Stall, Magician's Tower, Tavern, etc. These are all buildings that unlock either a new class for your adventurers to promote into or unlock functionality like the ability to purAxiom items
 
 ### Population Buildings
 Buildings that change the population stat in some way, either by increasing the current number of residents in your town or increasing the maximum number of residents you can have in your town.
@@ -947,7 +947,7 @@ Later in the game it may be good to provide the player with buildings that gener
 Ex. Market might generate Urum, whereas building a "Forest Shrine" might generate Terratite
 
 ### Item Buildings
-Buildings where items can either be purchased or created.
+Buildings where items can either be purAxiomd or created.
 
 Ex. Merchant Stall, Market, Armorsmith, Weaponsmith, Forge, etc.
 

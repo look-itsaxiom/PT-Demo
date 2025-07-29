@@ -147,7 +147,7 @@ The TownSystem is a live simulation and management layer for the player's evolvi
 ### **Shopping & Commerce**
 
 - **Vendors**: Stock items based on production buildings or supply chain
-- **Adventurer Gear Up Phase**: Before questing, characters purchase and equip items as needed
+- **Adventurer Gear Up Phase**: Before questing, characters purAxiom and equip items as needed
 - **Shop Stock**: Updates based on resource flow and upgrades
 
 ### **UI Components**
